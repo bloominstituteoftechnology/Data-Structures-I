@@ -1,17 +1,13 @@
+/* eslint-disable no-undef, no-prototype-builtins */
+/* eslint-disable */
 const LinkedList = require('../src/linked-list');
+
 let list;
 
 describe('LinkedList', () => {
 
   beforeEach(() => {
   	list = new LinkedList();
-  });
-
-  it('should have both a head and a tail property', () => {
-    const hasHead = list.hasOwnProperty('head') || list.__proto__.hasOwnProperty('head') ? true : false;
-    const hasTail = list.hasOwnProperty('tail') || list.__proto__.hasOwnProperty('tail') ? true : false;
-    expect(hasHead).toBe(true);
-    expect(hasTail).toBe(true);
   });
 
   it('should have the methods "addToTail", "removeHead", and "contains"', () => {
@@ -61,6 +57,9 @@ describe('LinkedList', () => {
 
   it('should not contain removed values', () => {
   	list.addToTail(1);
+    list.addToTail(2);
+    list.addToTail(3);
+    list.addToTail(4);
   	list.removeHead();
   	expect(list.contains(1)).toBe(false);
   });

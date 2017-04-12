@@ -1,16 +1,17 @@
+/* eslint-disable no-undef, no-prototype-builtins */
 const Queue = require('../src/queue');
+
 let queue;
 
 describe('Queue', () => {
-  
   beforeEach(() => {
-  	queue = new Queue();
+    queue = new Queue();
   });
 
   it('should have the methods "enqueue", "dequeue", and the property "size"', () => {
-    const hasEnqueue = queue.hasOwnProperty('enqueue') || queue.__proto__.hasOwnProperty('enqueue') ? true : false;
-    const hasDequeue = queue.hasOwnProperty('dequeue') || queue.__proto__.hasOwnProperty('dequeue') ? true : false;
-    const hasSize = queue.hasOwnProperty('size') || queue.__proto__.hasOwnProperty('size') ? true : false;
+    const hasEnqueue = queue.hasOwnProperty('enqueue') || Object.getPrototypeOf(queue).hasOwnProperty('enqueue');
+    const hasDequeue = queue.hasOwnProperty('dequeue') || Object.getPrototypeOf(queue).hasOwnProperty('dequeue');
+    const hasSize = queue.hasOwnProperty('size') || Object.getPrototypeOf(queue).hasOwnProperty('size');
     expect(hasEnqueue).toBe(true);
     expect(hasDequeue).toBe(true);
     expect(hasSize).toBe(true);
@@ -69,4 +70,3 @@ describe('Queue', () => {
     expect(queue.dequeue()).toBe(77);
   });
 });
-

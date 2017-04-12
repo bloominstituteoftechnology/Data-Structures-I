@@ -7,13 +7,12 @@ class LimitedArray {
   checkLimit(index) {
     if (typeof index !== 'number') throw new Error('The supplied index needs to be a number');
     if (this.limit <= index) {
-      console.log('index', index);
       throw new Error('The supplied index lies out of the array\'s bounds');
     }
   }
 
   each(cb) {
-    for (var i = 0; i < this.storage.length; i++) {
+    for (let i = 0; i < this.storage.length; i++) {
       cb(this.storage[i], i);
     }
   }
@@ -33,6 +32,7 @@ class LimitedArray {
   }
 }
 
+/* eslint-disable no-bitwise, operator-assignment */
 const getIndexBelowMax = (str, max) => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -45,5 +45,5 @@ const getIndexBelowMax = (str, max) => {
 
 module.exports = {
   LimitedArray,
-  getIndexBelowMax
+  getIndexBelowMax,
 };
