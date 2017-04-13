@@ -1,7 +1,7 @@
 {
-  "name": "js-homework-1",
+  "name": "ls-data-structures-i",
   "version": "1.0.0",
-  "description": "LambdaSchool's JavaScript Mini-Bootcamp Homework 1",
+  "description": "LambdaSchool's Data Structures I",
   "main": "index.js",
   "scripts": {
     "test": "eslint tests/*.js && eslint src/*.js && jest --verbose",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SunJieMing/js-minicamp-homework-1.git"
+    "url": "git+https://github.com/SunJieMing/LS-Data-Structures-II.git"
   },
   "author": "Ben Nelson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SunJieMing/js-minicamp-homework-1/issues"
+    "url": "https://github.com/SunJieMing/LS-Data-Structures-II/issues"
   },
-  "homepage": "https://github.com/SunJieMing/js-minicamp-homework-1#readme",
+  "homepage": "https://github.com/SunJieMing/LS-Data-Structures-II/#readme",
   "devDependencies": {
     "babel-jest": "^19.0.0",
     "eslint": "^3.17.1",
