@@ -9,9 +9,9 @@ describe('Queue', () => {
   });
 
   it('should have the methods "enqueue", "dequeue", and the property "size"', () => {
-    const hasEnqueue = queue.hasOwnProperty('enqueue') || Object.getPrototypeOf(queue).hasOwnProperty('enqueue');
-    const hasDequeue = queue.hasOwnProperty('dequeue') || Object.getPrototypeOf(queue).hasOwnProperty('dequeue');
-    const hasSize = queue.hasOwnProperty('size') || Object.getPrototypeOf(queue).hasOwnProperty('size');
+    const hasEnqueue = Object.getPrototypeOf(queue).hasOwnProperty('enqueue');
+    const hasDequeue = Object.getPrototypeOf(queue).hasOwnProperty('dequeue');
+    const hasSize = Object.getPrototypeOf(queue).hasOwnProperty('size');
     expect(hasEnqueue).toBe(true);
     expect(hasDequeue).toBe(true);
     expect(hasSize).toBe(true);

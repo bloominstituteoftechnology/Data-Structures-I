@@ -1,5 +1,4 @@
 /* eslint-disable no-undef, no-prototype-builtins */
-
 const Stack = require('../src/stack');
 
 let stack;
@@ -10,9 +9,9 @@ describe('Stack', () => {
   });
 
   it('should have the methods "add", "remove", and the property "size"', () => {
-    const hasAdd = stack.hasOwnProperty('add') || Object.getPrototypeOf(stack).hasOwnProperty('add');
-    const hasRemove = stack.hasOwnProperty('remove') || Object.getPrototypeOf(stack).hasOwnProperty('remove');
-    const hasSize = stack.hasOwnProperty('size') || Object.getPrototypeOf(stack).hasOwnProperty('size');
+    const hasAdd = Object.getPrototypeOf(stack).hasOwnProperty('add');
+    const hasRemove = Object.getPrototypeOf(stack).hasOwnProperty('remove');
+    const hasSize = Object.getPrototypeOf(stack).hasOwnProperty('size');
     expect(hasAdd).toBe(true);
     expect(hasRemove).toBe(true);
     expect(hasSize).toBe(true);

@@ -9,9 +9,9 @@ describe('HashTable', () => {
   });
 
   it('should have "insert", "remove" and "retrieve" methods', () => {
-    const hasInsert = hashTable.hasOwnProperty('insert') || Object.getPrototypeOf(hashTable).hasOwnProperty('insert');
-    const hasRemove = hashTable.hasOwnProperty('remove') || Object.getPrototypeOf(hashTable).hasOwnProperty('remove');
-    const hasRetrieve = hashTable.hasOwnProperty('retrieve') || Object.getPrototypeOf(hashTable).hasOwnProperty('retrieve');
+    const hasInsert = Object.getPrototypeOf(hashTable).hasOwnProperty('insert');
+    const hasRemove = Object.getPrototypeOf(hashTable).hasOwnProperty('remove');
+    const hasRetrieve = Object.getPrototypeOf(hashTable).hasOwnProperty('retrieve');
     expect(hasInsert).toBe(true);
     expect(hasRemove).toBe(true);
     expect(hasRetrieve).toBe(true);
