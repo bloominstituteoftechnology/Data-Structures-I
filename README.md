@@ -42,5 +42,5 @@ Topics:
 
 ### Extra Credit
 
- * Uncommente the final test in `hash-table.test.js` and make the hash-table rebalance.  As a hash table increases in size the associated storage table will typically double in size once it reaches a certain capacity.  Change the hash table so that it doubles the size of the storage table once it is 75% full.
+ * Uncomment the final test in `hash-table.test.js` and make the hash-table rebalance.  As a hash table increases in size the associated storage table will typically double in size once it reaches a certain capacity.  Change the hash table so that it doubles the size of the storage table once it is 75% full.
  * Make the linked-list a doubly linked list.
