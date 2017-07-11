@@ -13,9 +13,9 @@ class Stack {
       this.size = this.stack.length;
       return popped;
     }
-    return 0;
+    return Stack;
   }
-  size() { return this.size };
+  size() { return this.size; }
 }
 const stack = new Stack();
 module.exports = Stack;
