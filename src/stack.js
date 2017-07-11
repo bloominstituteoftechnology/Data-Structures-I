@@ -3,7 +3,7 @@ class Stack {
     this.storage = [];
   }
   get size() { return this.storage.length; }
-  add(x) { return this.storage.push(x); }
+  add(anItem) { return this.storage.push(anItem); }
   remove() { return this.storage.pop(); }
 }
 
