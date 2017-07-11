@@ -1,7 +1,6 @@
 class Stack {
   constructor() {
     this.storage = [];
-    this.x = 9;
   }
   get size() { return this.storage.length; }
   add(x) { return this.storage.push(x); }
