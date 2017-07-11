@@ -1,19 +1,18 @@
 class Stack {
   constructor() {
     this.storage = [];
+    this.x = 9;
   }
   get size() { return this.storage.length; }
   add(x) { return this.storage.push(x); }
   remove() { return this.storage.pop(); }
 }
 
-
-// GIT PULL TEST
-
 // Drew: to run this, uncomment the following line, cd into the /src/ directory and type `node stack.js` into your console
 // const x = new Stack;
 // console.log(x);
 // console.log(x.size);
+// // console.log(x.size());
 // x.add('poop');
 // console.log(x.size);
 // console.log(x.storage);
