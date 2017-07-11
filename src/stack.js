@@ -7,6 +7,7 @@ class Stack {
   remove() { return this.storage.pop(); }
 }
 
+// Drew: to run this, uncomment the following line, cd into the /src/ directory and type `node stack.js` into your console
 // const x = new Stack;
 // console.log(x);
 // console.log(x.size);
