@@ -3,7 +3,7 @@ class Queue {
     this.storage = [];
   }
   get size() { return this.storage.length; }
-  enqueue(poop) { return this.storage.push(poop); }
+  enqueue(listItem) { return this.storage.push(listItem); }
   dequeue() { return this.storage.shift(); }
 }
 
