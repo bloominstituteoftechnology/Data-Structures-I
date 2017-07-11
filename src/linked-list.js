@@ -9,7 +9,7 @@ class LinkedList {
     this.tail = nodeParameter;
   }
   removeHead() { /* removes and returns the head node. */
-    return this;
+    return this.tail;
   }
   contains() { /* should searth through the linked list and return true if a matching value is found. */
     return this;
@@ -33,15 +33,14 @@ console.log(test);
 * of nodes.  Build your nodes with objects.
 */
 
-class ExampleLinkedList {
-  constructor() {
-    this.head = {
-      value: 'something',
-      next: {}
-    };
-    this.tail = null;
-  }
-}
-
+// class ExampleLinkedList {
+//   constructor() {
+//     this.head = {
+//       value: 'something',
+//       next: {}
+//     };
+//     this.tail = null;
+//   }
+// }
 
 module.exports = LinkedList;
