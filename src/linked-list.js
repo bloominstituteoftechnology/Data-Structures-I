@@ -38,7 +38,7 @@ class LinkedList {
     } else {
       this.head.next = node.value;
     }
-    
+
     this.tail = node;
   }
   removeHead() { return this; }/* removes and returns the head node. */
