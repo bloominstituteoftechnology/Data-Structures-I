@@ -7,6 +7,15 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
+  insert(key, value) {
+
+  }
+  remove() {
+
+  }
+  retrieve() {
+
+  }
 }
 
 module.exports = HashTable;
