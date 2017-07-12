@@ -1,3 +1,18 @@
+class Node {
+  constructor() {
+    this.value = undefined;
+    this.next = null;
+  }
+}
+
+const nodeA = new Node;
+console.log('nodeA:');
+console.log(nodeA);
+const nodeB = new Node;
+console.log('nodeB:');
+console.log(nodeB);
+
+
 class LinkedList {
   constructor() {
     this.head = null;
@@ -5,23 +20,24 @@ class LinkedList {
     this.tail = null;
     // Do not modify anything inside of the constructor
   }
+
   addToTail(nodeParameter) { /* replaces the tail with a new value that is passed in. */
     this.tail = nodeParameter;
   }
   removeHead() { /* removes and returns the head node. */
     return this.tail;
   }
-  contains() { /* should searth through the linked list and return true if a matching value is found. */
-    return this;
+  contains(x) { /* should searth through the linked list and return true if a matching value is found. */
+    if (this.includes(x)) { return true; }
+    return false;
   }
 }
 
-
-const test = new LinkedList;
-test.addToTail('argument');
-console.log(test);
-test.addToTail('heated conversation');
-console.log(test);
+// const test = new LinkedList;
+// test.addToTail('argument');
+// console.log(test);
+// test.addToTail('heated conversation');
+// console.log(test);
 /*
 
 * 1) Should have the methods: `addToTail`, `removeHead`, and `contains`.
