@@ -1,35 +1,32 @@
-class Node {
-  constructor() {
-    this.value = undefined;
-    this.next = null;
-  }
-}
-
-const nodeA = new Node;
-console.log('nodeA:');
-console.log(nodeA);
-const nodeB = new Node;
-console.log('nodeB:');
-console.log(nodeB);
-
-
 class LinkedList {
   constructor() {
     this.head = null;
-    /* to infinity and beyond! */
+    /* links to nodes - to infinity and beyond! */
     this.tail = null;
     // Do not modify anything inside of the constructor
   }
-
-  addToTail(nodeParameter) { /* replaces the tail with a new value that is passed in. */
-    this.tail = nodeParameter;
+  // [ 'The Godfather', 'The Matrix' ]
+  addToTail(fromOutside) {
+    const node = {
+      value: fromOutside, // <--- e.g. 'The Godfather'
+      next: null
+    };
+    if (this.head === null) {
+      this.head = node;
+    }
+    this.tail = node;
   }
+
+  // Conditions to check to Add to tail
+  // 1) nothing in the list?
+  // 2) 1 other in the list?
+  // 3) more than 1?
+
   removeHead() { /* removes and returns the head node. */
-    return this.tail;
+    return this;
   }
   contains(x) { /* should searth through the linked list and return true if a matching value is found. */
-    if (this.includes(x)) { return true; }
-    return false;
+    return this;
   }
 }
 
