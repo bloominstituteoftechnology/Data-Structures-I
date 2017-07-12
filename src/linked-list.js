@@ -6,9 +6,23 @@ class LinkedList {
     // Do not modify anything inside of the constructor
   }
 
-  // [ {value: 'The Godfather', next: Matrix, STATE head:Godf, tail: ???},
-  //   {value: 'The Matrix',    next: null,   STATE head: ???, tail: Matrix},
-  //   {value: 'Ex Machina',    next: null,   STATE head: ???}]
+  // First value passed in to linked list:
+  [ {value: 'The Godfather', next: null, STATE {head:Godf, tail: Godf}},]
+
+  // Second value added linked list:
+  [ {value: 'The Godfather', next: Matrix, STATE {head:Godf,/*tail:nil*/}},
+    {value: 'The Matrix',    next: null,   STATE/*head: nil*/{tail: Matrix}} ]
+
+  // Third value added to linked list:
+  [ {value: 'The Godfather', next: Matrix, STATE {head:Godf,/*tail:nil*/}},
+    {value: 'The Matrix',    next: Ex Mac,/*STATE head: nil,tail:nil*/},
+    {value: 'Ex Machina',    next: null,   STATE/* head */{tail: Ex}} ]
+
+  // Fourth value added to linked list:
+  [ {value: 'The Godfather', next: Matrix, STATE {head:Godf,/*tail:nil*/}},
+    {value: 'The Matrix',    next: Ex Mac,/*STATE head:nil,tail:nil*/},
+    {value: 'Ex Machina',    next: OffSpac,/*STATE head:nil,tail:nil*/},
+    {value: 'Office Space',  next: null,    STATE/* head:nil */{tail: OffSpac}} ]
 
   addToTail(fromOutside) {
     const node = {
