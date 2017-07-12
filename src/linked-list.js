@@ -5,7 +5,11 @@ class LinkedList {
     this.tail = null;
     // Do not modify anything inside of the constructor
   }
-  // [ 'The Godfather', 'The Matrix' ]
+
+  // [ {value: 'The Godfather', next: Matrix, STATE head:Godf, tail: ???},
+  //   {value: 'The Matrix',    next: null,   STATE head: ???, tail: Matrix},
+  //   {value: 'Ex Machina',    next: null,   STATE head: ???}]
+
   addToTail(fromOutside) {
     const node = {
       value: fromOutside, // <--- e.g. 'The Godfather'
@@ -13,6 +17,8 @@ class LinkedList {
     };
     if (this.head === null) {
       this.head = node;
+    } else {
+      this.head.next = node.value;
     }
     this.tail = node;
   }
