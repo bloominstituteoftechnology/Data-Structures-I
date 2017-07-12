@@ -5,15 +5,22 @@ class LinkedList {
     // Do not modify anything inside of the constructor
   }
   addToTail(newValue) {
+    const node = {
+      value: newValue,
+      next: null
+    };
     if (this.head === null) {
-      this.head = {
-        value: newValue,
-        next: null
-      };
-      this.tail = this.head;
+      this.head = node;
+      this.head.value = newValue;
+      this.tail = node;
+      this.tail.value = newValue;
+    } else if (this.head === this.tail) {
+      this.head.next = this.tail;
+      this.tail.next = node;
+      this.tail = node;
     } else {
-      this.tail.next = LinkedList.constructor();
-      this.tail = this.tail.next;
+      this.tail.next = node;
+      this.tail = node;
     }
     this.tail.value = newValue;
   }
@@ -24,14 +31,13 @@ class LinkedList {
   }
   contains(item) {
     let current = this.head;
-    // return this.current.next.value;
-    while (this.current.value !== item) {
-      current = this.current.next;
+    while (current.next !== null) {
+      if (current.value === item) {
+        return true;
+      }
+      current = current.next;
     }
-    if (this.current.value !== item) {
-      return false;
-    }
-    return true;
+    return false;
   }
 }
 
