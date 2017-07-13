@@ -44,12 +44,12 @@ class LinkedList {
   removeHead() { return this; }/* removes and returns the head node. */
   contains(x) { return this; }/* should searth through the linked list and return true if a matching value is found. */
 }
-const test = new LinkedList;
-test.addToTail('The Godfather');
+// const test = new LinkedList;
+// test.addToTail('The Godfather');
+// // console.log(test);
+// test.addToTail('The Matrix');
+// test.addToTail('Ex Machina');
 // console.log(test);
-test.addToTail('The Matrix');
-test.addToTail('Ex Machina');
-console.log(test);
 
 /*
 * 1) Should have the methods: `addToTail`, `removeHead`, and `contains`.
