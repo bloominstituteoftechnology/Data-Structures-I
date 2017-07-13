@@ -7,7 +7,6 @@ class Stack {
   add(anItem) { return this.storage.push(anItem); }
   remove() { return this.storage.pop(); }
 }
-
 // Drew: to run this, uncomment the following line, cd into the /src/ directory and type `node stack.js` into your console
 // const test = new Stack;
 // console.log(test);
