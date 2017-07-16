@@ -11,9 +11,9 @@ class Node {
   constructor(element) {
     this.value = element;
     this.next = null;
+    this.prev = null;
   }
 }
-
 class LinkedList {
   constructor() {
     this.head = null;
@@ -23,22 +23,34 @@ class LinkedList {
   addToTail(element) {
     const currentNode = new Node(element);
     if (!this.head) this.head = currentNode;
-  // else if (this.head === this.tail) this.head.next = currentNode;
-    else this.tail.next = currentNode;
+    else {
+      this.tail.next = currentNode;
+      currentNode.prev = this.tail;
+    }
     this.tail = currentNode;
   }
   removeHead() {
     const currentData = this.head.value;
     this.head = this.head.next;
+    this.head.prev = null;
     return currentData;
   }
   contains(element) {
     let currentNode = this.head;
+    if (currentNode.value === element) return true;
     while (currentNode.next) {
       if (currentNode.value === element) return true;
       currentNode = currentNode.next;
     }
     return false;
+  }
+  print() {
+    let currentNode = this.head;
+    while (currentNode.next) {
+      console.log(currentNode);
+      currentNode = currentNode.next;
+    }
+    console.log(currentNode);
   }
 }
 
