@@ -7,13 +7,13 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
-  insert() {
+  insert(aKey, andItsValue) {
     return this;
   }
-  remove() {
+  remove(unwantedKey) {
     return this;
   }
-  retrieve() {
+  retrieve(thisKey) {
     return this;
   }
 }
