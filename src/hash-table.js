@@ -13,7 +13,7 @@ class HashTable {
   remove(unwantedKey) {
     return this;
   }
-  retrieve(thisKey) {
+  retrieve(someKey) {
     return this;
   }
 }
