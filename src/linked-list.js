@@ -28,6 +28,7 @@ class LinkedList {
   // 1) nothing in the list?
   // 2) 1 other in the list?
   // 3) more than 1?
+  // replace the tail with a new value that is passed in
   addToTail(fromOutside) {
     const node = {
       value: fromOutside, // <--- e.g. 'The Godfather'
@@ -40,16 +41,43 @@ class LinkedList {
     } else { this.tail.next = node; }
     this.tail = node;
   }
-  removeHead() { return this; }/* removes and returns the head node. */
+  // removes and returns the head node.
+  removeHead() {
+    if (this.head === null) return;
+    if (this.head.next === null) {
+      const head = this.head;
+      this.head = null;
+      this.tail = null;
+      return head.value;
+    }
+    const value = this.head.value;
+    this.head = this.head.next;
+    return value;
+  }
   contains(x) { return this; }/* should searth through the linked list and return true if a matching value is found. */
 }
+// TEST SUITE
+// LinkedList class construction
 const test = new LinkedList;
-test.addToTail('The Godfather');
-// console.log(test);
-test.addToTail('The Matrix');
-test.addToTail('Ex Machina');
-test.addToTail('Casablanca');
 console.log(test);
+// addToTail()
+test.addToTail('The Godfather');
+console.log(test);
+test.addToTail('The Matrix');
+console.log(test);
+test.addToTail('Ex Machina');
+console.log(test);
+test.addToTail('Casablanca');
+console.log('AFTER FOUR CALLS TO addToTail');
+// removeHead()
+test.removeHead();
+console.log(`REMOVING "The Godfather":\n${console.log(test)}`);
+test.removeHead();
+console.log(`REMOVING "The Matrix":\n${console.log(test)}`);
+test.removeHead();
+console.log(`REMOVING "Ex Machina":\n${console.log(test)}`);
+test.removeHead();
+console.log(`REMOVING "Casablance":\n${console.log(test)}`);
 
 /*
 * 1) Should have the methods: `addToTail`, `removeHead`, and `contains`.
