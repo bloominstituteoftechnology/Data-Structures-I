@@ -54,7 +54,16 @@ class LinkedList {
     this.head = this.head.next;
     return value;
   }
-  contains(x) { return this; }/* should searth through the linked list and return true if a matching value is found. */
+  // should searth through the linked list and return true if a matching value is found.
+  contains(x) {
+    if (this.head === null) return false;
+    const searchLinkedList = (node) => {
+      if (node.value === x) return true;
+      if (node.next === null) return false;
+      return searchLinkedList(node.next);
+    };
+    return searchLinkedList(this.head);
+  }
 }
 // // TEST SUITE
 // // LinkedList class construction
@@ -78,6 +87,25 @@ class LinkedList {
 // console.log(`REMOVING "Ex Machina":\n${console.log(test)}`);
 // test.removeHead();
 // console.log(`REMOVING "Casablance":\n${console.log(test)}`);
+// contains()
+const test2 = new LinkedList;
+test2.addToTail('The Godfather');
+test2.addToTail('The Matrix');
+test2.addToTail('Ex Machina');
+test2.addToTail('Casablanca');
+console.log('AFTER FOUR CALLS TO addToTail');
+console.log(test2.contains('The Godfather')); // <-- true
+console.log(test2.contains('The Matrix'));    // <-- true
+console.log(test2.contains('Ex Machina'));    // <-- true
+console.log(test2.contains('Casablanca'));    // <-- true
+console.log(`Removing: ${test2.removeHead()}`);
+console.log(test2.contains('The Godfather')); // <-- false
+console.log(test2.contains('Casablanca'));    // <-- true
+console.log(`Removing: ${test2.removeHead()}`);
+console.log(`Removing: ${test2.removeHead()}`);
+console.log(`Removing: ${test2.removeHead()}`);
+console.log(test2.contains('Casablanca'));    // <-- false
+console.log(`Removing ???: ${test2.removeHead()}`); // <--- undefined
 
 /*
 * 1) Should have the methods: `addToTail`, `removeHead`, and `contains`.
