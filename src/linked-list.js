@@ -1,3 +1,13 @@
+/*
+* 1) Should have the methods: `addToTail`, `removeHead`, and `contains`.
+* 2) `addToTail` replaces the tail with a new value that is passed in.
+* 3) `removeHead` removes and returns the head node.
+* 4) `contains` should searth through the linked list and return true if a matching value is found.
+* 5) The `head` property is a reference to the first node and the `tail` property is a reference to
+* the last node.  These are the only two properties that you need to keep track of an infinite number
+* of nodes.  Build your nodes with objects.
+*/
+
 // // First value passed in to linked list:
 // [ {value: 'The Godfather', next: null, STATE {head:Godf, tail: Godf}},]
 //
@@ -55,10 +65,10 @@ class LinkedList {
     return value;
   }
   // should searth through the linked list and return true if a matching value is found.
-  contains(x) {
+  contains(anObject) {
     if (this.head === null) return false;
     const searchLinkedList = (node) => {
-      if (node.value === x) return true;
+      if (node.value === anObject) return true;
       if (node.next === null) return false;
       return searchLinkedList(node.next);
     };
@@ -87,34 +97,24 @@ class LinkedList {
 // console.log(`REMOVING "Ex Machina":\n${console.log(test)}`);
 // test.removeHead();
 // console.log(`REMOVING "Casablance":\n${console.log(test)}`);
-// contains()
-const test2 = new LinkedList;
-test2.addToTail('The Godfather');
-test2.addToTail('The Matrix');
-test2.addToTail('Ex Machina');
-test2.addToTail('Casablanca');
-console.log('AFTER FOUR CALLS TO addToTail');
-console.log(test2.contains('The Godfather')); // <-- true
-console.log(test2.contains('The Matrix'));    // <-- true
-console.log(test2.contains('Ex Machina'));    // <-- true
-console.log(test2.contains('Casablanca'));    // <-- true
-console.log(`Removing: ${test2.removeHead()}`);
-console.log(test2.contains('The Godfather')); // <-- false
-console.log(test2.contains('Casablanca'));    // <-- true
-console.log(`Removing: ${test2.removeHead()}`);
-console.log(`Removing: ${test2.removeHead()}`);
-console.log(`Removing: ${test2.removeHead()}`);
-console.log(test2.contains('Casablanca'));    // <-- false
-console.log(`Removing ???: ${test2.removeHead()}`); // <--- undefined
-
-/*
-* 1) Should have the methods: `addToTail`, `removeHead`, and `contains`.
-* 2) `addToTail` replaces the tail with a new value that is passed in.
-* 3) `removeHead` removes and returns the head node.
-* 4) `contains` should searth through the linked list and return true if a matching value is found.
-* 5) The `head` property is a reference to the first node and the `tail` property is a reference to
-* the last node.  These are the only two properties that you need to keep track of an infinite number
-* of nodes.  Build your nodes with objects.
-*/
+// // contains()
+// const test2 = new LinkedList;
+// test2.addToTail('The Godfather');
+// test2.addToTail('The Matrix');
+// test2.addToTail('Ex Machina');
+// test2.addToTail('Casablanca');
+// console.log('AFTER FOUR CALLS TO addToTail');
+// console.log(test2.contains('The Godfather')); // <-- true
+// console.log(test2.contains('The Matrix'));    // <-- true
+// console.log(test2.contains('Ex Machina'));    // <-- true
+// console.log(test2.contains('Casablanca'));    // <-- true
+// console.log(`Removing: ${test2.removeHead()}`);
+// console.log(test2.contains('The Godfather')); // <-- false
+// console.log(test2.contains('Casablanca'));    // <-- true
+// console.log(`Removing: ${test2.removeHead()}`);
+// console.log(`Removing: ${test2.removeHead()}`);
+// console.log(`Removing: ${test2.removeHead()}`);
+// console.log(test2.contains('Casablanca'));    // <-- false
+// console.log(`Removing ???: ${test2.removeHead()}`); // <--- undefined
 
 module.exports = LinkedList;
