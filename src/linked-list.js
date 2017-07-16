@@ -44,14 +44,14 @@ class LinkedList {
     }
     return false;
   }
-  print() {
-    let currentNode = this.head;
-    while (currentNode.next) {
-      console.log(currentNode);
-      currentNode = currentNode.next;
-    }
-    console.log(currentNode);
-  }
+  // print() {
+  //   let currentNode = this.head;
+  //   while (currentNode.next) {
+  //     console.log(currentNode);
+  //     currentNode = currentNode.next;
+  //   }
+  //   console.log(currentNode);
+  // }
 }
 
 module.exports = LinkedList;
