@@ -24,22 +24,25 @@ class LinkedList {
     // Do not modify anything inside of the constructor
   }
 
-  // Conditions to check to Add to tail
-  // 1) nothing in the list?
-  // 2) 1 other in the list?
-  // 3) more than 1?
+  // Conditions to check when passing an argument fromOutside to addToTail(parameter)
+  // 1) nothing  in the linkedList?
+  // 2) 1  node  in the linkedList?
+  // 3) 2+ nodes in the linkedList?
   addToTail(fromOutside) {
     const node = {
       value: fromOutside, // <--- e.g. 'The Godfather'
       next: null
     };
-    if (this.head === null) {
-      this.head = node;
-    } else {
-      this.head.next = node.value;
+    if (this.head === null) { // 1) if first condition is true,
+      this.head = node;       //    then Head assigned to node (passed in fromOutside)
+      this.tail = node;       //    AND  Tail assigned to node (passed in fromOutside)
+    } else if (this.head === this.tail) { // 2) if second condition is true,
+      this.head.next = node;              //    then Head.next assigned to node (passed in fromOutside)
+      this.tail = node;                   //    AND  Tail      assigned to node (passed in fromOutside)
+    } else {                 // 3) if third condition is true,
+      this.tail.next = node; //    then Tail.next assigned to node (passed in fromOutside)
+      this.tail = node;      //    AND  Tail      assigned to node (passed in fromOutside)
     }
-
-    this.tail = node;
   }
   removeHead() { return this; }/* removes and returns the head node. */
   contains(x) { return this; }/* should searth through the linked list and return true if a matching value is found. */
