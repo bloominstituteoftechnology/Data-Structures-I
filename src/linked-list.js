@@ -53,16 +53,16 @@ class LinkedList {
   }
   // removes and returns the head node.
   removeHead() {
-    if (this.head === null) return;
-    if (this.head.next === null) {
-      const head = this.head;
-      this.head = null;
-      this.tail = null;
-      return head.value;
-    }
-    const value = this.head.value;
-    this.head = this.head.next;
-    return value;
+    if (this.head === null) return null; // if linkedList empty, return null (or just return;)
+    if (this.head.next === null) {  // if linkedList Head & Tail are equal (i.e. only 1 node)
+      const placeHolder = this.head.value; // placeholeder for current "head"s value
+      this.head = null; // reset to state when no nodes have been constructed
+      this.tail = null; // reset to state when no nodes have been constructed
+      return placeHolder; // returns the value which has been removed, e.g. 'The Godfather'
+    } // if linkedList has 2 or more nodes, the following is executed:
+    const anotherPlaceHolder = this.head.value; // placeholder for current "head"s value
+    this.head = this.head.next;     // sets the 2nd node as head
+    return anotherPlaceHolder; // returns the value which has been removed, e.g. 'The Godfather'
   }
   // should searth through the linked list and return true if a matching value is found.
   contains(anObject) {
