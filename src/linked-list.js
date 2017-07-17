@@ -65,14 +65,14 @@ class LinkedList {
     return anotherPlaceHolder; // returns the value which has been removed, e.g. 'The Godfather'
   }
   // should searth through the linked list and return true if a matching value is found.
-  contains(anObject) {
-    if (this.head === null) return false;
+  contains(aMatch) {
+    if (this.head === null) return false; // if list empty, return false
     const searchLinkedList = (node) => {
-      if (node.value === anObject) return true;
-      if (node.next === null) return false;
-      return searchLinkedList(node.next);
+      if (node.value === aMatch) return true; // if we get a matching value, return true
+      if (node.next === null) return false; // if we're at the end of the list and anObject hasn't been found
+      return searchLinkedList(node.next); // recursive call upon next is head is not a match
     };
-    return searchLinkedList(this.head);
+    return searchLinkedList(this.head); // recursive call
   }
 }
 // // TEST SUITE
