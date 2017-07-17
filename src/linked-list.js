@@ -30,10 +30,17 @@ class LinkedList {
     this.tail = currentNode;
   }
   removeHead() {
-    const currentData = this.head.value;
+    if (!this.head) return;
+    if (!this.head.next) {
+      const prevHead = this.head.value;
+      this.head = null;
+      this.tail = null;
+      return prevHead;
+    }
+    const prevHead = this.head.value;
     this.head = this.head.next;
-    this.head.prev = null;
-    return currentData;
+    if (this.head.prev) this.head.prev = null;
+    return prevHead;
   }
   contains(element) {
     let currentNode = this.head;
