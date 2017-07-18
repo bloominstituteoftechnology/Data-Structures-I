@@ -1,5 +1,16 @@
 class Queue {
-
+  constructor() {
+    this.queue = [];
+  }
+  enqueue(...args) {
+    this.queue.push(...args);
+  }
+  dequeue(...args) {
+    return this.queue.shift(...args);
+  }
+  get size() {
+    return this.queue.length;
+  }
 }
 
 module.exports = Queue;

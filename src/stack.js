@@ -1,16 +1,16 @@
 class Stack {
-      constructor() {
-         this.stack = [];
-      }
-      add(...args) {
-        this.stack.push(...args);
-      }
-      remove(...args) {
-        return this.stack.pop(...args);
-      }
-      get size() {
-        return this.stack.length;
-      }
+  constructor() {
+    this.stack = [];
+  }
+  add(...args) {
+    this.stack.push(...args);
+  }
+  remove(...args) {
+    return this.stack.pop(...args);
+  }
+  get size() {
+    return this.stack.length;
+  }
 }
 
 module.exports = Stack;
