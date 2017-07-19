@@ -7,14 +7,13 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
-  insert(key, value) {
-    const hash = this.getHash(key);
-    if (this.storage.get(hash) !== undefined) {
-      
-    } else {
-      this.storage.set(this.getHash(key), value);
-    }
-  }
+  // insert(key, value) {
+  //   const hash = this.getHash(key);
+  //   if (this.storage.get(hash) !== undefined) {  
+  //   } else {
+  //     this.storage.set(this.getHash(key), value);
+  //   }
+  // }
 
   getHash(key) {
     if (typeof key === 'number' && Number.isInteger(key) && key < this.limit) {
