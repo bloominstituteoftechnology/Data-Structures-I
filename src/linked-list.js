@@ -5,26 +5,31 @@ class LinkedList {
     // Do not modify anything inside of the constructor
   }
   addToTail(value) {
-    if (this.head == null) {
-      this.tail = {
-        value,
-        next: null
-      };
-      this.head = this.tail;
+    const node = { // New node object
+      value,
+      next: null
+    };
+    if (this.head == null) { // If there is no first node, point the head to this new node that is being added
+      this.head = node;
     } else {
-      this.tail = {
-        value,
-        next: null
-      };
+      this.tail.next = node; // Otherwise, assign this node to the 'next' property of the last (aka tail) node.
     }
-
-    console.log(this)
+    this.tail = node;
   }
   removeHead() {
-
+    const oldHead = this.head;
+    this.head = this.head.next;
+    return oldHead.value;
   }
-  contains() {
-
+  contains(value) {
+    let current = this.head;
+    while (current.value && current.next !== null) {
+      if (current.value === value) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
   }
 }
 
