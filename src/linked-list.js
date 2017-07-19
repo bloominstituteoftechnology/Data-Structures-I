@@ -6,53 +6,41 @@ class LinkedList {
   }
 
   addToTail(value) {
-    // Add the new node that contains `value` and directs to `null`.
-    // Modify previous tail to instead point to the new node.
-    if (this.head === null) { // If there are no nodes in the list,
-      this.tail = { // Add a tail
-        value,
-        next: null
-      };
-      this.head = this.tail; // Set the head equal to the tail because there is only one node.
-    } else {
-      // If there are existing nodes, we want to add a new tail and modify old tail.
-      this.node = {
-        value: this.tail.value,
-        next:
-      };
-
-      this.tail = { // Otherwise, if there is already a head, set the tail equal to given value.
-        value,
-        next: null
-      };
-      // HOW DO ACCESS OLD TAIL !!  ??
+  //   // Add the new node that contains `value` and directs to `null`.
+  //   // Modify previous tail to instead point to the new node.
+    const newNode = {
+      value,
+      next: null,
+    };
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
     }
+    this.tail.next = newNode;
+    this.tail = newNode;
   }
 
   removeHead() {
-    // Remove and return the head node. Nothing else.
-    const oldHead = this.head;
-    if (this.head === this.tail) { // If there is only one node.
-      // Remove head AND tail.
-      this.head = null;
-      this.tail = null;
-    } else { // If there is more than one node.
+    // head has a value
+    if (this.head) {
+      const value = this.head.value;
       this.head = this.head.next;
-      // Also remove the next node so there isn't a copy.
-      this[this.head.next] = null; // How to actually access the next node? By using the reference from head?
+      return value;
     }
-    return oldHead.value;
   }
 
-  contains(value) {
+  contains(val) {
     // Search through the linked list (how?) and return true if a matching value is found.
     // Linear search:
-    while (true) {
-      if (value === this.node.value) {
+    let currentNode = this.head;
+    // check to see if currentNode is null. If not, proceed.
+    while (currentNode) {
+      if (currentNode.value === val) {
         return true;
       }
-      let node = this.next; // Iterate thru linked list?
+      currentNode = currentNode.next;
     }
+    return false;
   }
 }
 
