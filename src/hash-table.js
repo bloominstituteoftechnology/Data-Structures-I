@@ -8,13 +8,19 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
   insert(key, value) {
-  	// Takes a key value pair and adds the value to the hash table
+    // Takes a key value pair and adds the value to the hash table
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    this.storage[index] = value;
   }
   retrieve(key) {
-  	// Returns the value associated with the key passed into the method as the argument
+    // Returns the value associated with the key passed into the method as the argument
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    return this.storage[index];
   }
   remove(key) {
-  	// Removes the value associated with the key passed from the hash table
+    // Removes the value associated with the key passed from the hash table
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    this.storage[index] = undefined;
   }
 }
 
