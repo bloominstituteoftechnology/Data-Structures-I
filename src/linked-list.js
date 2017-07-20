@@ -13,6 +13,7 @@ class LinkedList {
 
     if (this.head === null) {
       this.head = node; // correct
+      this.tail = node;
     } else {
       this.tail.next = node;
     }
@@ -27,8 +28,15 @@ class LinkedList {
       return value;
     }
   }
-  contains() {
-    console.log(this);
+  contains(value) {
+    let current = this.head;
+    while (current) {
+      if (current.value === value) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
   }
 }
 
