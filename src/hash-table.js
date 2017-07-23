@@ -6,22 +6,18 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
   insert(key, value) {
-    const pairArray = [[key, value]];
     const index = getIndexBelowMax(key, this.limit);
-    let bucket = this.storage.get(index);
-    if (!bucket) {
-      this.storage.set(index, pairArray);
-      bucket = this.storage.get(index);
-    } else {
+    const pair = [key, value];
+    const bucket = this.storage.get(index);
+    if (!bucket) this.storage.set(index, [pair]);
+    else {
       for (let i = 0; i < bucket.length; i++) {
-        if (bucket[i][0] === key) {
-          bucket[i][1] = value;
-        }
+        if (bucket[i][0] === key) bucket[i][1] = value;
       }
-      bucket.push(pairArray.pop());
+      bucket.push(pair);
     }
-    if (this.length > this.limit * 0.75) {
-      this.limit *= 2
+    if (this.storage.length >= this.limit * 0.75) {
+      this.limit *= 2;
       this.storage.limit = this.limit;
     }
   }
@@ -38,7 +34,7 @@ class HashTable {
     const bucket = this.storage.get(index);
     if (bucket) {
       for (let i = 0; i < bucket.length; i++) {
-        if (bucket[i][0] === key) bucket.splice([i][1], 1);
+        if (bucket[i][0] === key) bucket.splice(i, 1);
       }
     }
   }
