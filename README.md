@@ -42,5 +42,6 @@ Topics:
 
 ### Extra Credit
 
- * Uncomment the final test in `hash-table.test.js` and make the hash-table rebalance.  As a hash table increases in size the associated storage table will typically double in size once it reaches a certain capacity.  Change the hash table so that it doubles the size of the storage table once it is 75% full.
- * Make the linked-list a doubly linked list.
+ * Uncomment the final test in `hash-table.test.js` and make the hash-table rebalance.  As a hash table increases in size the associated storage table will typically double in size once it reaches a certain capacity. Change the hash table so that it doubles the size of the storage table once it is 75% full.
+ * If you used arrays as your underlying data structure for implementing stacks, queues, and hash table buckets, convert these to use linked lists instead as the underlying data structure. If you started off with linked lists, convert these to use arrays. In order to do this, you'll need to export your linked list implementation by wrapping it inside a `module.exports`. Just comment out your initial implementation; don't delete perfectly good code!
+ * Make your linked list implementation a [doubly linked list](https://en.wikipedia.org/wiki/Doubly_linked_list).
