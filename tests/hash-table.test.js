@@ -18,8 +18,8 @@ describe('HashTable', () => {
   });
 
   it('should save and return values by key', () => {
-    hashTable.insert('hello', 'there');
-    expect(hashTable.retrieve('hello')).toBe('there');
+    hashTable.insert('Hello', 'there');
+    expect(hashTable.retrieve('Hello')).toBe('there');
   });
 
   it('should properly remove items', () => {
@@ -41,24 +41,22 @@ describe('HashTable', () => {
     expect(hashTable.retrieve(0)).toBe('Second Value');
   });
 
-  /* Extra Credit */
+  it('should properly handle collisions', () => {
+    hashTable.insert('B', 'First Value');
+    hashTable.insert('HI!', 'Second Value');
+    expect(hashTable.retrieve('B')).toBe('First Value');
+    expect(hashTable.retrieve('HI!')).toBe('Second Value');
+  });
 
-  // it('should properly handle collisions', () => {
-  //   hashTable.insert('B', 'First Value');
-  //   hashTable.insert('HI!', 'Second Value');
-  //   expect(hashTable.retrieve('B')).toBe('First Value');
-  //   expect(hashTable.retrieve('HI!')).toBe('Second Value');
-  // });
-  //
-  // it('should resize the hash table when > 75% full', () => {
-  //   hashTable.insert('a', true);
-  //   hashTable.insert('b', true);
-  //   hashTable.insert('c', true);
-  //   hashTable.insert('d', true);
-  //   hashTable.insert('e', true);
-  //   hashTable.insert('f', true);
-  //   hashTable.insert('g', true);
-  //   expect(hashTable.limit).toBe(16);
-  //   expect(hashTable.storage.length).toBe(8);
-  // });
+  it('should resize the hash table when > 75% full', () => {
+    hashTable.insert('a', true);
+    hashTable.insert('b', true);
+    hashTable.insert('c', true);
+    hashTable.insert('d', true);
+    hashTable.insert('e', true);
+    hashTable.insert('f', true);
+    hashTable.insert('g', true);
+    expect(hashTable.limit).toBe(16);
+    expect(hashTable.storage.length).toBe(8);
+  });
 });
