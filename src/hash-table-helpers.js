@@ -33,6 +33,9 @@ class LimitedArray {
 }
 
 /* eslint-disable no-bitwise, operator-assignment */
+// THIS IS THE HASHING FUNCTION
+// used to compute the index in the hash table
+// pass in the key and get the index where the value is stored
 const getIndexBelowMax = (str, max) => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
