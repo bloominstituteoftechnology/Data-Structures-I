@@ -31,15 +31,6 @@ describe('LinkedList', () => {
     expect(list.head.value).toBe(1);
   });
 
-  it('should return true from contains if a matching value is found and false otherwise', () => {
-    list.addToTail(1);
-    list.addToTail(2);
-    list.addToTail('hello');
-    list.addToTail(true);
-    expect(list.contains('hello')).toBe(true);
-    expect(list.contains('asdf')).toBe(false);
-  });
-
   it('should remove head when removeHead is invoked', () => {
     list.addToTail(1);
     list.addToTail(2);
@@ -51,6 +42,15 @@ describe('LinkedList', () => {
   it('should return the head that is removed when removeHead is invoked', () => {
     list.addToTail(1);
     expect(list.removeHead()).toBe(1);
+  });
+
+  it('should return true from contains if a matching value is found and false otherwise', () => {
+    list.addToTail(1);
+    list.addToTail(2);
+    list.addToTail('hello');
+    list.addToTail(true);
+    expect(list.contains('hello')).toBe(true);
+    expect(list.contains('asdf')).toBe(false);
   });
 
   it('should not contain removed values', () => {
