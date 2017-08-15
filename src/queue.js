@@ -1,15 +1,20 @@
+const LinkedList = require('./linked-list');
+
 class Queue {
   constructor() {
-    this.queue = [];
+    this.queue = new LinkedList();
+    this.count = 0;
   }
   enqueue(item) {
-    this.queue.push(item);
+    this.queue.addToTail(item);
+    this.count++;
   }
   dequeue() {
-    return this.queue.shift();
+    if (this.count > 0) this.count--;
+    return this.queue.removeHead();
   }
   get size() {
-    return this.queue.length;
+    return this.count;
   }
 }
 

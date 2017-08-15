@@ -1,7 +1,16 @@
+const LinkedList = require('./linked-list');
+const HashTable = require('./hash-table');
+
 class LimitedArray {
   constructor(limit) {
     this.storage = [];
     this.limit = limit;
+  }
+
+  changeStorage() {
+    if (this.storage.length >= 6) {
+      this.limit = 16;
+    }
   }
 
   checkLimit(index) {
