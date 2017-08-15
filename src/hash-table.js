@@ -17,8 +17,16 @@ class HashTable {
   constructor(limit) {
     this.limit = limit || 8;// Modified to add set limit functionality when creating
                             // a new instance of the HashTable class
-    this.storage = new LimitedArray(this.limit);
+    this.storage = new LimitedArray(this.limit).storage; // Storage was another internal array according to the helper...
     // Do not modify anything inside of the constructor
+  }
+  // Extra Credit
+  manageStorage() {
+    if (this.storage.length / this.limit > 0.75) {
+      this.limit = this.limit * 2;
+      const newStorage = new LimitedArray(this.limit).storage;
+      this.storage = newStorage.concat(this.storage);
+    }
   }
   insert(key, value) {
     // Base solution
@@ -27,6 +35,7 @@ class HashTable {
     // Extra Credit
     const index = getIndexBelowMax(`${key}`, this.limit);
     this.storage[index] = this.storage[index] ? [...this.storage[index], [key, value]] : [[key, value]];
+    this.manageStorage();
   }
   retrieve(key) {
     // Base solution
@@ -45,6 +54,7 @@ class HashTable {
     const index = getIndexBelowMax(`${key}`, this.limit);
     const elementIndex = this.storage[index].findIndex(value => value[0] === key);
     this.storage[index] = this.storage[index].splice(elementIndex, 0);
+    this.manageStorage();
   }
 }
 
