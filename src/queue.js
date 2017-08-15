@@ -13,10 +13,10 @@ class Queue {
     this.queue = [];
   }
   enqueue(item) {
-    this.queue.push(item)
+    this.queue.push(item);
   }
   dequeue() {
-    return this.queue.shift()
+    return this.queue.shift();
   }
   get size() {
     return this.queue.length;
