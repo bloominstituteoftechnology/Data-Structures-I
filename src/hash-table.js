@@ -11,27 +11,24 @@ class HashTable {
   }
   insert(key, value) {
     const i = getIndexBelowMax(key, this.limit);
-    if (this.storage[i]) {
-      this.storage[i].push([key, value]);
+    if (this.storage[i] && this.storage[i].containsKey(key)) {
+      this.storage[i].change(key, value);
+    }
+    if (this.storage[i] && !this.storage[i].containsKey(key)) {
+      this.storage[i].addToTail([key, value]);
     } else {
-      this.storage[i] = [[key, value]];
+      this.storage[i] = new LinkedList();
+      this.storage[i].addToTail([key, value]);
     }
     this.storage.changeStorage();
   }
   retrieve(key) {
     const i = getIndexBelowMax(key, this.limit);
-    let found;
-    this.storage[i].forEach((k) => {
-      if (k[0] === key) {
-        found = k[1];
-      }
-    });
-    return found;
+    return this.storage[i].search(key);
   }
   remove(key) {
     const i = getIndexBelowMax(key, this.limit);
-    const index = this.storage[i].findIndex(k => k[0] === key);
-    this.storage[i].splice(index, 1);
+    this.storage[i].remove(key);
   }
 }
 
