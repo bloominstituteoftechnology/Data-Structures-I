@@ -22,21 +22,29 @@ class HashTable {
   }
   insert(key, value) {
     // Base solution
-    this.storage[getIndexBelowMax(`${key}`, this.limit)] = value;
+    // this.storage[getIndexBelowMax(`${key}`, this.limit)] = value;
 
     // Extra Credit
-    // const index = getIndexBelowMax(`${key}`, this.limit);
-    // this.storage[index] = [...this.storage[index], [key, value]];
+    const index = getIndexBelowMax(`${key}`, this.limit);
+    this.storage[index] = this.storage[index] ? [...this.storage[index], [key, value]] : [[key, value]];
   }
   retrieve(key) {
     // Base solution
-    return this.storage[getIndexBelowMax(`${key}`, this.limit)];
+    // return this.storage[getIndexBelowMax(`${key}`, this.limit)];
 
     // Extra Credit
-    // const 
+    const values = this.storage[getIndexBelowMax(`${key}`, this.limit)];
+    const element = values.find(value => value[0] === key);
+    return element ? element[1] : undefined;
   }
   remove(key) {
-    delete this.storage[getIndexBelowMax(`${key}`, this.limit)];
+    // Base solution
+    // delete this.storage[getIndexBelowMax(`${key}`, this.limit)];
+
+    // Extra Credit
+    const index = getIndexBelowMax(`${key}`, this.limit);
+    const elementIndex = this.storage[index].findIndex(value => value[0] === key);
+    this.storage[index] = this.storage[index].splice(elementIndex, 0);
   }
 }
 
