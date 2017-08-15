@@ -6,11 +6,6 @@ class LimitedArray {
     this.storage = [];
     this.limit = limit;
   }
-  resize(newLimit) {
-    const oldstorage = this.storage;
-    this.limit = 16;
-    this.storage = [];
-  }
   checkLimit(index) {
     if (typeof index !== 'number') throw new Error('The supplied index needs to be a number');
     if (this.limit <= index) {
