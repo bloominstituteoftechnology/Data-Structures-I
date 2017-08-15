@@ -16,35 +16,6 @@ class LinkedList {
     this.tail = null;
     // Do not modify anything inside of the constructor
   }
-  // addToTail(value) {
-  //   const node = {
-  //     value,
-  //     next: null
-  //   };
-  //   if (!this.head) {
-  //     this.head = node;
-  //     this.tail = node;
-  //   } else if (!this.head.next) {
-  //     this.head.next = node;
-  //     this.tail = node;
-  //   } else {
-  //     this.tail.next= node;
-  //     this.tail = node
-  //   }
-  // }
-  // removeHead() {
-  //   if (!this.head) return null;
-  //   if (!this.head.next) {
-  //     this.head = null;
-  //     this.tail = null;
-  //     return null;
-  //   } else {
-  //     const returnVal = this.head.value;
-  //     this.head = this.head.next;
-  //     return returnVal;
-  //   }
-  // }
-  // contains(value) {}
   addToTail(value) {
     const node = {
       next: null,
