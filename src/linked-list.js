@@ -1,3 +1,11 @@
+class Node {
+  constructor(value) {
+    this.next = null;
+    this.last = null;
+    this.value = value;
+  }
+}
+
 class LinkedList {
   constructor() {
     this.head = null;
@@ -5,9 +13,9 @@ class LinkedList {
     // Do not modify anything inside of the constructor
   }
   addToTail(value) {
-    const node = { value, next: null };
+    const node = new Node(value);
 
-    if (this.head === null) {
+    if (!this.head) {
       this.head = node;
     } else {
       this.tail.next = node;
@@ -34,4 +42,7 @@ class LinkedList {
   }
 }
 
-module.exports = LinkedList;
+module.exports = {
+  Node,
+  LinkedList,
+};
