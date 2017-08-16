@@ -57,6 +57,16 @@ class LinkedList {
     };
     return findValue(this.head);
   }
+
+  get size() {
+    let count = 0;
+    let currentNode = this.head;
+    while (currentNode) {
+      currentNode = currentNode.next;
+      count++;
+    }
+    return count;
+  }
 }
 
 module.exports = LinkedList;
