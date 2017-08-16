@@ -21,9 +21,7 @@ class HashTable {
     if (this.storage.length / this.limit > 0.75) {
       this.limit *= 2;
       const resizedStorage = new LimitedArray(this.limit);
-      this.storage.each((element, index) => {
-        resizedStorage.set(index, element);
-      });
+      this.storage.each((element, index) => resizedStorage.set(index, element));
       this.storage = resizedStorage;
     }
   }
