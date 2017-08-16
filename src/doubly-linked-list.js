@@ -11,7 +11,7 @@
  * number of nodes.  Build your nodes with objects.
  */
 
-class LinkedList {
+class DoublyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
@@ -87,6 +87,16 @@ class LinkedList {
     };
     return findValue(this.head);
   }
+
+  get size() {
+    let count = 0;
+    let currentNode = this.head;
+    while (currentNode) {
+      currentNode = currentNode.next;
+      count++;
+    }
+    return count;
+  }
 }
 
-module.exports = LinkedList;
+module.exports = DoublyLinkedList;
