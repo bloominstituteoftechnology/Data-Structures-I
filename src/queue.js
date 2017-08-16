@@ -1,15 +1,15 @@
 class Queue {
-  constructor(options) {
-    this.newArr = [];
+  constructor() {
+    this.storage = [];
   }
   enqueue(value) {
-    return this.newArr.unshift(value);
+    this.storage.unshift(value);
   }
   dequeue() {
-    return this.newArr.pop();
+    return this.storage.pop();
   }
   get size() {
-    return this.newArr.length;
+    return this.storage.length;
   }
 }
 
