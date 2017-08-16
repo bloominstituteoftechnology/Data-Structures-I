@@ -1,0 +1,52 @@
+"use strict";var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var LinkedList = function () {
+  function LinkedList() {_classCallCheck(this, LinkedList);
+    this.head = null;
+    this.tail = null;
+    // Do not modify anything inside of the constructor
+  }_createClass(LinkedList, [{ key: "addToTail", value: function addToTail(
+    value) {
+      var node = {
+        value: value,
+        next: null };
+
+      if (this.head === null) {
+        this.head = node;
+        this.tail = node;
+      } else {
+        this.tail.next = node;
+        this.tail = node;
+      }
+    } }, { key: "removeHead", value: function removeHead()
+
+    {
+      if (this.head === null) {
+        return null;
+      }
+      if (this.head === this.tail) {
+        var _value = this.head.value;
+        this.head = null;
+        this.tail = null;
+        return _value;
+      }
+      var value = this.head.value;
+      this.head = this.head.next;
+      return value;
+    } }, { key: "contains", value: function contains(
+    value) {
+      if (this.head === null) {
+        return false;
+      }
+      var searchLinkedList = function searchLinkedList(node) {
+        if (node.value === value) {
+          return true;
+        }
+        if (node.next === null) {
+          return false;
+        }
+        return searchLinkedList(node.next);
+      };
+      return searchLinkedList(this.head);
+    } }]);return LinkedList;}();
+
+
+module.exports = LinkedList;

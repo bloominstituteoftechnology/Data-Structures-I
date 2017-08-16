@@ -1,0 +1,48 @@
+'use strict';var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}var LimitedArray = function () {
+  function LimitedArray(limit) {_classCallCheck(this, LimitedArray);
+    this.storage = [];
+    this.limit = limit;
+  }_createClass(LimitedArray, [{ key: 'checkLimit', value: function checkLimit(
+
+    index) {
+      if (typeof index !== 'number') throw new Error('The supplied index needs to be a number');
+      if (this.limit <= index) {
+        throw new Error('The supplied index lies out of the array\'s bounds');
+      }
+    } }, { key: 'each', value: function each(
+
+    cb) {
+      for (var i = 0; i < this.storage.length; i++) {
+        cb(this.storage[i], i);
+      }
+    } }, { key: 'get', value: function get(
+
+    index) {
+      this.checkLimit(index);
+      return this.storage[index];
+    } }, { key: 'set', value: function set(
+
+
+
+
+
+    index, value) {
+      this.checkLimit(index);
+      this.storage[index] = value;
+    } }, { key: 'length', get: function get() {return this.storage.length;} }]);return LimitedArray;}();
+
+
+/* eslint-disable no-bitwise, operator-assignment */
+var getIndexBelowMax = function getIndexBelowMax(str, max) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = (hash << 5) + hash + str.charCodeAt(i);
+    hash = hash & hash;
+    hash = Math.abs(hash);
+  }
+  return hash % max;
+};
+
+module.exports = {
+  LimitedArray: LimitedArray,
+  getIndexBelowMax: getIndexBelowMax };
