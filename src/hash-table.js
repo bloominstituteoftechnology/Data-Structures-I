@@ -26,8 +26,18 @@ class HashTable {
 
   insert(key, value) {
     const index = this.getIndex(key);
-    const element = [[key, value]];
-    this.storage.set(index, element);
+    const element = this.storage.get(index);
+    if (!element) {
+      this.storage.set(index, [[key, value]])
+    } else {
+      element.forEach((kvp, i) => {
+        if (kvp[0] === key) {
+          kvp[1] = value;
+          element[i] = kvp;
+        }
+      })
+      this.storage.set(index, element);
+    }
   }
 
   retrieve(key) {
