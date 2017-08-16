@@ -1,0 +1,87 @@
+'use strict';var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}} /* eslint-disable no-unused-vars */var _require =
+require('./hash-table-helpers'),LimitedArray = _require.LimitedArray,getIndexBelowMax = _require.getIndexBelowMax;var
+
+HashTable = function () {
+  function HashTable() {_classCallCheck(this, HashTable);
+    this.limit = 8;
+    this.storage = new LimitedArray(this.limit);
+    // Do not modify anything inside of the constructor
+  }
+
+  // checkCapacity() {
+  //   let fullCells = 1;
+  //   this.storage.each((bucket) => {
+  //     if (bucket !== undefined) {
+  //       fullCells++;
+  //     }
+  //   });
+  //   return fullCells / this.limit > 0.75;
+  // }
+
+  // resize() {
+  //   this.limit *= 2;
+  //   const oldStorage = this.storage;
+  //   this.storage = new LimitedArray(this.limit);
+  //   oldStorage.each((bucket) => {
+  //     if (bucket === undefined) return;
+  //     bucket.forEach((pair) => {
+  //       this.insert(pair[0], pair[1]);
+  //     });
+  //   });
+  // }
+  _createClass(HashTable, [{ key: 'insert', value: function insert(
+    key, value) {
+      // if (this.checkCapacity()) {
+      //   this.resize();
+      // }
+      var index = getIndexBelowMax(key.toString(), this.limit);
+      var bucket = this.storage.get(index);
+
+      if (bucket === undefined) {
+        this.storage.set(index, [[key, value]]);
+        return;
+      }
+
+      for (var i = 0; i < bucket.length; i++) {
+        var cell = bucket[i];
+        if (cell[0] === key) {
+          cell[1] = value;
+          this.storage.set(index, bucket);
+          return;
+        }
+      }
+
+      bucket.push([key, value]);
+      this.storage.set(index, bucket);
+    } }, { key: 'retrieve', value: function retrieve(
+
+    key) {
+      var index = getIndexBelowMax(key.toString(), this.limit);
+      var bucket = this.storage.get(index);
+      if (bucket === undefined) {
+        return undefined;
+      }
+      for (var i = 0; i < bucket.length; i++) {
+        if (bucket[i][0] === key) {
+          return bucket[i][1];
+        }
+      }
+    } }, { key: 'remove', value: function remove(
+    key) {var _this = this;
+      var index = getIndexBelowMax(key.toString(), this.limit);
+      var bucket = this.storage.get(index);
+      if (bucket.length === 1) {
+        var value = bucket[0][1];
+        this.storage.set(index, undefined);
+        return value;
+      }
+      bucket.forEach(function (pair, i) {
+        if (pair[0] === key) {
+          bucket.splice(i, 1);
+        }
+        _this.storage.set(index, bucket);
+      });
+    } }]);return HashTable;}();
+
+
+module.exports = HashTable;
