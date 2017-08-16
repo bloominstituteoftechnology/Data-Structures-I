@@ -15,46 +15,38 @@ const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 
 class HashTable {
   constructor(limit) {
-    this.limit = limit || 8;// Modified to add set limit functionality when creating
-                            // a new instance of the HashTable class
-    this.storage = new LimitedArray(this.limit).storage; // Storage was another internal array according to the helper...
+    this.limit = 8;
+    this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
-  // Extra Credit
-  manageStorage() {
-    if (this.storage.length / this.limit > 0.75) {
-      this.limit = this.limit * 2;
-      const newStorage = new LimitedArray(this.limit).storage;
-      this.storage = newStorage.concat(this.storage);
-    }
+
+  getIndex(key) {
+    return getIndexBelowMax(`${key}`, this.limit);
   }
+
   insert(key, value) {
-    // Base solution
-    // this.storage[getIndexBelowMax(`${key}`, this.limit)] = value;
-
-    // Extra Credit
-    const index = getIndexBelowMax(`${key}`, this.limit);
-    this.storage[index] = this.storage[index] ? [...this.storage[index], [key, value]] : [[key, value]];
-    this.manageStorage();
+    const index = this.getIndex(key);
+    const element = [[key, value]];
+    this.storage.set(index, element);
   }
+
   retrieve(key) {
-    // Base solution
-    // return this.storage[getIndexBelowMax(`${key}`, this.limit)];
-
-    // Extra Credit
-    const values = this.storage[getIndexBelowMax(`${key}`, this.limit)];
-    const element = values.find(value => value[0] === key);
-    return element ? element[1] : undefined;
+    const index = this.getIndex(key);
+    const element = this.storage.get(index);
+    if (!element) return;
+    const values = element.find(value => value[0] === key);
+    const returnVal = values ? values[1] : undefined;
+    return returnVal;
   }
-  remove(key) {
-    // Base solution
-    // delete this.storage[getIndexBelowMax(`${key}`, this.limit)];
 
-    // Extra Credit
-    const index = getIndexBelowMax(`${key}`, this.limit);
-    const elementIndex = this.storage[index].findIndex(value => value[0] === key);
-    this.storage[index] = this.storage[index].splice(elementIndex, 0);
-    this.manageStorage();
+  remove(key) {
+    const index = this.getIndex(key);
+    const element = this.storage.get(index);
+    if (element.length === 1) return this.storage.set(index, undefined);
+    element.forEach((value, i) => {
+      if (value[0] === key) element.splice(i, 1);
+      this.storage.set(index, element);
+    });
   }
 }
 
