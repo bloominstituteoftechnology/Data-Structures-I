@@ -3,7 +3,7 @@ const Queue = require('../src/queue-extra-credit');
 
 let queue;
 
-describe('Queue', () => {
+describe('Linked List Queue', () => {
   beforeEach(() => {
     queue = new Queue();
   });
