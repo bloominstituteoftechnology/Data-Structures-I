@@ -8,11 +8,14 @@ describe('LinkedList', () => {
     list = new LinkedList();
   });
 
-  it('should have the methods "addToTail", "removeHead", and "contains"', () => {
+  it('should have the methods "addToTail", "addToHead", "removeHead", "removeTail", and "contains"', () => {
     const hasAddToTail = Object.getPrototypeOf(list).hasOwnProperty('addToTail');
+    const hasAddToHead = Object.getPrototypeOf(list).hasOwnProperty('addToHead');
     const hasRemoveHead = Object.getPrototypeOf(list).hasOwnProperty('removeHead');
+    const hasRemoveTail = Object.getPrototypeOf(list).hasOwnProperty('removeTail');
     const hasContains = Object.getPrototypeOf(list).hasOwnProperty('contains');
     expect(hasAddToTail).toBe(true);
+    expect(hasAddToHead).toBe(true);
     expect(hasRemoveHead).toBe(true);
     expect(hasContains).toBe(true);
   });
