@@ -68,7 +68,7 @@ describe('Doubly LinkedList', () => {
   });
 
   it('should remove tail when removeTail is invoked', () => {
-    list.addToHead(1); 
+    list.addToHead(1);
     list.addToHead(2);
     expect(list.tail.value).toBe(1);
     list.removeTail();
