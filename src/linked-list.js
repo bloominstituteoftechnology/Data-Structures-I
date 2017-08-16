@@ -21,18 +21,16 @@ class LinkedList {
       next: null,
       value
     };
-    if (this.head === null) {
+    if (!this.head) {
       this.head = node;
       this.tail = node;
-      return;
-    }
-    if (this.head.next === null) {
+    } else if (!this.head.next) {
       this.head.next = node;
       this.tail = node;
-      return;
+    } else {
+      this.tail.next = node;
+      this.tail = node;
     }
-    this.tail.next = node;
-    this.tail = node;
   }
 
   removeHead() {
@@ -49,9 +47,9 @@ class LinkedList {
   }
 
   contains(value) {
-    if (this.head === null) return false;
+    if (!this.head) return false;
     const findValue = (node) => {
-      if (node.next === null) return false;
+      if (!node.next) return false;
       else if (node.value === value) return true;
       return findValue(node.next);
     };
