@@ -1,3 +1,5 @@
+const { Node, LinkedList } = require('./linked-list.js');
+
 class Stack {
   constructor() {
     this.storage = [];
