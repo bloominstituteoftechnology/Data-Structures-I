@@ -24,8 +24,7 @@ class LinkedList {
   newNode(value) {
     return {
       value,
-      next: null,
-      // previous: null
+      next: null
     };
   }
   initializeList(node) {
