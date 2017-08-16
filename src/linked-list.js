@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * #### Linked Lists
 
@@ -8,6 +9,10 @@
  * The `head` property is a reference to the first node and the `tail` property is a reference to
  * the last node.  These are the only two properties that you need to keep track of an infinite
  * number of nodes.  Build your nodes with objects.
+ *
+ * ### Extra Credit
+ *
+ * Make your linked list implementation a [doubly linked list](https://en.wikipedia.org/wiki/Doubly_linked_list).
  */
 
 class LinkedList {
@@ -16,11 +21,35 @@ class LinkedList {
     this.tail = null;
     // Do not modify anything inside of the constructor
   }
-  addToTail(value) {
-    const node = {
+  newNode(value) {
+    return {
+      value,
       next: null,
-      value
+      // previous: null
     };
+  }
+  initializeList(node) {
+    this.head = node;
+    this.tail = node;
+  }
+
+  getPrevious() {
+    const size = this.size;
+    let count = 0;
+    let currentNode = this.head;
+    let previousNode;
+    while (currentNode) {
+      if (count === size - 2) {
+        previousNode = currentNode;
+      }
+      currentNode = currentNode.next;
+      count++;
+    }
+    return previousNode;
+  }
+
+  addToTail(value) {
+    const node = this.newNode(value);
     if (!this.head) {
       this.head = node;
       this.tail = node;
@@ -30,6 +59,16 @@ class LinkedList {
     } else {
       this.tail.next = node;
       this.tail = node;
+    }
+  }
+
+  addToHead(value) {
+    const node = this.newNode(value);
+    if (!this.head) {
+      this.initializeList(node);
+    } else {
+      node.next = this.head;
+      this.head = node;
     }
   }
 
@@ -44,6 +83,12 @@ class LinkedList {
     const returnVal = this.head.value;
     this.head = this.head.next;
     return returnVal;
+  }
+
+  removeTail() {
+    if (!this.head) return;
+    const returnVal = this.tail.value;
+    this.tail = this.getPrevious();
   }
 
   contains(value) {
