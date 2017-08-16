@@ -28,14 +28,14 @@ class HashTable {
     const index = this.getIndex(key);
     const element = this.storage.get(index);
     if (!element) {
-      this.storage.set(index, [[key, value]])
+      this.storage.set(index, [[key, value]]);
     } else {
       element.forEach((kvp, i) => {
         if (kvp[0] === key) {
           kvp[1] = value;
           element[i] = kvp;
         }
-      })
+      });
       this.storage.set(index, element);
     }
   }
