@@ -24,8 +24,15 @@ describe('HashTable', () => {
 
   it('should properly remove items', () => {
     hashTable.insert('Ben', 'Nelson');
+    hashTable.insert('Sean', 'Chen');
+    hashTable.insert('Ryan', 'Hamblin');
+    hashTable.insert('Karthik', 'Viswanathan');
+    hashTable.insert('Austen', 'Allred');
     hashTable.remove('Ben');
+    hashTable.remove('Austen');
     expect(hashTable.retrieve('Ben')).toBe(undefined);
+    expect(hashTable.retrieve('Sean')).toBe('Chen');
+    expect(hashTable.retrieve('Karthik')).toBe('Viswanathan');
   });
 
   it('should handle numbers as keys', () => {
@@ -41,15 +48,15 @@ describe('HashTable', () => {
     expect(hashTable.retrieve(0)).toBe('Second Value');
   });
 
+  it('should properly handle collisions', () => {
+    hashTable.insert('B', 'First Value');
+    hashTable.insert('HI!', 'Second Value');
+    expect(hashTable.retrieve('B')).toBe('First Value');
+    expect(hashTable.retrieve('HI!')).toBe('Second Value');
+  });
+
   /* Extra Credit */
 
-  // it('should properly handle collisions', () => {
-  //   hashTable.insert('B', 'First Value');
-  //   hashTable.insert('HI!', 'Second Value');
-  //   expect(hashTable.retrieve('B')).toBe('First Value');
-  //   expect(hashTable.retrieve('HI!')).toBe('Second Value');
-  // });
-  //
   // it('should resize the hash table when > 75% full', () => {
   //   hashTable.insert('a', true);
   //   hashTable.insert('b', true);

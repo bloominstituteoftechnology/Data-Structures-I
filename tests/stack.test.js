@@ -8,12 +8,12 @@ describe('Stack', () => {
     stack = new Stack();
   });
 
-  it('should have the methods "add", "remove", and the property "size"', () => {
-    const hasAdd = Object.getPrototypeOf(stack).hasOwnProperty('add');
-    const hasRemove = Object.getPrototypeOf(stack).hasOwnProperty('remove');
+  it('should have the methods "push", "pop", and the property "size"', () => {
+    const hasPush = Object.getPrototypeOf(stack).hasOwnProperty('push');
+    const hasPop = Object.getPrototypeOf(stack).hasOwnProperty('pop');
     const hasSize = Object.getPrototypeOf(stack).hasOwnProperty('size');
-    expect(hasAdd).toBe(true);
-    expect(hasRemove).toBe(true);
+    expect(hasPush).toBe(true);
+    expect(hasPop).toBe(true);
     expect(hasSize).toBe(true);
   });
 
@@ -22,51 +22,51 @@ describe('Stack', () => {
   });
 
   it('should return a size of 10 after adding 10 items to the stack', () => {
-    stack.add(null);
-    stack.add(null);
-    stack.add(null);
-    stack.add(null);
-    stack.add(null);
-    stack.add(null);
-    stack.add(null);
-    stack.add(null);
-    stack.add(null);
-    stack.add(null);
+    stack.push(null);
+    stack.push(null);
+    stack.push(null);
+    stack.push(null);
+    stack.push(null);
+    stack.push(null);
+    stack.push(null);
+    stack.push(null);
+    stack.push(null);
+    stack.push(null);
     expect(stack.size).toBe(10);
   });
 
-  it('should not error when attempting to remove an item from an empty stack', () => {
-    expect(stack.remove()).toThrow(undefined);
+  it('should not error when attempting to pop an item from an empty stack', () => {
+    expect(stack.pop()).toThrow(undefined);
   });
 
-  it('should return a size of 0 after attempting to remove more items than were added', () => {
-    stack.remove();
-    stack.remove();
-    stack.remove();
+  it('should return a size of 0 after attempting to pop more items than were added', () => {
+    stack.pop();
+    stack.pop();
+    stack.pop();
     expect(stack.size).toBe(0);
   });
 
-  it('should remove and return the top item', () => {
-    stack.add(1);
-    expect(stack.remove()).toBe(1);
+  it('should pop and return the top item', () => {
+    stack.push(1);
+    expect(stack.pop()).toBe(1);
   });
 
-  it('should remove the most recent item added if multiple items added', () => {
-    stack.add(true);
-    stack.add('hi');
-    stack.add(null);
-    stack.add(77);
-    expect(stack.remove()).toBe(77);
+  it('should pop the most recent item added if multiple items added', () => {
+    stack.push(true);
+    stack.push('hi');
+    stack.push(null);
+    stack.push(77);
+    expect(stack.pop()).toBe(77);
   });
 
   it('should respect the order with which elements are added', () => {
-    stack.add(true);
-    stack.add('hi');
-    stack.add(null);
-    stack.add(77);
-    expect(stack.remove()).toBe(77);
-    expect(stack.remove()).toBe(null);
-    expect(stack.remove()).toBe('hi');
-    expect(stack.remove()).toBe(true);
+    stack.push(true);
+    stack.push('hi');
+    stack.push(null);
+    stack.push(77);
+    expect(stack.pop()).toBe(77);
+    expect(stack.pop()).toBe(null);
+    expect(stack.pop()).toBe('hi');
+    expect(stack.pop()).toBe(true);
   });
 });
