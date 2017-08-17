@@ -50,11 +50,7 @@ class LinkedList {
   addToTail(value) {
     const node = this.newNode(value);
     if (!this.head) {
-      this.head = node;
-      this.tail = node;
-    } else if (!this.head.next) {
-      this.head.next = node;
-      this.tail = node;
+      this.initializeList(node);
     } else {
       this.tail.next = node;
       this.tail = node;
@@ -72,22 +68,21 @@ class LinkedList {
   }
 
   removeHead() {
-    if (!this.head) return null;
-    if (!this.head.next) {
-      const head = this.head;
-      this.head = null;
-      this.tail = null;
-      return head.value;
-    }
+    if (!this.head) return;
+    const nextHead = this.head.next;
     const returnVal = this.head.value;
-    this.head = this.head.next;
+    this.head = nextHead;
+    if (!nextHead) this.initializeList();
     return returnVal;
   }
 
   removeTail() {
     if (!this.head) return;
+    const previousTail = this.getPrevious();
     const returnVal = this.tail.value;
-    this.tail = this.getPrevious();
+    this.tail = previousTail;
+    if (!previousTail) this.initializeList();
+    return returnVal;
   }
 
   contains(value) {
