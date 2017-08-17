@@ -2,22 +2,28 @@
 
 /**
  * #### Hash Tables
-
- * Should have the methods: `insert`, `remove`, and `retrieve`.
- * `insert` should take a key value pair and add the value to the hash table.
- * `retrieve` should return the value associated with a key.
- * `remove` should removed the given key's value from the hash table.
- * Should properly handle collisions.  If two keys map to the same index in the
- * storage table then you should store a 2d array as the value.  Make each key/value
- * pair its own array that is nested inside of the array stored at that index on the table.
+ * ### Extra Credit
+ * Uncomment the final test in `hash-table.test.js` and make the hash-table rebalance.
+ * As a hash table increases in size the associated storage table will typically double
+ * in size once it reaches a certain capacity. Change the hash table so that it doubles
+ * the size of the storage table once it is 75% full.
  */
 const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 
 class HashTable {
-  constructor(limit) {
+  constructor() {
     this.limit = 8;
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
+  }
+
+  manageStorage() {
+    if (this.storage.length / this.limit > 0.75) {
+      this.limit *= 2;
+      const resizedStorage = new LimitedArray(this.limit);
+      this.storage.each((element, index) => resizedStorage.set(index, element));
+      this.storage = resizedStorage;
+    }
   }
 
   getIndex(key) {
@@ -25,19 +31,11 @@ class HashTable {
   }
 
   insert(key, value) {
+    this.manageStorage();
     const index = this.getIndex(key);
-    const element = this.storage.get(index);
-    if (!element) {
-      this.storage.set(index, [[key, value]]);
-    } else {
-      element.forEach((kvp, i) => {
-        if (kvp[0] === key) {
-          kvp[1] = value;
-          element[i] = kvp;
-        }
-      });
-      this.storage.set(index, element);
-    }
+    const element = this.storage.get(index) || [];
+    element.push([key, value]);
+    this.storage.set(index, element);
   }
 
   retrieve(key) {
@@ -61,3 +59,4 @@ class HashTable {
 }
 
 module.exports = HashTable;
+
