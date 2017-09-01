@@ -8,7 +8,7 @@ describe('Stack', () => {
     stack = new Stack();
   });
 
-  it('should have the methods "push", "pop", and the property "size"', () => {
+  it('should have the methods "push", "pop", and "size"', () => {
     const hasPush = Object.getPrototypeOf(stack).hasOwnProperty('push');
     const hasPop = Object.getPrototypeOf(stack).hasOwnProperty('pop');
     const hasSize = Object.getPrototypeOf(stack).hasOwnProperty('size');
