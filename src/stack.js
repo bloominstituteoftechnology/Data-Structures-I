@@ -5,11 +5,11 @@ class Stack {
     // this.stack = [];
     this.stack = new LinkedList();
   }
-  push(object) {
+  add(object) {
     // return this.stack.push(object);
     return this.stack.addToTail(object);
   }
-  pop() {
+  remove() {
     // return this.stack.pop();
     return this.stack.removeTail();
   }
