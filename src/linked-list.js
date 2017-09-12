@@ -64,7 +64,6 @@ class LinkedList {
         }
         current = current.next;
       }
-      return false;
     }
     return false;
   }
