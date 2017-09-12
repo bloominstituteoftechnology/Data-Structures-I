@@ -5,19 +5,16 @@ class LinkedList {
     // Do not modify anything inside of the constructor
   }
   addToTail(value) {
+    const node = {
+      value,
+      next: null
+    };
     if (this.head === null) {
-      this.head = {
-        value,
-        next: null
-      };
-      this.tail = this.head;
+      this.head = node;
     } else {
-      this.tail.next = {
-        value,
-        next: null
-      };
-      this.tail = this.tail.next;
+      this.tail.next = node;
     }
+    this.tail = node;
   }
   removeHead() {
     const value = this.head.value;
