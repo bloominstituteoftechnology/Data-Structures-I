@@ -8,33 +8,36 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
   insert(key, value) {
-    const index = getIndexBelowMax(key);
-    if (this.storage[index] === undefined) { // bucket is empty
-      this.storage[index] = [[key, value]];
+    const index = getIndexBelowMax(key, this.limit);
+    const bucket = this.storage.get(index);
+    if (!bucket) { // bucket is empty
+      this.storage.set(index, [[key, value]]);
     } else {
       let inserted = false;
-      for (let i = 0; i < this.storage[index].length; i++) { // check if key already exists in bucket. if so, overwrite value
-        if (this.storage[index][i][0] === key) {
-          this.storage[index][i][1] = value;
-          inserted = true;
+      for (let i = 0; i < bucket.length; i++) { // check if key already exists in bucket. if so, overwrite value
+        if (bucket[i][0] === key) {
+          bucket[i][1] = value;
+          inserted = false;
         }
       }
-      if (inserted === false) { // key does not already exist in the bucket
-        this.storage[index].push([key, value]);
+      if (!inserted) { // key does not already exist in the bucket
+        bucket.push([key, value]);
       }
     }
   }
   retrieve(key) {
-    const index = getIndexBelowMax(key);
-    for (let i = 0; i < this.storage[index].length; i++) {
-      if (this.storage[index][i][0] === key) {
-        return this.storage[index][i][1];
+    const index = getIndexBelowMax(key, this.limit);
+    const bucket = this.storage.get(index);
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        return bucket[i][1];
       }
     }
   }
   remove(key) {
-    const index = getIndexBelowMax(key);
-    this.storage[index].forEach((element) => {
+    const index = getIndexBelowMax(key, this.limit);
+    const bucket = this.storage.get(index);
+    bucket.forEach((element) => {
       if (key === element[0]) {
         element[1] = undefined;
       }
