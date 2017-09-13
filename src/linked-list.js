@@ -21,11 +21,9 @@ class LinkedList {
     }
     if (this.head === this.tail) {
       node.previous = this.head;
-      this.head.next = node;
-      this.tail = node;
-      return this.size;
+    } else {
+      node.previous = this.tail;
     }
-    node.previous = this.tail;
     this.tail.next = node;
     this.tail = node;
     return this.size;
