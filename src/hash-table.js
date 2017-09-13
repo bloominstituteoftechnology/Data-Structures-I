@@ -12,19 +12,27 @@ class HashTable {
     const index = getIndexBelowMax(key, this.limit);
     let arr = this.storage.get(index);
     if (arr === undefined) {
-      // this.storage.set(index, []);
-      this.storage.set(index, new LinkedList());
+      this.storage.set(index, []);
       arr = this.storage.get(index);
     }
     if (arr.length > 0) {
       for (let i = 0; i < arr.length; i++) {
-        if (arr[i][0] === key) {
-          arr[i] = [key, value];
+        // if (arr[i][0] === key) {
+        //   arr[i] = [key, value];
+        //   return this.size;
+        // }
+        if (arr[i].head.value === key) {
+          arr[i].removeTail();
+          arr[i].addToTail(value);
           return this.size;
         }
       }
     }
-    arr.push([key, value]);
+    // arr.push([key, value]);
+    const newList = new LinkedList();
+    newList.addToTail(key);
+    newList.addToTail(value);
+    arr.push(newList);
     this.rebalance();
     return this.size;
   }
@@ -37,8 +45,11 @@ class HashTable {
         if (item === undefined) {
           return;
         }
-        item.forEach(([key, value]) => {
-          this.insert(key, value);
+        // item.forEach(([key, value]) => {
+        //   this.insert(key, value);
+        // });
+        item.forEach((list) => {
+          this.insert(list.removeHead(), list.removeTail());
         });
       });
     }
@@ -51,8 +62,9 @@ class HashTable {
     }
     if (arr.length > 0) {
       for (let i = 0; i < arr.length; i++) {
-        if (arr[i] !== undefined && arr[i][0] === key) {
-          const data = arr[i][1];
+        if (arr[i] !== undefined && arr[i].head.value === key /* arr[i][0] === key */) {
+          // const data = arr[i][1];
+          const data = arr[i].removeTail();
           delete arr[i];
           return data;
         }
@@ -67,8 +79,9 @@ class HashTable {
     }
     if (arr.length > 0) {
       for (let i = 0; i < arr.length; i++) {
-        if (arr[i] !== undefined && arr[i][0] === key) {
-          const data = arr[i][1];
+        if (arr[i] !== undefined && arr[i].head.value === key /* arr[i][0] === key */) {
+          // const data = arr[i][1];
+          const data = arr[i].tail.value;
           return data;
         }
       }
