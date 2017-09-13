@@ -9,6 +9,20 @@ class HashTable {
   }
 
   insert(key, val) {
+    if ((this.storage.length + 1) / this.limit >= 0.75) {
+      // re balance
+      this.limit *= 2;
+      const temp = [];
+      for (let i = 0; i < this.storage.length; i++) {
+        if (this.storage.get(i)) {
+          temp.push(this.storage.get(i));
+        }
+      }
+      this.storage = new LimitedArray(this.limit);
+      for (let i = 0; i < temp.length; i++) {
+        this.storage.set(getIndexBelowMax(temp[i][0][0], this.limit), temp[i]);
+      }
+    }
     const index = getIndexBelowMax(key, this.limit);
     const bucket = this.storage.get(index);
     if (bucket) {
@@ -46,5 +60,35 @@ class HashTable {
     }
   }
 }
+
+/*
+if ((this.storage.length + 1) / this.limit >= 0.75) {
+      // re balance
+      this.limit *= 2;
+      // should be all key value pairs
+      const temp = [];
+      // iterate through buckets
+      for (let i = 0; i < this.storage.length; i++) {
+        // if bucket exists
+        if (this.storage[i]) {
+          // iterate through key value pairs
+          for (let j = 0; j < this.storage[i].length; j++) {
+            // there is always at least 1 if a bucket exists
+            temp.push(this.storage[i][j]);
+          }
+          this.storage[i] = undefined; // null the bucket since it had stuff
+        }
+      }
+      // iterate through key value pairs in temp and rehash them
+      for (let i = 0; i < temp.length; i++) {
+        const index = getIndexBelowMax(temp[i][0], this.limit);
+        if (this.storage[index]) {
+          this.storage[index].push(temp[i]);
+        } else {
+          this.storage[index] = [temp[i]];
+        }
+      }
+    }
+    */
 
 module.exports = HashTable;
