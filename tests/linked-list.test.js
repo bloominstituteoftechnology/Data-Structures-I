@@ -15,6 +15,7 @@ describe('LinkedList', () => {
     expect(hasAddToTail).toBe(true);
     expect(hasRemoveHead).toBe(true);
     expect(hasContains).toBe(true);
+    console.log('lol');
   });
 
   it('should update the tail value when a new node is added', () => {

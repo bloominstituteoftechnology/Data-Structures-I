@@ -1,11 +1,15 @@
+const LinkedList = require('../src/linked-list');
+
 class Stack {
   constructor() {
     this.size = 0;
-    this.array = [];
+    // this.array = [];
+    this.array = new LinkedList();
   }
 
   push(val) {
-    this.array.push(val);
+    // this.array.push(val);
+    this.array.addToTail(val);
     this.size++;
   }
 
@@ -14,7 +18,8 @@ class Stack {
       return undefined;
     }
     this.size--;
-    return this.array.pop();
+    // return this.array.pop();
+    return this.array.removeTail();
   }
 
   size() {
