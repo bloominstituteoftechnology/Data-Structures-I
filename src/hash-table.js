@@ -17,7 +17,7 @@ class HashTable {
       for (let i = 0; i < bucket.length; i++) { // check if key already exists in bucket. if so, overwrite value
         if (bucket[i][0] === key) {
           bucket[i][1] = value;
-          inserted = false;
+          inserted = true;
         }
       }
       if (!inserted) { // key does not already exist in the bucket
