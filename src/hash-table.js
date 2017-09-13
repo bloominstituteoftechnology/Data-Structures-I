@@ -19,11 +19,11 @@ const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 //     const tempStorage = new LimitedArray(this.limit);
 //     this.limit *= 2;
 //     this.storage.each((elem, idx) => {
-//       tempStorage.storage[idx] = elem;
+//       tempStorage.set(idx, elem);
 //     });
 //     this.storage = new LimitedArray(this.limit);
 //     tempStorage.each((elem, idx) => {
-//       this.storage.storage[idx] = elem;
+//       this.storage.set(idx, elem);
 //     });
 //   }
 
@@ -94,11 +94,11 @@ class HashTable {
     const tempStorage = new LimitedArray(this.limit);
     this.limit *= 2;
     this.storage.each((elem, idx) => {
-      tempStorage.storage[idx] = elem;
+      tempStorage.set(idx, elem);
     });
     this.storage = new LimitedArray(this.limit);
     tempStorage.each((elem, idx) => {
-      this.storage.storage[idx] = elem;
+      this.storage.set(idx, elem);
     });
   }
 
