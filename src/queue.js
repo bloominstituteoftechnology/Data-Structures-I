@@ -1,9 +1,26 @@
 class Queue {
   constructor() {
     this.size = 0;
-    this.head = null;
+    // this.head = null;
+    this.arr = [];
   }
 
+  enqueue(val) {
+    this.size++;
+    this.arr.unshift(val);
+  }
+
+  dequeue() {
+    if (this.size) {
+      this.size--;
+      return this.arr.pop();
+    }
+  }
+
+  size() {
+    return this.size;
+  }
+/*
   enqueue(val) {
     if (!this.head) {
       // it's the first item
@@ -44,6 +61,7 @@ class Queue {
   size() {
     return this.size;
   }
+  */
 }
 
 module.exports = Queue;
