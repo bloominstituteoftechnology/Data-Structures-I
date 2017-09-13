@@ -7,36 +7,62 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
-  insert(key, value) {
-    const index = getIndexBelowMax(key, this.limit);
-    if (this.storage[index] === undefined) {
-      this.storage[index] = [[key, value]];
-    } else {
-      this.storage[index].push([key, value]);
-    }
-  }
-  retrieve(key) {
-    const index = getIndexBelowMax(key, this.limit);
-    if (this.storage[index] === undefined) {
-      return false;
-    }
-    let valueIn2DArray = null;
-    this.storage[index].forEach((element) => {
-      if (key === element[0]) {
-        valueIn2DArray = element[1];
-      }
+
+  checkCapacity() {
+    let count = 1;
+    this.storage.each((collection) => {
+      if (collection !== undefined) count++;
     });
-    return valueIn2DArray;
+    if (count / this.limit > 0.75) return true;
+  }
+
+  resize() {
+    this.limit *= 2;
+    const oldStorage = this.storage;
+    this.storage = new LimitedArray(this.limit);
+    oldStorage.each((collection) => {
+      if (collection === undefined) return;
+      collection.forEach((pair) => {
+        this.insert(pair[0], pair[1]);
+      });
+    });
+  }
+
+  insert(key, value) {
+    if (this.checkCapacity()) this.resize();
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const collection = this.storage.get(index);
+
+    if (collection === undefined) {
+      this.storage.set(index, [[key, value]]);
+      return;
+    }
+    for (let i = 0; i < collection.length; i++) {
+      if (collection[i][0] === key) {
+        collection[i][1] = value;
+        this.storage.set(index, collection);
+        return;
+      }
+    }
+    collection.push([key, value]);
+    this.storage.set(index, collection);
+  }
+
+  retrieve(key) {
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const collection = this.storage.get(index);
+    if (collection === undefined) return undefined;
+    for (let i = 0; i < collection.length; i++) {
+      if (collection[i][0] === key) return collection[i][1];
+    }
   }
   remove(key) {
-    const index = getIndexBelowMax(key, this.limit);
-    if (this.storage[index] === undefined) {
-      return undefined;
-    }
-    this.storage[index].forEach((element) => {
-      if (key === element[0]) {
-        element[1] = undefined;
-      }
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const collection = this.storage.get(index);
+    if (collection.length === 1) return this.storage.set(index, undefined);
+    collection.forEach((pair, i) => {
+      if (pair[0] === key) collection.splice(i, 1);
+      this.storage.set(index, collection);
     });
   }
 }
