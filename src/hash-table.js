@@ -7,7 +7,5 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
-  
 }
-
 module.exports = HashTable;
