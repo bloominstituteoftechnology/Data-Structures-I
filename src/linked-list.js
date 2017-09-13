@@ -19,11 +19,10 @@ class LinkedList {
       this.tail = this.head; // tests expect the head to also be the tail if size === 1
       return this.size;
     }
-    if (this.head === this.tail) {
-      node.previous = this.head;
-    } else {
-      node.previous = this.tail;
-    }
+    // because this.head and this.tail start off as the same
+    // object, I don't need to specify this.head.next. this.tail.next
+    // will do the same thing before changing the tail.
+    node.previous = this.tail;
     this.tail.next = node;
     this.tail = node;
     return this.size;
