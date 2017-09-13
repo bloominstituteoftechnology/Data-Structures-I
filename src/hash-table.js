@@ -10,8 +10,15 @@ const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 
 //   insert(key, val) {
 //     if (this.storage.length > (this.limit * 0.75)) {
+//       const tempStorage = new LimitedArray(this.limit);
 //       this.limit *= 2;
-//       this.storage.limit = this.limit;
+//       this.storage.each((elem, idx) => {
+//         tempStorage.storage[idx] = elem;
+//       });
+//       this.storage = new LimitedArray(this.limit);
+//       tempStorage.each((elem, idx) => {
+//         this.storage.storage[idx] = elem;
+//       });
 //     }
 //     const index = getIndexBelowMax(key, this.limit);
 //     let bucket = this.storage.get(index);
@@ -66,8 +73,15 @@ class HashTable {
 
   insert(key, val) {
     if (this.storage.length > (this.limit * 0.75)) {
+      const tempStorage = new LimitedArray(this.limit);
       this.limit *= 2;
-      this.storage.limit = this.limit;
+      this.storage.each((elem, idx) => {
+        tempStorage.storage[idx] = elem;
+      });
+      this.storage = new LimitedArray(this.limit);
+      tempStorage.each((elem, idx) => {
+        this.storage.storage[idx] = elem;
+      });
     }
 
     const index = getIndexBelowMax(key, this.limit);
