@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
+const { LimitedArray, getIndexBelowMax } = require('./src/hash-table-helpers');
 
 class HashTable {
   constructor() {
@@ -63,5 +62,62 @@ class HashTable {
   }
 
 }
+let hashTable = new HashTable();
+hashTable.insert('Ben', 'Nelson');
+hashTable.insert('Sean', 'Chen');
+hashTable.insert('Ryan', 'Hamblin');
+hashTable.insert('Karthik', 'Viswanathan');
+hashTable.insert('Austen', 'Allred');
+// hashTable.remove('Ben');
+// hashTable.remove('Austen');
 
-module.exports = HashTable;
+console.log(hashTable)
+// class LinkedList {
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//     // Do not modify anything inside of the constructor
+//   }
+
+//   // const node = (val) {
+//   //   this.value = val;
+//   //   this.next = null;
+//   // }
+//   function Node(data) {
+//     this.value = data;
+//     this.next = null;
+//   }
+
+//   addToTail(val) {
+//     let node = new Node(val);
+//     // add node to tail
+//     this.tail = val;
+//     return;
+
+//     // add new tail to that node
+//   }
+
+//   removeHead() {
+//     const val = this.head;
+//     delete this.head;
+//     return val;
+//   }
+
+//   contains(query) {
+//     // while loop through all nodes til node is null, (tail)
+//     while (this.node) {
+//       if (this.node.val === query) {
+//         return true;
+//       }
+//     }
+
+//     return false;
+//   }
+
+// }
+
+// let ll = new LinkedList()
+// ll.addToTail(5)
+// // ll.removeHead()
+// // console.log(ll.removeHead());
+// console.log(ll.tail.value)
