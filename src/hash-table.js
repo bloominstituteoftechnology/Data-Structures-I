@@ -7,18 +7,29 @@ const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 //     this.storage = new LimitedArray(this.limit);
 //     // Do not modify anything inside of the constructor
 //   }
+//   checkCapacity() {
+//     if (this.storage.length > this.limit * 0.75) {
+//       return true;
+//     }
+
+//     return false;
+//   }
+
+//   resize() {
+//     const tempStorage = new LimitedArray(this.limit);
+//     this.limit *= 2;
+//     this.storage.each((elem, idx) => {
+//       tempStorage.storage[idx] = elem;
+//     });
+//     this.storage = new LimitedArray(this.limit);
+//     tempStorage.each((elem, idx) => {
+//       this.storage.storage[idx] = elem;
+//     });
+//   }
 
 //   insert(key, val) {
-//     if (this.storage.length > (this.limit * 0.75)) {
-//       const tempStorage = new LimitedArray(this.limit);
-//       this.limit *= 2;
-//       this.storage.each((elem, idx) => {
-//         tempStorage.storage[idx] = elem;
-//       });
-//       this.storage = new LimitedArray(this.limit);
-//       tempStorage.each((elem, idx) => {
-//         this.storage.storage[idx] = elem;
-//       });
+//     if (this.checkCapacity()) {
+//       this.resize();
 //     }
 //     const index = getIndexBelowMax(key, this.limit);
 //     let bucket = this.storage.get(index);
@@ -71,17 +82,29 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
   }
 
+  checkCapacity() {
+    if (this.storage.length > this.limit * 0.75) {
+      return true;
+    }
+
+    return false;
+  }
+
+  resize() {
+    const tempStorage = new LimitedArray(this.limit);
+    this.limit *= 2;
+    this.storage.each((elem, idx) => {
+      tempStorage.storage[idx] = elem;
+    });
+    this.storage = new LimitedArray(this.limit);
+    tempStorage.each((elem, idx) => {
+      this.storage.storage[idx] = elem;
+    });
+  }
+
   insert(key, val) {
-    if (this.storage.length > (this.limit * 0.75)) {
-      const tempStorage = new LimitedArray(this.limit);
-      this.limit *= 2;
-      this.storage.each((elem, idx) => {
-        tempStorage.storage[idx] = elem;
-      });
-      this.storage = new LimitedArray(this.limit);
-      tempStorage.each((elem, idx) => {
-        this.storage.storage[idx] = elem;
-      });
+    if (this.checkCapacity()) {
+      this.resize();
     }
 
     const index = getIndexBelowMax(key, this.limit);
