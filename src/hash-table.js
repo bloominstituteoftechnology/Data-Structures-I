@@ -8,23 +8,42 @@ const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 //     // Do not modify anything inside of the constructor
 //   }
 //   checkCapacity() {
-//     if (this.storage.length > this.limit * 0.75) {
-//       return true;
-//     }
+//     // OLD/WRONG SOLUTION - counts empty cells and ends up resizing too soon
+//     // if (this.storage.length > this.limit * 0.75) {
+//     //   return true;
+//     // }
 
-//     return false;
+//     // return false;
+
+//     let cells = 0;
+//     this.storage.each((elem) => {
+//       if (!elem) return;
+//       cells++;
+//     });
+
+//     return (this.limit * 0.75) <= cells;
 //   }
 
 //   resize() {
-//     const tempStorage = new LimitedArray(this.limit);
+//     // OLD SOLUTION - overly complicated/unnecessary no need to copy element
+//     // by element into temp storage.
+//     // const tempStorage = new LimitedArray(this.limit);
+//     // this.limit *= 2;
+//     // this.storage.each((elem, idx) => {
+//     //   tempStorage.set(idx, elem);
+//     // });
+//     // this.storage = new LimitedArray(this.limit);
+//     // tempStorage.each((elem, idx) => {
+//     //   this.storage.set(idx, elem);
+//     // });
 //     this.limit *= 2;
-//     this.storage.each((elem, idx) => {
-//       tempStorage.set(idx, elem);
-//     });
+//     const tempStorage = this.storage;
 //     this.storage = new LimitedArray(this.limit);
 //     tempStorage.each((elem, idx) => {
+//       if (!elem) return;
 //       this.storage.set(idx, elem);
 //     });
+//     return;
 //   }
 
 //   insert(key, val) {
@@ -45,14 +64,14 @@ const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 //     }
 //     bucket.push([key, val]);
 //     this.storage.set(index, bucket);
-//     return undefined;
+//     return;
 //   }
 
 //   retrieve(key) {
 //     const index = getIndexBelowMax(key, this.limit);
 //     const bucket = this.storage.get(index);
 
-//     if (!bucket) return undefined;
+//     if (!bucket) return;
 
 //     for (let i = 0; i < bucket.length; i++) {
 //       if (bucket[i][0] === key) return bucket[i][1];
@@ -68,7 +87,7 @@ const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 //       }
 //     });
 //     this.storage.set(index, bucket);
-//     return undefined;
+//     return;
 //   }
 // }
 
@@ -83,23 +102,41 @@ class HashTable {
   }
 
   checkCapacity() {
-    if (this.storage.length > this.limit * 0.75) {
-      return true;
-    }
+    // OLD/WRONG SOLUTION
+    // if (this.storage.length > this.limit * 0.75) {
+    //   return true;
+    // }
 
-    return false;
+    // return false;
+    let cells = 0;
+    this.storage.each((elem) => {
+      if (!elem) return;
+      cells++;
+    });
+
+    return (this.limit * 0.75) <= cells;
   }
 
   resize() {
-    const tempStorage = new LimitedArray(this.limit);
+    // OLD SOLUTION
+    // const tempStorage = new LimitedArray(this.limit);
+    // this.limit *= 2;
+    // this.storage.each((elem, idx) => {
+    //   tempStorage.set(idx, elem);
+    // });
+    // this.storage = new LimitedArray(this.limit);
+    // tempStorage.each((elem, idx) => {
+    //   this.storage.set(idx, elem);
+    // });
+
     this.limit *= 2;
-    this.storage.each((elem, idx) => {
-      tempStorage.set(idx, elem);
-    });
+    const tempStorage = this.storage;
     this.storage = new LimitedArray(this.limit);
     tempStorage.each((elem, idx) => {
+      if (!elem) return;
       this.storage.set(idx, elem);
     });
+    return;
   }
 
   insert(key, val) {
@@ -117,14 +154,14 @@ class HashTable {
       bucket.addToTail(val, key);
     }
     this.storage.set(index, bucket);
-    return undefined;
+    return;
   }
 
   retrieve(key) {
     const index = getIndexBelowMax(key, this.limit);
     const bucket = this.storage.get(index);
 
-    if (!bucket) return undefined;
+    if (!bucket) return;
 
     return bucket.find(key);
   }
@@ -135,7 +172,7 @@ class HashTable {
 
     bucket.deleteNode(key);
     this.storage.set(index, bucket);
-    return undefined;
+    return;
   }
 }
 
