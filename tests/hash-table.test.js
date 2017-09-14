@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, no-prototype-builtins */
+/* eslint-disable no-undef, no-prototype-builtins, no-trailing-spaces */
 const HashTable = require('../src/hash-table');
 
 let hashTable;
@@ -24,15 +24,16 @@ describe('HashTable', () => {
 
   it('should properly remove items', () => {
     hashTable.insert('Ben', 'Nelson');
-    hashTable.insert('Sean', 'Chen');
-    hashTable.insert('Ryan', 'Hamblin');
-    hashTable.insert('Karthik', 'Viswanathan');
-    hashTable.insert('Austen', 'Allred');
     hashTable.remove('Ben');
-    hashTable.remove('Austen');
     expect(hashTable.retrieve('Ben')).toBe(undefined);
-    expect(hashTable.retrieve('Sean')).toBe('Chen');
-    expect(hashTable.retrieve('Karthik')).toBe('Viswanathan');
+  });
+
+  it('should not throw an error when attempting to retrieve a non-existent value', () => {
+    expect(hashTable.retrieve('Sean')).toBe(undefined);
+  });
+
+  it('should not throw an error when removing a non-existent key', () => {
+    expect(hashTable.remove('Sean')).toThrow(undefined);
   });
 
   it('should handle numbers as keys', () => {
@@ -55,8 +56,8 @@ describe('HashTable', () => {
     expect(hashTable.retrieve('HI!')).toBe('Second Value');
   });
 
-  /* Extra Credit */
-
+/* Extra Credit */
+  
   // it('should resize the hash table when > 75% full', () => {
   //   hashTable.insert('a', true);
   //   hashTable.insert('b', true);
@@ -67,5 +68,15 @@ describe('HashTable', () => {
   //   hashTable.insert('g', true);
   //   expect(hashTable.limit).toBe(16);
   //   expect(hashTable.storage.length).toBe(8);
+  //   hashTable.insert('h', true);
+  //   hashTable.insert('i', true);
+  //   hashTable.insert('j', true);
+  //   hashTable.insert('k', true);
+  //   hashTable.insert('l', true);
+  //   hashTable.insert('m', true);
+  //   hashTable.insert('n', true);
+  //   hashTable.insert('o', true);
+  //   expect(hashTable.limit).toBe(32);
+  //   expect(hashTable.storage.length).toBe(16);
   // });
 });

@@ -46,6 +46,8 @@ describe('LinkedList', () => {
     expect(list.head.value).toBe(1);
     list.removeHead();
     expect(list.head.value).toBe(2);
+    list.removeHead();
+    expect(list.head).toBe(null);
   });
 
   it('should return the head that is removed when removeHead is invoked', () => {
