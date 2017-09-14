@@ -8,7 +8,7 @@ describe('Stack', () => {
     stack = new Stack();
   });
 
-  it('should have the methods "push", "pop", and "size"', () => {
+  it('should have the methods "push", "pop", and the property "size"', () => {
     const hasPush = Object.getPrototypeOf(stack).hasOwnProperty('push');
     const hasPop = Object.getPrototypeOf(stack).hasOwnProperty('pop');
     const hasSize = Object.getPrototypeOf(stack).hasOwnProperty('size');
@@ -21,7 +21,7 @@ describe('Stack', () => {
     expect(stack.size).toBe(0);
   });
 
-  it('should return a size of 10 after adding 10 items to the stack', () => {
+  it('should return a size of 10 after pushing 10 items to the stack', () => {
     stack.push(null);
     stack.push(null);
     stack.push(null);
@@ -59,7 +59,7 @@ describe('Stack', () => {
     expect(stack.pop()).toBe(77);
   });
 
-  it('should respect the order with which elements are added', () => {
+  it('should respect the order with which elements are pushed', () => {
     stack.push(true);
     stack.push('hi');
     stack.push(null);

@@ -21,7 +21,7 @@ describe('Queue', () => {
     expect(queue.size).toBe(0);
   });
 
-  it('should return a size of 10 after queuing 10 items', () => {
+  it('should return the correct size after queuing items', () => {
     queue.enqueue(null);
     queue.enqueue(null);
     queue.enqueue(null);
