@@ -8,34 +8,60 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
   insert(key, value) {
-    if (typeof key === 'number') {
-      this.storage.set(key, value);
+    const index = getIndexBelowMax(key.toString(), this.limit); // get index from hashing function
+    let bucket = this.storage.get(index); // get the bucket at that index
+    if (bucket) {
+      let overridenFlag = false;
+      for (let i = 0; i < bucket.length; i++) {
+        const pair = bucket[i];
+        if (pair[0] === key) {
+          pair[1] = value;
+          overridenFlag = true;
+        } else {
+          bucket.push([key, value]);
+        }
+      }
     }
-    if (typeof key === 'string') {
-      key = key.toLowerCase();
-      const position = getIndexBelowMax(key, this.limit);
-      this.storage.set(position, value);
+    if (!bucket) {
+      bucket = [];
+      bucket.push([key, value]);
+      this.storage.set(index, bucket);
     }
   }
   remove(key) {
-    if (typeof key === 'number') {
-      return this.storage.set(key, undefined);
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    if (!bucket) {
+      return;
     }
-    if (typeof key === 'string') {
-      key = key.toLowerCase();
+    if (bucket) {
+      if (bucket.length === 1) {
+        bucket[0] = undefined;
+        return;
+      }
+      for (let i = 0; i < bucket.length; i++) {
+        const pair = bucket[i];
+        if (pair[0] === key) {
+          pair[1] = undefined;
+          return;
+        }
+      }
     }
-    const position = getIndexBelowMax(key, this.limit);
-    this.storage.set(position, undefined);
+    return;
   }
   retrieve(key) {
-    if (typeof key === 'number') {
-      return this.storage.get(key);
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    if (!bucket) {
+      return undefined;
     }
-    if (typeof key === 'string') {
-      key = key.toLowerCase();
+    for (let i = 0; i < bucket.length; i++) {
+      const pair = bucket[i];
+      if (pair !== undefined && pair[0] === key) {
+        return pair[1];
+      }
     }
-    const position = getIndexBelowMax(key, this.limit);
-    return this.storage.get(position);
+    return undefined;
   }
 }
 
