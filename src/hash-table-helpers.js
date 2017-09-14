@@ -3,6 +3,7 @@ class LimitedArray {
   constructor(limit) {
     // You should not be directly accessing this array from your hash table methods
     // Use the getter and setter methods included in this class to manipulate data in this class
+    this.storage = [];
     this.limit = limit;
   }
 
