@@ -36,7 +36,7 @@ describe('Stack', () => {
   });
 
   it('should not error when attempting to pop an item from an empty stack', () => {
-    expect(stack.pop()).toThrow(undefined);
+    expect(() => stack.pop()).not.toThrow(undefined);
   });
 
   it('should return a size of 0 after attempting to pop more items than were added', () => {

@@ -14,9 +14,9 @@
       "no-return-assign": 0,
       "comma-dangle": 0,
       "arrow-body-style": 0,
-      "max-len": 0,
       "no-unused-vars": 0,
       "no-useless-constructor": 0,
-      "import/no-unresolved": 0
+      "import/no-unresolved": 0,
+      "semi": 0
     }
 }

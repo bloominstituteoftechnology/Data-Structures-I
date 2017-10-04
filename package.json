@@ -19,13 +19,15 @@
   },
   "homepage": "https://github.com/SunJieMing/LS-Data-Structures-I/#readme",
   "devDependencies": {
+    "ajv": "^5.2.3",
+    "babel-core": "^6.26.0",
     "babel-jest": "^19.0.0",
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
-    "jest": "^19.0.2",
+    "jest": "^21.2.1",
     "regenerator-runtime": "^0.10.3"
   },
   "dependencies": {

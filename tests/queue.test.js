@@ -36,7 +36,7 @@ describe('Queue', () => {
   });
 
   it('should not error when attempting to dequeue an item from an empty queue', () => {
-    expect(queue.dequeue()).toThrow(undefined);
+    expect(() => queue.dequeue()).not.toThrow(undefined);
   });
 
   it('should return a size of 0 after attempting to dequeue more items than were queued', () => {

@@ -34,7 +34,7 @@ describe('HashTable', () => {
   });
 
   it('should not throw an error when removing a non-existent key', () => {
-    expect(hashTable.remove('Sean')).toThrow(undefined);
+    expect(() => hashTable.remove('Sean')).not.toThrow(undefined);
   });
 
   it('should handle numbers as keys', () => {
