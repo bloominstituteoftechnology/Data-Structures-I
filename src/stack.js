@@ -4,8 +4,41 @@
   3. Add a `push` method that accepts an item as input and adds it to the storage structure
   4. Add a `pop` method that removes the most recently-added item to the stack
 */
-class Stack {
 
+class Stack {
+  constructor() {
+    this.storage = [];
+  }
+  push(item) {
+    this.storage.push(item);
+  }
+  pop() {
+    return this.storage.pop();
+  }
+  get size() {
+    return this.storage.length;
+  }
 }
 
+/* PASSES WITHOUT 'get' SHOULD NOT PASS
+class Stack {
+  constructor() {
+    this.storage = [];
+    this.size = 0;
+  }
+  push(item) {
+    this.storage.push(item);
+    this.size++;
+  }
+  pop() {
+    if (this.size > 0) {
+      this.size = this.size--;
+      return this.storage.pop();
+    }
+  }
+  size() {
+    return this.storage.length;
+  }
+}
+*/
 module.exports = Stack;
