@@ -4,8 +4,26 @@
   3. Add a `push` method that accepts an item as input and adds it to the storage structure
   4. Add a `pop` method that removes the most recently-added item to the stack
 */
-class Stack {
+// Stack
+// Last in First out
 
+const queque = [];
+
+class Stack {
+  constructor() {
+    this.storage = [];
+  }
+  push(item) {
+    this.storage.push(item);
+  }
+  pop() {
+    return this.storage.pop();
+  }
+  get size() {
+    return this.storage.length;
+  }
 }
+
+const newStack = new Stack();
 
 module.exports = Stack;
