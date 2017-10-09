@@ -1,4 +1,3 @@
-/* eslint-disable */
 
 /*
   1. Add a constructor with a storage structure; there are multiple options you could use for this
