@@ -14,10 +14,10 @@ class HashTable {
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
     const index = this.fetchKey(key);
-    const bucket = this.storage.get(index);
-    if (bucket === undefined) this.storage.set(index, []); // if is new bucket then add an array
+    let bucket = this.storage.get(index);
+    if (bucket === undefined) bucket = [];
 
-    this.storage.storage[index].push([key, value]);
+    this.storage.set(index, [...bucket, [key, value]]);
     if (this.storage.length === this.limit * 0.75) this.resizeHash();
   }
   // Removes the key, value pair from the hash table
@@ -27,10 +27,14 @@ class HashTable {
     const index = this.fetchKey(key);
     const bucket = this.storage.get(index);
     if (bucket === undefined || bucket === []) return undefined;
+
     let retValue;
+    this.storage.set(index, undefined);
     bucket.forEach((element, i) => {
-      if (element[0] === key) {
-        retValue = this.storage.storage[index].splice(i, 1);
+      if (element[0] !== key) {
+        this.insert(element);
+      } else {
+        retValue = element;
       }
     });
     return retValue;
