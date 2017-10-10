@@ -15,6 +15,10 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    if (!(isNaN(key))) {
+      this.storage.set(Number(key), value);
+      return;
+    }
     const index = this.fetchKey(key);
     this.storage.set(index, value);
   }
@@ -38,7 +42,7 @@ class HashTable {
   }
 
   fetchKey(key) {
-    if (!(isNaN(key))) return key;
+    if (!(isNaN(key))) key = `${key}`;
     const keyTest = !(Object.values(keyObj).includes(getIndexBelowMax(key, this.limit)));
     if (keyObj[key] !== undefined) {
       return keyObj[key];
@@ -47,7 +51,19 @@ class HashTable {
     } else if (!(keyTest)) {
       keyObj[key] = getIndexBelowMax(key + key, this.limit);
     }
+
+    if (Object.keys(keyObj).length > this.limit * 0.75) this.resizeHash();
     return keyObj[key];
+  }
+
+  resizeHash() {
+    const limit = this.limit * 2;
+    const tempStorage = new LimitedArray(limit);
+    this.storage.each((value, index) => {
+      tempStorage.storage[index] = value;
+    });
+    this.limit = limit;
+    this.storage = tempStorage;
   }
 }
 
