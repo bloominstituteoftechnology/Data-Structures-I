@@ -25,11 +25,21 @@ class LinkedList {
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
+    const curr = this.head;
+    this.head = curr.next;
+    return curr.value;
   }
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
-
+    let curr = this.head;
+    while (curr.next !== null) {
+      if (value === curr.value) {
+        return true;
+      }
+      curr = curr.next;
+    }
+    return false;
   }
 }
 
