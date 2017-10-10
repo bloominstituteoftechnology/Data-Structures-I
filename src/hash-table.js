@@ -51,22 +51,4 @@ class HashTable {
   }
 }
 
-
-let hashTable = new HashTable();
-hashTable.insert('hello', 'there');
-console.log(hashTable.retrieve('hello'));
-hashTable.insert('Ben', 'Nelson');
-console.log(hashTable.retrieve('Ben')) //.toBe('Nelson');
-    hashTable.remove('Ben');
-console.log(hashTable.retrieve('Ben')) //.toBe(undefined);
-    hashTable.insert(0, 'First Value');
-    hashTable.insert(1, 'Second Value');
-console.log(hashTable.retrieve(0)) //.toBe('First Value');
-console.log(hashTable.retrieve(1)) //.toBe('Second Value');
-    hashTable.insert('B', 'First Value');
-    hashTable.insert('HI!', 'Second Value');
-console.log(hashTable.retrieve('B')) //.toBe('First Value');
-console.log(hashTable.retrieve('HI!')) //.toBe('Second Value');
-console.log(keyObj);
-
 module.exports = HashTable;

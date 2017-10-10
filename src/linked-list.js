@@ -53,12 +53,5 @@ class LinkedList {
     return false;
   }
 }
-/*
-list = new LinkedList();
-list.addToTail(1);
-console.log(list.tail.value)
-console.log()
-list.addToTail(2);
-console.log(list.tail.value)
- */
+
 module.exports = LinkedList;
