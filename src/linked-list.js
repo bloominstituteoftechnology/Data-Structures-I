@@ -1,4 +1,12 @@
 /* eslint-disable class-methods-use-this */
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
 class LinkedList {
   constructor() {
     this.head = null;
@@ -9,17 +17,41 @@ class LinkedList {
   // If the list is empty, the new element is considered the tail as well as the head
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   addToTail(value) {
-
+    const node = new Node(value);
+    if (this.head === null) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      this.tail.next = node;
+      this.tail = node;
+    }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
-
+    if (this.head === null) {
+      return null;
+    }
+    if (this.head === this.tail) {
+      const node = this.head;
+      this.head = null;
+      this.tail = null;
+      return node.value;
+    }
+    const node = this.head;
+    this.head = this.head.next;
+    node.next = null;
+    return node.value;
   }
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
-
+    let node = this.head;
+    while (node !== null) {
+      if (node.value === value) return true;
+      node = node.next;
+    }
+    return false;
   }
 }
 
