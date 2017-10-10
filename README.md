@@ -25,6 +25,7 @@ Topics:
  * `size` should return the number of items in the queue.
 
 #### Linked Lists
+![Image of Linked List](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Singly-linked-list.svg/816px-Singly-linked-list.svg.png)
 
  * Should have the methods: `addToTail`, `removeHead`, and `contains`.
  * `addToTail` replaces the tail with a new value that is passed in.
