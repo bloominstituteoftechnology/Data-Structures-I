@@ -7,8 +7,6 @@
 // Stack
 // Last in First out
 
-const queque = [];
-
 class Stack {
   constructor() {
     this.storage = [];
