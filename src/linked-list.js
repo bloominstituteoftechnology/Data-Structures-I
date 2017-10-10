@@ -9,17 +9,34 @@ class LinkedList {
   // If the list is empty, the new element is considered the tail as well as the head
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   addToTail(value) {
+    const node = {
+      value,
+      newHead: null
+    };
 
+    if (this.head === null) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      this.tail.newHead = node;
+      this.tail = node;
+    }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
+    if (this.head == null) {
+      return;
+    }
 
+    if (this.head.hasInd === 0) {
+      return this.head = this.tail.newHead;
+    }
   }
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
-
+    return this.head === value;
   }
 }
 
