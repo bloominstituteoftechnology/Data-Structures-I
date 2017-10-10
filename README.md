@@ -34,8 +34,7 @@ Topics:
 
 #### Hash Tables
 
-![Image of Hash Table]
-(https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg/630px-Hash_table_3_1_1_0_1_0_0_SP.svg.png)
+![Image of Hash Table](https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg/630px-Hash_table_3_1_1_0_1_0_0_SP.svg.png)
 
  * Should have the methods: `insert`, `remove`, and `retrieve`.
  * `insert` should take a key value pair and add the value to the hash table.
