@@ -23,5 +23,7 @@ class Stack {
 }
 
 const newStack = new Stack();
+console.log(newStack.push(1));
+console.log(newStack);
 
 module.exports = Stack;
