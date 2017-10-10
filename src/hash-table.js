@@ -14,7 +14,7 @@ class HashTable {
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
     const bucketIndex = getIndexBelowMax(key, this.limit);
-    if (!this.storage.get(bucketIndex)) {
+    if (this.storage.get(bucketIndex) === undefined) {
       this.storage.set(bucketIndex, []);
     }
     let wasChanged = false;
