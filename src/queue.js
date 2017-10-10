@@ -11,7 +11,7 @@ class Queue {
   enqueue(item) {
     this.stroage.push(item);
   }
-  dequenue(item) {
+  dequeue(item) {
     return this.stroage.shift(item);
   }
   get size() {
