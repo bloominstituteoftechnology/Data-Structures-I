@@ -8,17 +8,16 @@ const LinkedList = require('./linked-list.js');
 
 class Queue {
   constructor() {
-    this.storage = [];
+    this.storage = new LinkedList();
   }
   get size() {
     return this.storage.length;
   }
   enqueue(item) {
-    this.storage = [...this.storage, item];
+    this.storage.addToTail(item);
   }
   dequeue() {
-    const item = this.storage[0];
-    this.storage = this.storage.slice(1);
+    const item = this.storage.removeHead();
     return item;
   }
 }

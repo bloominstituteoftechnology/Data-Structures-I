@@ -10,6 +10,7 @@ class LinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.length = 0;
     // Do not modify anything inside of the constructor
   }
   // Wraps the given value in a node object and adds the node to the tail of the list
@@ -20,11 +21,13 @@ class LinkedList {
     if (this.head === null && this.tail === null) {
       this.head = node;
       this.tail = node;
+      this.length++;
     } else {
       node.prev = this.tail;
       this.tail.next = node;
       this.tail = node;
       this.tail.next = null;
+      this.length++;
     }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
@@ -35,10 +38,12 @@ class LinkedList {
       if (this.head.next === null) {
         this.head = null;
         this.tail = null;
+        this.length--;
         return value;
       }
       this.head = this.head.next;
       this.head.prev = null;
+      this.length--;
       return value;
     }
   }
