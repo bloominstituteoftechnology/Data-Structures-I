@@ -13,37 +13,60 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-    // definition of storage in constructor gives access to limited array class
-    this.storage.set(key, value);
-    const index = getIndexBelowMax(value, this.storage.length);
-    let bucket = this.storage[index];
-    if (!bucket) {
-      bucket = [];
+    let testKey = '';
+    // convert num key into string key
+    if (typeof key === 'number') {
+      // assign to new variable to not override argument
+      testKey = key.toString();
     }
-    bucket[key] = value;
-    let override = false;
-    // now iterate through our bucket to see if there are any conflicting
-    // key value pairs within our bucket. If there are any, override them.
+
+    // grab the index for the bucket
+    const index = getIndexBelowMax(value, this.limit);
+
+    // attempt to grab index to see if bucket exists
+    const bucket = this.storage.get(index);
+
+    // if bucket returns undefined, create a the new bucket
+    if (bucket === undefined) {
+      this.storage.set(index, [testKey, value]);
+      return;
+    }
     for (let i = 0; i < bucket.length; i++) {
       const tuple = bucket[i];
-      if (tuple[0] === key) {
-        // overide value stored at this key
-        tuple[1] = value;
-        override = true;
+      if (tuple[0] === testKey) {
+        tuple[i] = value;
+        this.storage.set(index, bucket);
+        return;
       }
     }
+    bucket.push([testKey, value]);
+    this.storage.set(index, bucket);
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
-    delete this.storage[key];
+    const index = getIndexBelowMax(key, this.limit);
+    const bucket = this.storage.get(index);
+    if (bucket === undefined) {
+      return undefined;
+    }
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-
+    const index = getIndexBelowMax(key, this.limit);
+    const bucket = this.storage.get(index);
+    if (bucket === undefined) {
+      return undefined;
+    }
+    for (let i = 0; i < bucket.length; i++) {
+      const tuple = bucket[i];
+      if (tuple[0] === key) {
+        return bucket;
+      }
+    }
   }
 }
 
