@@ -25,8 +25,8 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
-    if (!key) return;
     const hashKey = getIndexBelowMax(key, this.limit);
+    if (this.storage[hashKey] === undefined) return undefined;
     delete this.storage[hashKey][key];
     return;
   }
@@ -35,6 +35,7 @@ class HashTable {
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
     const hashKey = getIndexBelowMax(key, this.limit);
+    if (this.storage[hashKey] === undefined) return undefined;
     return this.storage[hashKey][key];
   }
 }
