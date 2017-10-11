@@ -26,7 +26,7 @@ class HashTable {
   //     });
   //   }
   // }
-    const index = this.getIndexBelowMax(key.toString(), this.limit);
+    const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
 
     if (bucket === undefined) {
@@ -43,16 +43,19 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
-    const index = this.getIndexBelowMax(key.toString(), this.limit);
+    const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
-    if (key === bucket[0]) this.storage.set(index, []);
+    if (bucket === undefined || bucket === {}) return;
+    if (bucket[key]) this.storage.set(index, 'undefined');
+    return;
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-    const index = this.getIndexBelowMax(key.toString(), this.limit);
+    const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
+    if (bucket === undefined) return;
     if (key === bucket[0]) return bucket[1];
   }
 }
