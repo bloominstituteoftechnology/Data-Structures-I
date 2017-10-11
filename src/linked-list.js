@@ -17,20 +17,12 @@ class LinkedList {
 
     if (this.head === null) {
       this.head = newNode;
-      newNode.previous = newNode;
       this.tail = newNode;
-      return;
+    } else {
+      this.tail.next = newNode;
+      newNode.previous = this.tail;
+      this.tail = newNode;
     }
-
-    let current = this.tail;
-
-    while (current.next !== null) {
-      current = this.next;
-    }
-
-    this.tail.next = newNode;
-    newNode.previous = this.tail;
-    this.tail = newNode;
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
@@ -50,9 +42,10 @@ class LinkedList {
       if (current.value === value) return true;
       current = current.next;
     }
-
     return false;
   }
+
+  // These values are for Queue and Stack extra credit.
   get size() {
     let current = this.head;
     let count = 0;
@@ -64,6 +57,7 @@ class LinkedList {
 
     return count;
   }
+
   addToHead(value) {
     const newNode = {
       value,
