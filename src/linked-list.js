@@ -7,9 +7,9 @@ class LinkedList {
   }
   size() {
     let current = this.head;
-    for (let count = 0; current !== null; ++count) {
+    for (let i = 0; current !== null; ++i) {
       current = current.next;
-    }; return count;
+    }; return i;
   }
 
   addToHead(value) {
