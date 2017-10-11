@@ -16,40 +16,39 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-    const bucketIndex = this.storage.getIndexBelowMax(key, this.limit)
+    const bucketIndex = this.storage.getIndexBelowMax(key, this.limit);
     const bucket = this.storage.get(bucketIndex);
-    if(bucket === null) {
+    if (bucket === null) {
       const newBucket = {
         key,
-        value
-      } 
+        value,
+      };
     } else {
-        bucket.value = value;
-    } 
+      bucket.value = value;
+    }
   }
-  
-  
+
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
-    const bucketIndex = this.storage.getIndexBelowMax(key, this.limit)
-    if(bucket === null) {
+    const bucketIndex = this.storage.getIndexBelowMax(key, this.limit);
+    if (this.storage.get(bucketIndex) === null) {
       return;
-    } else {
-       this.storage.set(bucketIndex, null);
     }
+    this.storage.set(bucketIndex, null);
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-    const bucketIndex = this.storage.getIndexBelowMax(key, this.limit)
+    const bucketIndex = this.storage.getIndexBelowMax(key, this.limit);
     const bucket = this.storage.get(bucketIndex);
-    if(bucket === null) {
+    if (bucket === null) {
       return null;
     }
     return bucket.value;
+  }
 }
 
 module.exports = HashTable;

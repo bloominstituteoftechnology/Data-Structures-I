@@ -11,9 +11,9 @@ class LinkedList {
   addToTail(value) {
     const newNode = {
       value,
-      next: null
+      next: null,
     };
-    if(this.head === null) {
+    if (this.head === null) {
       this.head = newNode;
       this.tail = this.head;
     } else {
@@ -24,9 +24,10 @@ class LinkedList {
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
-    if(this.head === null) 
+    if (this.head === null) {
       return null;
-    
+    }
+
     const value = this.head.value;
     this.head = this.head.next;
     return value;
@@ -36,9 +37,10 @@ class LinkedList {
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
     let head = this.head;
-    while(head != null) {
-      if(head.value === value)
+    while (head != null) {
+      if (head.value === value) {
         return true;
+      }
       head = head.next;
     }
     return false;
