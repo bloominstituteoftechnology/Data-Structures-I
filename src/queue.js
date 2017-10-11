@@ -4,8 +4,41 @@
   3. Add an `enqueue` method that accepts an item as input and adds it to the storage structure
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
-class Queue {
 
+class Queue {
+  constructor() {
+    this.storage = [];
+  }
+
+  enqueue(val) {
+    this.storage.push(val);
+  }
+
+  dequeue() {
+    if (this.size === 0) return;
+    const tempVal = this.storage[0];
+    this.storage.shift();
+    return tempVal;
+  }
+
+  get size() {
+    return this.storage.length;
+  }
 }
+
+
+// Queue.prototype.enqueue = function (item) {
+//   // Check to see if value is defined
+//   if (item) {
+//     this.storage[this.count] = item;
+//     this.count++;
+//   }
+// };
+
+// Queue.prototype.dequeue = function () {
+//   if (this.count - this.lowestCount === 0) {
+//     return undefined;
+//   }
+// };
 
 module.exports = Queue;
