@@ -11,7 +11,7 @@ class Queue {
   }
 
   enqueue(item) {
-    if (this.size() > 100) {
+    if (this.size > 100) {
       return;
     }
     this.queue.push(item);
