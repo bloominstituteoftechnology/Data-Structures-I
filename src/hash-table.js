@@ -11,12 +11,18 @@ class HashTable {
   }
   doubleSize() {
     const limit = this.limit * 2;
-    const storage = new LimitedArray(limit)
-    this.storage.each((v, i) => {
-      storage[i] = v;
-    })
-    this.limit = limit;
+    const storage = new LimitedArray(limit);
+    const temp = this.storage;
     this.storage = storage;
+    this.limit = limit;
+    this.used = 0;
+    temp.each((v) => {
+      if (v !== undefined) {
+        v.forEach((iv) => {
+          this.insert(iv.key, iv.value)
+        })
+      }
+    })
   }
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
