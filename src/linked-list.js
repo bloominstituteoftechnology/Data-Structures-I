@@ -30,12 +30,12 @@ class LinkedList {
       this.tail = newNode;
       return;
     }
-    let current = this.head;
-    while (current.next !== null) {
-      current = current.next;
-      this.tail = this.tail.next;
-      this.tail = newNode;
-    }
+    // let currentHead = this.head;
+    // while (currentHead.next !== null) {
+      // currentHead = currentHead.next;
+    this.tail.next = newNode;
+    this.tail = newNode;
+    // }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
