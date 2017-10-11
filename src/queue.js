@@ -15,7 +15,7 @@ class Queue {
     return this.storage.push(item);
   }
   dequeue() {
-    return this.storage.pop();
+    return this.storage.shift();
   }
 }
 
