@@ -7,23 +7,23 @@
 
 class Stack {
 	constructor(){ this.closure = []}
-	Size(){ return (this.closure.length ? this.closure.length : 0)}
-	Push(tuple){ this.closure.push(tuple)}
-	Pop(){ if (this.closure.length > 0) this.closure.pop()}
+	size(){ return (this.closure.length ? this.closure.length : 0)}
+	push(tuple){ this.closure.push(tuple)}
+	pop(){ if (this.closure.length > 0) this.closure.pop()}
 }
 
 module.exports = Stack;
 
 
-const logit = function(stack){ console.log(
-	'this: ', stack,
-	'\nthis.Size():', stack.Size(), '...end of test')}
+// const logit = function(stack){ console.log(
+// 	'this: ', stack,
+// 	'\nthis.Size():', stack.size(), '...end of test')}
 
-const test = new Stack();
-test.Push(['key1', 'value1']); logit(test);
-test.Push(['key2', 'value2']); logit(test);
-test.Pop(); logit(test);// 2
-test.Push(['key3', 'value3']); logit(test); // 3
-test.Pop(); logit(test); // 2
-test.Pop(); logit(test); // 0
-test.Pop(); logit(test); // testing conditional
+// const test = new Stack();
+// test.push(['key1', 'value1']); logit(test);
+// test.push(['key2', 'value2']); logit(test);
+// test.pop(); logit(test);// 2
+// test.push(['key3', 'value3']); logit(test); // 3
+// test.pop(); logit(test); // 2
+// test.pop(); logit(test); // 0
+// test.pop(); logit(test); // testing conditional
