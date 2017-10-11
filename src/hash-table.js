@@ -23,14 +23,15 @@ class HashTable {
       return;
     }
 
-    const repIndex = bucket.indexOf(bucket.filter(arrItem => arrItem[0] === key)[0]);
-
-    if (repIndex !== -1) {
-      bucket[repIndex] = [key, value];
-    } else {
-      bucket.push([key, value]);
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        bucket[i][1] = value;
+        this.storage.set(index, bucket);
+        return;
+      }
     }
 
+    bucket.push([key, value]);
     this.storage.set(index, bucket);
   }
   // Removes the key, value pair from the hash table
