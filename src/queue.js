@@ -13,14 +13,14 @@ class Queue {
 
 module.exports = Queue;
 
-const logit = function(que){ console.log(
-	'this: ', que,
-	'\nthis.size():', que.size(), '...end of test')}
-// Digestion moves toward the 0th index for ease of access.
-const test = new Queue();
-test.enqueue(['key1', 'value1']); logit(test);
-test.enqueue(['key2', 'value2']); logit(test);
-test.dequeue(); logit(test);// 2
-test.enqueue(['key3', 'value3']); logit(test); // 3
-test.dequeue(); logit(test); // 2
-test.dequeue(); logit(test); // 0
+// const logit = function(que){ console.log(
+// 	'this: ', que,
+// 	'\nthis.size():', que.size(), '...end of test')}
+// // Digestion moves toward the 0th index for ease of access.
+// const test = new Queue();
+// test.enqueue(['key1', 'value1']); logit(test);
+// test.enqueue(['key2', 'value2']); logit(test);
+// test.dequeue(); logit(test);// 2
+// test.enqueue(['key3', 'value3']); logit(test); // 3
+// test.dequeue(); logit(test); // 2
+// test.dequeue(); logit(test); // 0
