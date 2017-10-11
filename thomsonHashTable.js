@@ -1,6 +1,6 @@
-values = [];
+const values = [];
 
-hashMap = (key) => {
+const hashMap = (key) => {
   let letters = Array.from(key);
   let index = letters.reduce((s, letter) => {
     return s + Number(letter.charCodeAt(0));
@@ -9,7 +9,7 @@ hashMap = (key) => {
   return index;
 }
 
-hashTable = {
+const hashTable = {
   insert: function(key, value) {
     if(value === undefined) {
       console.log("Forget you, undefineds not allowed");
@@ -22,7 +22,7 @@ hashTable = {
       values[index] = {keyName:key, valueName:value};
     }
     else {
-      if(obj instanceof Array) {
+      if(objectAtIndex instanceof Array) {
         // insert the new keyName valueNAme object into the array
       }
       else {
@@ -38,7 +38,7 @@ hashTable = {
     return values[index].valueName;
   },
   initialize: () => {
-    for(i = 0 ; i < 100 ; i++ ) {
+    for(let i = 0 ; i < 100 ; i++ ) {
       values.push(undefined);
     }
   }
@@ -76,5 +76,3 @@ hashTable.insert('tondfasdfue', 2);
 
 console.log(hashTable.retrieve('fondue'));
 console.log(hashTable.retrieve('ronmonduemodfduedue'));
-
-
