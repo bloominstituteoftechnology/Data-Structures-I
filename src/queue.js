@@ -7,7 +7,7 @@
 class Queue {
   constructor(maxSize = 100) {
     this.maxSize = maxSize;
-    this.queue = new Array(maxSize);
+    this.queue = [];
   }
 
   enqueue(item) {
@@ -18,7 +18,12 @@ class Queue {
   }
 
   dequeue() {
-    return this.queue.shift();
+    if (this.queue.length === 0) {
+      return null;
+    }
+    const result = this.queue[0];
+    this.queue.shift();
+    return result;
   }
 
   get size() {
