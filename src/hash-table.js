@@ -14,11 +14,11 @@ class HashTable {
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
     const index = getIndexBelowMax(key, this.limit);
-    if (this.storage[index] === undefined) {
-      this.storage[index] = [];
-      this.storage[index].push([key, value]);
+    let bucket = this.storage.get(index);
+    if (bucket === undefined) {
+      bucket = [];
+      bucket.push([key, value]);
     } else {
-      const bucket = this.storage[index];
       let keyExists = false;
       for (let i = 0; i < bucket.length; i++) {
         if (bucket[i][0] === key) {
@@ -27,15 +27,16 @@ class HashTable {
           break;
         }
       }
-      if (!keyExists) this.storage[index].push([key, value]);
+      if (!keyExists) bucket.push([key, value]);
     }
+    this.storage.set(index, bucket);
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
     const index = getIndexBelowMax(key, this.limit);
-    const bucket = this.storage[index];
+    const bucket = this.storage.get(index);
     if ((bucket === []) || (bucket === undefined)) {
       return;
     }
@@ -51,7 +52,7 @@ class HashTable {
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
     const index = getIndexBelowMax(key, this.limit);
-    const bucket = this.storage[index];
+    const bucket = this.storage.get(index);
     if ((bucket === []) || (bucket === undefined)) {
       return;
     }
