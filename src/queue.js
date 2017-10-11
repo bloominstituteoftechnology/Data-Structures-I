@@ -17,11 +17,12 @@ class Queue {
     return this.storage;
   }
   dequeue() {
-    if (this.size === 0) {
-      return;
-    } const holdFirstItem = this.storage[0];
-    this.storage.shift();
-    return holdFirstItem;
+    return this.storage.pop();
+  //   if (this.size === 0) {
+  //     return;
+  //   } const holdFirstItem = this.storage[0];
+  //   this.storage.shift();
+  //   return holdFirstItem;
   }
 }
 
