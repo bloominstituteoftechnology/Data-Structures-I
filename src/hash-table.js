@@ -10,9 +10,9 @@ class HashTable {
   }
   insert(key, value) {
     if (typeof key === 'number') {
-      this.storage.set(key, [key] = value);
+      this.storage.set(key, value);
     } else {
-      this.storage.set(getIndexBelowMax(key, this.limit), [key] = value);
+      this.storage.set(getIndexBelowMax(key, this.limit), value);
       // this.storage.set(getIndexBelowMax(key, this.limit), value);
     }
   }
