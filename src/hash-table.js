@@ -34,6 +34,9 @@ class HashTable {
   // Remove the key, value pair from the bucket
   remove(key) {
     const index = getIndexBelowMax(key, this.storage.length);
+    if (this.storage[index] === undefined) {
+      return;
+    }
     if (this.storage[index].length === 1 && this.storage[index][0][0] === key) {
       delete this.storage[index];
     } else {
