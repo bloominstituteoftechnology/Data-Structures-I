@@ -10,18 +10,18 @@ class Queue {
     this.storage = [];
   }
 
-  enqueue(value) {
-    this.storage.push(value);
+  enqueue(val) {
+    this.storage.push(val);
   }
 
   dequeue() {
     if (this.size === 0) return;
-    const tempValue = this.storage[0];
+    const tempVal = this.storage[0];
     this.storage.shift();
-    return tempValue;
+    return tempVal;
   }
 
-  size() {
+  get size() {
     return this.storage.length;
   }
 }
