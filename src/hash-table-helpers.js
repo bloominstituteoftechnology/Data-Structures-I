@@ -14,6 +14,10 @@ class LimitedArray {
     }
   }
 
+  remove(key) {
+    this.storage = this.storage.splice(key, 1);
+  }
+
   each(cb) {
     for (let i = 0; i < this.storage.length; i++) {
       cb(this.storage[i], i);
@@ -25,7 +29,7 @@ class LimitedArray {
     return this.storage[index];
   }
 
-  get length() {
+  getLength() {
     return this.storage.length;
   }
   // Use this setter function to add elements to this class
