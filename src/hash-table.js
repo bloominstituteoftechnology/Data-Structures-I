@@ -17,7 +17,7 @@ class HashTable {
     if (!this.storage[hashKey]) {
       const arr = [];
       arr[key] = value;
-      return this.stoarge[hashKey] = arr;
+      return this.storage[hashKey] = arr;
     }
     return this.storage[hashKey][key] = value;
   }
