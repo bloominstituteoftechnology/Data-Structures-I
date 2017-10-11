@@ -6,19 +6,24 @@
 */
 class Queue {
   constructor() {
+    this.head = 0;
     this.storage = [];
-  }
-  enqueue(item) {
-    this.storage.unshift(item);
-  }
-  dequeue() {
-    if (this.storage.length > 1) {
-      return this.storage.shift(this.storage[0]);
-    } return this.storage.shift();
   }
   get size() {
     return this.storage.length;
   }
+  enqueue(item) {
+    this.storage.unshift(item);
+    return this.storage;
+  }
+  dequeue() {
+    if (this.size === 0) {
+      return;
+    } const holdFirstItem = this.storage[0];
+    this.storage.shift();
+    return holdFirstItem;
+  }
 }
+
 
 module.exports = Queue;
