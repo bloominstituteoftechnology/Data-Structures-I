@@ -11,7 +11,7 @@ class HashTable {
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
-  // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
+  // If the key already exists in the bucket, the newer value should overwrite the older value associated with that fetchKey
   insert(key, value) {
     const index = this.fetchKey(key);
     const bucket = this.storage.get(index);
@@ -71,12 +71,17 @@ class HashTable {
 
   resizeHash() {
     const limit = this.limit * 2;
-    const tempStorage = new LimitedArray(limit);
-    this.storage.each((value, index) => {
-      tempStorage.set(index, value);
-    });
+    const newStorage = new LimitedArray(limit);
+    const tempStorage = this.storage;
+    this.storage = newStorage;
     this.limit = limit;
-    this.storage = tempStorage;
+    tempStorage.each((value) => {
+      if (value !== undefined && value !== []) {
+        value.forEach((arrValue) => {
+          this.insert(arrValue[0], arrValue[1]);
+        });
+      }
+    });
   }
 }
 
