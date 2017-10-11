@@ -39,9 +39,10 @@ class HashTable {
   remove(key) {
     const index = getIndexBelowMax(String(key), this.limit);
     const bucket = this.storage.get(index);
-    bucket.forEach((pair) => {
-      if (pair[0] === key) { bucket.splice(pair, 1); }
-    });
+    if (bucket === undefined) { return undefined; }
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) { bucket.splice(i, 1); }
+    }
   }
 
   // Fetches the value associated with the given key from the hash table
@@ -50,8 +51,9 @@ class HashTable {
   retrieve(key) {
     const index = getIndexBelowMax(String(key), this.limit);
     const bucket = this.storage.get(index);
+    if (bucket === undefined) { return undefined; }
     for (let i = 0; i < bucket.length; i++) {
-      if (bucket[i][0] === key) { bucket.splice(i, 1); }
+      if (bucket[i][0] === key) { return bucket[i][1]; }
     }
   }
 }
