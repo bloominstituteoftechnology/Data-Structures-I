@@ -14,11 +14,23 @@ class HashTable {
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
     const index = this.fetchKey(key);
-    let bucket = this.storage.get(index);
-    if (bucket === undefined) bucket = [];
+    const bucket = this.storage.get(index);
+
+    if (this.storage.length === this.limit * 0.75) this.resizeHash();
+
+    if (bucket === undefined) {
+      this.storage.set(index, [[key, value]]);
+      return;
+    }
+
+    const repIndex = bucket.indexOf(bucket.filter(arrItem => arrItem[0] === key)[0]);
+
+    if (repIndex !== -1) {
+      bucket[repIndex] = [key, value];
+      return;
+    }
 
     this.storage.set(index, [...bucket, [key, value]]);
-    if (this.storage.length === this.limit * 0.75) this.resizeHash();
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
@@ -46,24 +58,22 @@ class HashTable {
     const index = this.fetchKey(key);
     const bucket = this.storage.get(index);
     if (bucket === undefined || bucket === []) return undefined;
-    let retValue;
 
-    bucket.forEach((value) => {
-      if (value[0] === key) retValue = value[1];
-    });
-    return retValue;
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) return bucket[i][1];
+    }
   }
 
   fetchKey(key) {
-    if (!(isNaN(key))) key = `${key}`; // Parse key as number
-    return getIndexBelowMax(key, this.limit); // fetch key index
+    if (!(isNaN(key))) key = `${key}`;
+    return getIndexBelowMax(key, this.limit);
   }
 
   resizeHash() {
     const limit = this.limit * 2;
     const tempStorage = new LimitedArray(limit);
     this.storage.each((value, index) => {
-      tempStorage.storage[index] = value;
+      tempStorage.set(index, value);
     });
     this.limit = limit;
     this.storage = tempStorage;

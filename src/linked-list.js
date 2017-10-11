@@ -35,6 +35,7 @@ class LinkedList {
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
+    if (this.head === null) return null;
     const tempValue = this.head.value;
     this.head = this.head.next;
     return tempValue;
@@ -51,6 +52,25 @@ class LinkedList {
     }
 
     return false;
+  }
+  get size() {
+    let current = this.head;
+    let count = 0;
+
+    while (current !== null) {
+      count++;
+      current = current.next;
+    }
+
+    return count;
+  }
+  addToHead(value) {
+    const newNode = {
+      value,
+      previous: null,
+      next: this.head,
+    };
+    this.head = newNode;
   }
 }
 
