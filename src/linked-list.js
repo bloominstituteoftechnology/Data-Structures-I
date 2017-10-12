@@ -13,6 +13,17 @@ class LinkedList {
     this.length = 0;
     // Do not modify anything inside of the constructor
   }
+  addToHead(value) {
+    const next = this.head;
+    const node = new Node({ value });
+    if (next === null) {
+      this.head = node;
+      this.tail = node;
+    }
+    this.head = node;
+    this.head.next = next;
+    this.length++;
+  }
   // Wraps the given value in a node object and adds the node to the tail of the list
   // If the list is empty, the new element is considered the tail as well as the head
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
@@ -33,17 +44,20 @@ class LinkedList {
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
+    console.log('head before removal', this.head);
     if (this.head !== null) {
       const value = this.head.value;
       if (this.head.next === null) {
         this.head = null;
         this.tail = null;
         this.length--;
+        console.log('head after removal', this.head);
         return value;
       }
       this.head = this.head.next;
       this.head.prev = null;
       this.length--;
+      console.log('head after removal', this.head);
       return value;
     }
   }

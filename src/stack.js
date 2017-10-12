@@ -4,9 +4,11 @@
   3. Add a `push` method that accepts an item as input and adds it to the storage structure
   4. Add a `pop` method that removes the most recently-added item to the stack
 */
+const LinkedList = require('./linked-list.js');
+
 class Stack {
   constructor() {
-    this.storage = [];
+    this.storage = new LinkedList();
   }
 
   get size() {
@@ -14,11 +16,11 @@ class Stack {
   }
 
   push(item) {
-    this.storage = [...this.storage, item];
+    this.storage.addToHead(item);
   }
   pop() {
-    const item = this.storage[this.size - 1];
-    this.storage = this.storage.slice(0, (this.size - 1));
+    const item = this.storage.removeHead();
+    console.log('item popped', item);
     return item;
   }
 }
