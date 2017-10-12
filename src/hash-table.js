@@ -19,11 +19,11 @@ class HashTable {
 
     // attempt to grab index to see if bucket exists and start a new empty
     // if index returns undefined.
-    const bucket = this.storage.get(index) || [];
+    let bucket = this.storage.get(index) || [];
 
     // Get rid of items that hold the same key as the one you are inputting.
     // overriding the values;
-    bucket.filter(item => item[0] !== key);
+    bucket = bucket.filter(item => item[0] !== key);
 
     // store to the bucket and then store bucket
     bucket.push([key, value]);
