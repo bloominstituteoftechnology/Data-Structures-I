@@ -12,7 +12,7 @@ class Stack {
   }
 
   push(element) {
-    if (this.top < this.maxSize) {
+    if (this.size < this.maxSize) {
       this.stack[this.top + 1] = element;
       this.top++;
     }
