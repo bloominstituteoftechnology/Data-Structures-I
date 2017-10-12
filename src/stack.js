@@ -20,7 +20,6 @@ class Stack {
   }
   pop() {
     const item = this.storage.removeHead();
-    console.log('item popped', item);
     return item;
   }
 }
