@@ -37,7 +37,7 @@ class LinkedList {
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
     let node = this.head;
-    while (node != null) {// while not at end of list
+    while (node != null) { // while not at end of list
       if (node.value === value) {
         return true;
       }

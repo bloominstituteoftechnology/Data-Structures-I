@@ -13,8 +13,8 @@ class Queue {
   constructor(maxSize = 100) {
     this.maxSize = maxSize;
     this.queue = new Array(maxSize);
-    this.tail = -1;  
-  }*/
+    this.tail = -1;
+  } */
 
   enqueue(item) {
     if (this.size > 100) {
@@ -29,7 +29,7 @@ class Queue {
     }
     this.queue[this.tail + 1] = element;
     this.tail++;
-  }*/
+  } */
 
   dequeue() {
     if (this.queue.length === 0) {
@@ -39,7 +39,7 @@ class Queue {
     this.queue.shift();
     return result;
   }
-  /*dequeue() {
+  /* dequeue() {
     if(this.queue.size === 0) {
       return null;
     }
@@ -49,9 +49,8 @@ class Queue {
     }
     this.tail--;
     return result;
-  }  
-  */
-  
+  }  */
+
   get size() {
     return this.queue.length;
   }
@@ -59,8 +58,7 @@ class Queue {
   /*
   get size() {
     return this.queue.tail + 1;
-  }
-  */
+  } */
 
 }
 
