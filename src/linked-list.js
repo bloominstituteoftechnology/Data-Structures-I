@@ -33,7 +33,8 @@ class LinkedList {
       checkNode = checkNode.next;
       count++;
     }
-    if (checkNode) return true;
+    if (checkNode.value === value) return true;
+    return false;
   }
   }
 

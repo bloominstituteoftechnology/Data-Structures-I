@@ -11,7 +11,7 @@ class Stack {
     this.stack.push(value);
     this.size += 1;
   }
-  getSize() {
+  size() {
     return this.size;
   }
 }
