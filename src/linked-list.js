@@ -1,26 +1,60 @@
 /* eslint-disable class-methods-use-this */
+
 class LinkedList {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-    // Do not modify anything inside of the constructor
+  constructor() { this.head = null; this.tail = null; }
+  get size() {
+    let current = this.head; let i = 0;
+    while (current !== null) { current = current.next; i++; }
+    return i;
   }
-  // Wraps the given value in a node object and adds the node to the tail of the list
-  // If the list is empty, the new element is considered the tail as well as the head
-  // If there is one element in the list before the new element is added, the new element becomes the tail of the list
+
+  addNode(value) {
+    const node = { value, next: null };
+    if (this.head === null) {
+      this.head = node; this.tail = node;
+    } else { this.tail.next = node; this.tail = node; }
+  }
+
+  addToHead(value) {
+    const node = { value, previous: null, next: this.head };
+    this.head = node;
+  }
+
   addToTail(value) {
-
+    const node = { value, previous: null, next: null };
+    if (this.head === null) { this.head = node; node.previous = node; this.tail = node; return; }
+    let current = this.tail;
+    while (current.next !== null) { current = this.next; }
+    this.tail.next = node; node.previous = this.tail; this.tail = node;
   }
-  // Removes the current head node from the list, replacing it with the next element in the list
-  // Returns the value of the removed node
+
   removeHead() {
-
+    if (this.head === null) return null;
+    if (this.head.next === null) this.tail = null;
+    const nodeValue = this.head.value;
+    this.head = this.head.next;
+    return nodeValue;
   }
-  // Checks the linked list for the given value
-  // Returns true if the the value is found in the list, false otherwise
-  contains(value) {
 
+  contains(value) {
+    let current = this.head;
+    while (current !== null) {
+      if (current.value === value) return true;
+      current = current.next;
+    } return false;
   }
 }
 
 module.exports = LinkedList;
+
+let i = 0;
+const ll = new LinkedList();
+ll.addNode(i++);
+ll.addNode(i++);
+ll.addNode(i++);
+ll.addNode(i++);
+ll.removeHead();
+ll.removeHead();
+ll.removeHead();
+ll.removeHead();
+console.log(ll.size);
