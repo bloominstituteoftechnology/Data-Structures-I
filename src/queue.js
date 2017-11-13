@@ -13,12 +13,12 @@ class Queue {
   }
 
   size() {
-    this.size = this.newestIndex - this.oldestIndex;
     return this.size;
   }
 
   enqueue(data) {
     this.storage[this.newestIndex] = data;
+    this.size++;
     this.newestIndex++;
   }
 
@@ -30,6 +30,7 @@ class Queue {
     if (oldestIndex !== newestIndex) {
       deletedData = this.storage[oldestIndex];
       delete this.storage[oldestIndex];
+      this.size--;
       this.oldestIndex++;
 
       return deletedData;
@@ -37,7 +38,7 @@ class Queue {
   }
 }
 
-const myList = new Queue();
+// const myList = new Queue();
 // myList.enqueue('yasin');
 // myList.enqueue('samir');
 // console.log(myList.size());
