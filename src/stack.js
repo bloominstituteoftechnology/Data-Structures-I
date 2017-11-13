@@ -21,7 +21,7 @@ class Stack {
     return lastAdded;
   }
   size() {
-    return this.size;
+    return this.length;
   }
 }
 
