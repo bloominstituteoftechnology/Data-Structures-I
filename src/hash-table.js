@@ -37,7 +37,4 @@ class HashTable {
     return this.storage[hash][key];
   }
 }
-const hash1 = getIndexBelowMax('B', 8);
-const hash2 = getIndexBelowMax('HI!', 8);
-console.log([hash1, hash2]);
 module.exports = HashTable;
