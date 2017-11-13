@@ -1,4 +1,6 @@
 /* eslint-disable class-methods-use-this */
+// https://www.interviewcake.com/article/python/data-structures-coding-interview?collection=dsa#linked-lists
+
 class LinkedList {
   constructor() {
     this.head = null;
@@ -9,7 +11,19 @@ class LinkedList {
   // If the list is empty, the new element is considered the tail as well as the head
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   addToTail(value) {
-
+    // create the node
+    const newNode = {
+      value,
+      next: null,
+    };
+    // if there are no nodes alreay point head and tail to the node
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else { // otherwise add it to the last node and change the pointers
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
