@@ -32,13 +32,13 @@ class LinkedList {
   }
 }
 
-const something = new LinkedList();
-let i = 0;
-something.addToTail(++i);
-something.addToTail(++i);
-something.addToTail(++i);
-something.addToTail(++i);
+// const something = new LinkedList();
+// let i = 0;
+// something.addToTail(++i);
+// something.addToTail(++i);
+// something.addToTail(++i);
+// something.addToTail(++i);
 
-console.log(something);
+// console.log(something);
 
 module.exports = LinkedList;
