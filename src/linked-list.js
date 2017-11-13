@@ -8,24 +8,11 @@ class LinkedList {
     return i;
   }
 
-  addNode(value) {
+  addToTail(value) {
     const node = { value, next: null };
     if (this.head === null) {
       this.head = node; this.tail = node;
     } else { this.tail.next = node; this.tail = node; }
-  }
-
-  addToHead(value) {
-    const node = { value, previous: null, next: this.head };
-    this.head = node;
-  }
-
-  addToTail(value) {
-    const node = { value, previous: null, next: null };
-    if (this.head === null) { this.head = node; node.previous = node; this.tail = node; return; }
-    let current = this.tail;
-    while (current.next !== null) { current = this.next; }
-    this.tail.next = node; node.previous = this.tail; this.tail = node;
   }
 
   removeHead() {
@@ -45,16 +32,13 @@ class LinkedList {
   }
 }
 
-module.exports = LinkedList;
-
+const something = new LinkedList();
 let i = 0;
-const ll = new LinkedList();
-ll.addNode(i++);
-ll.addNode(i++);
-ll.addNode(i++);
-ll.addNode(i++);
-ll.removeHead();
-ll.removeHead();
-ll.removeHead();
-ll.removeHead();
-console.log(ll.size);
+something.addToTail(++i);
+something.addToTail(++i);
+something.addToTail(++i);
+something.addToTail(++i);
+
+console.log(something);
+
+module.exports = LinkedList;
