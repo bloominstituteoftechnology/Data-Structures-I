@@ -16,6 +16,8 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    let letters = Array.from(key);
+    
 
   }
   // Removes the key, value pair from the hash table
