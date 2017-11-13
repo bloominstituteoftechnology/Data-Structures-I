@@ -15,21 +15,15 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
-  insert(key, value) {
-
-  }
+  insert(key, value) {}
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
-  remove(key) {
-
-  }
+  remove(key) {}
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
-  retrieve(key) {
-
-  }
+  retrieve(key) {}
 }
 
 module.exports = HashTable;
