@@ -13,9 +13,9 @@ class LinkedList {
       value,
       next: null,
     };
-    if (this.head === null && this.tail === null) {
+    if (!this.head) {
       this.head = node;
-      this.tail = node;
+      this.tail = this.head;
     } else {
       this.tail.next = node;
       this.tail = node;
@@ -31,9 +31,9 @@ class LinkedList {
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
-    if (this.head.next === null) return this.head.value === value;
+    if (!this.head.next) return this.head.value === value;
     let myHead = this.head;
-    while (myHead.next !== null) {
+    while (myHead.next) {
       if (myHead.value === value) {
         return true;
       }
