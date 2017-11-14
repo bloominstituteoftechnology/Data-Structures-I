@@ -6,7 +6,7 @@
 */
 class Stack {
   constructor() {
-      this.storage = [];
+    this.storage = [];
     return this.counter = 0;
   }
   push(value) {
@@ -19,11 +19,11 @@ class Stack {
       this.counter = 0;
       return this.counter;
     }
-      return this.storage.pop();
+    return this.storage.pop();
     }
   get size() {
     return this.counter;
   }
 }
 
-  module.exports = Stack;
+module.exports = Stack;
