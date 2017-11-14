@@ -29,7 +29,7 @@ class HashTable {
   remove(key) {
     const index = getIndexBelowMax(key, this.limit);
     if (this.storage[index] === undefined) return undefined;
-    if (this.storage[index][0][0] === key) delete this.storage[index];
+    if (this.storage[index][0] === key) delete this.storage[index];
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
