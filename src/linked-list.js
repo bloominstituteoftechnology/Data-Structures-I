@@ -26,17 +26,14 @@ class LinkedList {
     return returnValue;
   }
   contains(value) {
-    let checkNode = this.head;
-    let count = 0;
-    if (value > this.length) return undefined;
-    while (count < value) {
-      checkNode = checkNode.next;
-      count++;
+    let thisNode = this.head;
+    while (thisNode) {
+      if (thisNode.value === value) return true;
+      thisNode = thisNode.next;
     }
-    if (checkNode.value === value) return true;
     return false;
   }
-  }
+}
 
 
 module.exports = LinkedList;

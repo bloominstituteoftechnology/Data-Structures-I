@@ -2,8 +2,10 @@ class Queue {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.length = 0;
   }
   enqueue(value) {
+    this.length++;
     const newNode = {
       value,
       next: null
@@ -25,7 +27,9 @@ class Queue {
     return returnValue;
   }
   get size() {
-    return this.length;
+    const size = this.length;
+    if (this.head === this.tail) return 0;
+    return size;
   }
 }
 
