@@ -18,19 +18,28 @@ class HashTable {
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
     const hash = getIndexBelowMax(key, this.limit);
-    this.storage.set(hash, value);
+    let assocArr = this.storage.get(hash);
+
+    if (typeof assocArr === 'undefined') {
+      const newAssocArr = {};
+      this.storage.set(hash, newAssocArr);
+      assocArr = newAssocArr;
+    }
+    assocArr[key] = value;
+    this.storage.set(hash, assocArr);
     this.length++;
-    // this.adjustLimit();
+    this.adjustLimit();
   }
 
   // extra credit
   adjustLimit() {
     if (this.length >= this.limit * 0.75) {
       this.limit = this.limit * 2;
-      /*
       const newStorage = new LimitedArray(this.limit);
+      this.storage.each((element, i) => {
+        newStorage.set(i, element);
+      });
       this.storage = newStorage;
-      */
     }
   }
   // Removes the key, value pair from the hash table
@@ -38,8 +47,9 @@ class HashTable {
   // Remove the key, value pair from the bucket
   remove(key) {
     const hash = getIndexBelowMax(key, this.limit);
-    if (typeof this.storage.get(hash) === 'undefined') return undefined;
-    this.storage.set(hash, undefined);
+    const assocArr = this.storage.get(hash);
+    if (typeof assocArr === 'undefined') return undefined;
+    delete assocArr[key];
     this.length--;
   }
   // Fetches the value associated with the given key from the hash table
@@ -47,8 +57,9 @@ class HashTable {
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
     const hash = getIndexBelowMax(key, this.limit);
-    if (typeof this.storage.get(hash) === 'undefined') return undefined;
-    return this.storage.get(hash);
+    const assocArr = this.storage.get(hash);
+    if (typeof assocArr === 'undefined') return undefined;
+    return assocArr[key];
   }
 }
 module.exports = HashTable;
