@@ -85,7 +85,7 @@ class HashTable {
       this.storage.set(hash, newList);
       list = newList;
     }
-    const node = list.find({ value: key, type: 'key' });
+    const node = list.findObject({ value: key, type: 'key' });
     if (node === null) {
       list.addToTail({ value: key, type: 'key' });
       list.addToTail({ value, type: 'value' });
