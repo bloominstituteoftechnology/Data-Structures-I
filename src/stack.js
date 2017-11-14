@@ -9,9 +9,14 @@ class Stack {
     this.storage = {};
     this.size = 0;
   }
+  size() {
+    if (this.size === 0) return 0;
+    return this.size;
+  }
   push(value) {
     this.storage[this.size] = value;
     this.size++;
+    return this.size;
   }
   pop() {
     if (this.size === 0) {
@@ -21,9 +26,6 @@ class Stack {
     const result = this.storage[this.size];
     delete this.storage[this.size];
     return result;
-  }
-  size() {
-    return this.size;
   }
   amtStore(value) {
     if (value === undefined) return this.storage[this.size - 1];
