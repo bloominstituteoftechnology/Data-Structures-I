@@ -10,14 +10,9 @@ class Stack {
     this.size = 0;
   }
   
-  push = (item) => {
+  push(item) {
     this.storage.push(item);
     this.size += 1;
-  }
-
-  pop = () => {
-    this.storage.pop();
-    this.size -= 1;
   }
 }
 
