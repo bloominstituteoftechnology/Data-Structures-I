@@ -57,8 +57,8 @@ describe('HashTable', () => {
     expect(hashTable.retrieve('HI!')).toBe('Second Value');
   });
 
-/* Extra Credit */
-  
+  /* Extra Credit */
+
   // it('should resize the hash table when > 75% full', () => {
   //   hashTable.insert('a', true);
   //   hashTable.insert('b', true);
