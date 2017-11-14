@@ -9,15 +9,14 @@ class LinkedList {
   // If the list is empty, the new element is considered the tail as well as the head
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   addToTail(value) {
-    if (!this.head) {
-      const Node = {
-        value,
-        next: null,
-      };
-      this.head = Node;
-      this.tail = Node;
+    const newNode = {
+      value,
+      next: null,
+    };
+    if (!this.tail) {
+      this.tail = newNode;
+      this.head = newNode;
     }
-
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
