@@ -7,13 +7,18 @@
 class Stack {
   constructor() {
     this.storage = [];
-    this.size = 0;
   }
-  
+
   push(item) {
     this.storage.push(item);
-    this.size += 1;
+  }
+
+  pop() {
+    return this.storage.pop();
+  }
+
+  get size() {
+    return this.storage.length;
   }
 }
-
 module.exports = Stack;
