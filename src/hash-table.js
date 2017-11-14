@@ -17,7 +17,7 @@ class HashTable {
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
     const size = this.storage.length;
-    if (size / this.limit > 0.75) {
+    if (size / this.limit >= 0.75) {
       this.limit *= 2;
       this.storage = new LimitedArray(this.limit);
     }

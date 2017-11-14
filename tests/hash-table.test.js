@@ -59,7 +59,7 @@ describe('HashTable', () => {
 
 /* Extra Credit */
   
-  it('should resize the hash table when > 75% full', () => {
+  it('should resize the hash table when >= 75% full', () => {
     hashTable.insert('a', true);
     hashTable.insert('b', true);
     hashTable.insert('c', true);
