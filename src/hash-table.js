@@ -16,6 +16,19 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    if (this.limit * 0.75 === this.storage.length) {
+      const nHashTable = new HashTable(this.limit * 2);
+      for (let i = 0; i < this.storage.length; i++) {
+        const bucket = this.storage.get(i);
+        if (bucket !== undefined) {
+          bucket.forEach((e) => {
+            nHashTable.insert(e[0], e[1]);
+          });
+        }
+      }
+      this.limit *= 2;
+      this.storage = nHashTable.storage;
+    }
     if (typeof key === 'number') {
       const values = [];
       values[key] = value;
