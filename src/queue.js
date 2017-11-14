@@ -18,13 +18,13 @@ class Queue {
   }
 
   dequeue() {
-    this.first = this.queueArray[1];
     const dequeueValue = this.queueArray.shift();
     if (this.queueArray.length === 0) {
       this.length = 0;
     } else {
       this.length--;
     }
+    this.first = this.queueArray[0];
     return dequeueValue;
   }
 
