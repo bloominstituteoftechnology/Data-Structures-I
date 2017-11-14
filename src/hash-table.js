@@ -16,7 +16,11 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-
+    let index = key;
+    if (typeof index !== 'number') {
+      index = getIndexBelowMax(key, this.limit);
+    }
+    this.storage.set(index, value);
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
@@ -28,8 +32,14 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-
+    let index = key;
+    if (typeof index !== 'number') {
+      index = getIndexBelowMax(key, this.limit);
+    }
+    const value = this.storage.get(index);
+    return value;
   }
 }
+
 
 module.exports = HashTable;
