@@ -16,11 +16,30 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-
+    const index = getIndexBelowMax(key, this.limit);
+    // console.log(index);
+    if (this.storage[index] === undefined) {
+      this.storage.set(index, value);
+      this.storage.get(index);
+    } else {
+      let inserted = false;
+      for (let i = 0; i < this.storage[index].length; i++) {
+        if (this.storage[index][i][0] === key) {
+          this.storage[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        this.storage[index].push([key, value]);
+      }
+    }
+    // console.log(this.storage.get(index));
+    return this.storage.get(index);
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
+
   remove(key) {
 
   }
@@ -31,5 +50,9 @@ class HashTable {
 
   }
 }
-
+// const newHash = new HashTable();
+// console.log(newHash);
+// newHash.insert('aaron',34);
+// console.log(getIndexBelowMax('aaron', 3));
+// console.log(newHash)
 module.exports = HashTable;
