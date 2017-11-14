@@ -33,7 +33,6 @@ class LinkedList {
     }
     const oldHead = this.head;
     this.head = this.head.next;
-    this.tail = this.tail.next;
     return oldHead.value;
   }
   // Checks the linked list for the given value
@@ -54,7 +53,11 @@ const myLinkedList = new LinkedList();
 myLinkedList.addToTail(1);
 // myLinkedList.addNode(2);
 myLinkedList.addToTail(3);
-myLinkedList.addToTail(4);
+// myLinkedList.addToTail(4);
+console.log(myLinkedList);
+myLinkedList.removeHead();
+console.log(myLinkedList);
+myLinkedList.removeHead();
 console.log(myLinkedList);
 myLinkedList.removeHead();
 console.log(myLinkedList);
