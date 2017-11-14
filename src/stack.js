@@ -20,7 +20,7 @@ class Stack {
       return this.counter;
     }
     return this.storage.pop();
-    }
+  }
   get size() {
     return this.counter;
   }
