@@ -38,6 +38,26 @@ class LinkedList {
   get length() {
     return this.size;
   }
+
+  removeTail() {
+    if (!this.tail) return null;
+    if (this.length === 1) {
+      const node = this.head;
+      this.head = null;
+      return node.value;
+    }
+    let current = this.head;
+    let i = 0;
+    while (i < this.length - 2) {
+      current = current.next;
+      i++;
+    }
+    const node = current.next;
+    current.next = null;
+    this.size--;
+    return node.value;
+  }
+
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
