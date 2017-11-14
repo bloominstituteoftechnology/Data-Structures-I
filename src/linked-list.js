@@ -42,12 +42,10 @@ class LinkedList {
   }
 }
 /* contains(value) {
-    while (this.head) {
-      if (this.head.value === value) {
-        return true;
-      }
-      this.head = this.head.next;
-    }
-    return false;
-  } */
+    //Set variable that references current node, starting with the head
+    // Loop through list until either I find the value or the current node's next is null
+    // Within loop, use current node's next property to update current node variable for next loop operation
+    // if I find the value, return true
+    //If I don't find the value, return false
+  */
 module.exports = LinkedList;

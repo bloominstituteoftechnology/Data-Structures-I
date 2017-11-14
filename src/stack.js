@@ -11,34 +11,11 @@ class Stack {
   get size() {
     return this.storage.length;
   }
-  push(item) {
-    return this.storage.push(item);
+  push(value) {
+    return this.storage.push(value);
   }
   pop() {
     return this.storage.pop();
   }
 }
-/*  constructor() {
-    this.items = [];
-    this.length = 0;
-  }
-  push(item) {
-    this.items.push(item);
-    this.length = this.length + 1;
-  }
-  pop() {
-    if (this.length > 0) {
-      this.length = this.length - 1;
-    }
-    return this.items.pop();
-  }
-  size() {
-    return this.length;
-  }
-  peek() {
-    return this.items.slice(-1)[0];
-  }
-
-}
-*/
 module.exports = Stack;
