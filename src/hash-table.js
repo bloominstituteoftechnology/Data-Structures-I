@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
-const HashTableLinkedList = require('./linked-list');
+const HashTableLinkedList = require('./hash-table-linked-list');
 // LimitedArray, and getIndexBelowMax are two tools provided for you in the helper file.
 // There are other methods on the LimitedArray class in the './hash-table-helpers' file that you can use for your implementation.
 
