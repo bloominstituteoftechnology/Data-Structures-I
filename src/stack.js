@@ -14,6 +14,11 @@ class Stack {
     this.storage.push(item);
     this.size += 1;
   }
+
+  pop = () => {
+    this.storage.pop();
+    this.size -= 1;
+  }
 }
 
 module.exports = Stack;
