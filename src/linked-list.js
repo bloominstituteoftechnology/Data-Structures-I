@@ -16,6 +16,9 @@ class LinkedList {
     if (!this.tail) {
       this.tail = newNode;
       this.head = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
