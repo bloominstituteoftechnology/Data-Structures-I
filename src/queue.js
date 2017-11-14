@@ -7,14 +7,11 @@
 class Queue {
   constructor() {
     this.storage = [];
-    this.counter = 0;
   }
   enqueue(value) {
-    this.counter++;
     this.storage.push(value);
   }
   dequeue() {
-    this.counter--;
     return this.storage.shift();
   }
   get size() {
