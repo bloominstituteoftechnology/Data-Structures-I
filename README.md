@@ -13,8 +13,8 @@ Topics:
 #### Stacks
 
  * Should have the methods: `push`, `pop`, and a getter for the property `size`
- * `add` should accept a value and place it on top of the stack.
- * `remove` should remove and return the top value off of the stack.
+ * `push` should accept a value and place it on top of the stack.
+ * `pop` should remove and return the top value off of the stack.
  * `size` should return how many items are on the stack.
  
 ![Image of Stack](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lifo_stack.png/700px-Lifo_stack.png)
