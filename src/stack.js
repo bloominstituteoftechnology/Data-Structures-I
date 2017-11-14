@@ -15,7 +15,4 @@ class Stack {
     return this.size;
   }
 }
-const myStack = new Stack();
-console.log(myStack.push('name'));
-
 module.exports = Stack;
