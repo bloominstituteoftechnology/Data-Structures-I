@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 // https://www.interviewcake.com/article/python/data-structures-coding-interview?collection=dsa#linked-lists
-
+// https://medium.com/@mrjimbot/linked-list-data-structure-javascript-3268e103597
 class LinkedList {
   constructor() {
     this.head = null;
