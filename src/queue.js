@@ -11,14 +11,14 @@ class Queue {
   }
   enqueue(element) {
     this.length++;
-    this.dataStore.push(element);
+    return this.dataStore.push(element);
   }
   dequeue() {
     this.length--;
-    this.dataStore.shift();
+    return this.dataStore.shift();
   }
   get size() {
-    return this.length;
+    return this.dataStore.length;
   }
 }
 
