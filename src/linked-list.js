@@ -35,6 +35,7 @@ class LinkedList {
     this.size--;
     return node.value;
   }
+
   get length() {
     return this.size;
   }
@@ -64,7 +65,6 @@ class LinkedList {
     let returnValue = false;
     let currentNode = this.head;
     for (let i = 0; i < this.length; i++) {
-      console.log(currentNode.value);
       if (currentNode.value === value) {
         returnValue = true;
       }
@@ -78,5 +78,4 @@ const list = new LinkedList();
 list.addToTail(1);
 list.addToTail(2);
 list.addToTail(3);
-
 module.exports = LinkedList;
