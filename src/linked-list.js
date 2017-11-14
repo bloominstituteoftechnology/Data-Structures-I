@@ -9,7 +9,6 @@ class LinkedList {
   // If the list is empty, the new element is considered the tail as well as the head
   // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   addToTail(value) {
-    this.length++;
     const newNode = {
       value,
       next: null,
@@ -26,26 +25,23 @@ class LinkedList {
   // Returns the value of the removed node
   removeHead() {
     if (!this.head) return null;
-    this.length--;
     if (!this.head.next) this.tail = null;
 
     const node = this.head.value;
     this.head = this.head.next;
     return node;
   }
-  // Checks the linked list for the given value
-  // Returns true if the the value is found in the list, false otherwise
+
   contains(value) {
-    const copyList = this;
-    let returnVal = false;
-    for (let i = 0; i < copyList.length; i++) {
-      if (value !== copyList.head.value) {
-        copyList.removeHead();
-      } else {
-        returnVal = true;
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.value === value) {
+        return true;
       }
+
+      currentNode = currentNode.next;
     }
-    return returnVal;
+    return false;
   }
 }
 
