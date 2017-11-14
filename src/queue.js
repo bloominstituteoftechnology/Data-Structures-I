@@ -5,17 +5,17 @@
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
 class Queue {
-  constructor(){
+  constructor() {
     this.storageStructure = [];
   }
-  get size(){
+  get size() {
     return this.storageStructure.length;
   }
-  enqueue(item){
-    this.storageStructure.push(item);    
+  enqueue(item) {
+    this.storageStructure.push(item);
   }
-  dequeue(){
-    if(typeof this.storageStructure !== 'undefined' && this.storageStructure.length > 0){
+  dequeue() {
+    if (typeof this.storageStructure !== 'undefined' && this.storageStructure.length > 0) {
       return this.storageStructure.shift();
     }
   }

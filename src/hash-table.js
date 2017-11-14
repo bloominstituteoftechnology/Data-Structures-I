@@ -17,26 +17,26 @@ class HashTable {
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(rawKey, value) {
     const key = String(rawKey);
-    const insertionKey = getIndexBelowMax(key, this.limit); 
-    const bucket = {key : value};
-    if (!this.storage.get(insertionKey)){
+    const insertionKey = getIndexBelowMax(key, this.limit);
+    let bucket = this.storage.get(insertionKey);
+    if (!bucket) {
+      bucket = {};
+      bucket[key] = value;
       this.storage.set(insertionKey, bucket);
     } else {
-      const oldBucket = this.storage.get(insertionKey);
-      oldBucket.key = value;
+      bucket[key] = value;
     }
-
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(rawKey) {
-    if(rawKey !== undefined){
+    if (rawKey !== undefined) {
       const key = String(rawKey);
       const insertionKey = getIndexBelowMax(key, this.limit);
       const bucket = this.storage.get(insertionKey);
-      if(typeof bucket === 'object'){
-        bucket.key = undefined;
+      if (typeof bucket === 'object' && bucket[key] !== 'undefined') {
+        bucket[key] = undefined;
       }
     }
   }
@@ -46,9 +46,9 @@ class HashTable {
   retrieve(rawKey) {
     const key = String(rawKey);
     const insertionKey = getIndexBelowMax(key, this.limit);
-    const bucket =this.storage.get(insertionKey);
-    if(typeof bucket === 'object'){
-      return bucket.key;
+    const bucket = this.storage.get(insertionKey);
+    if (typeof bucket === 'object' && typeof bucket[key] !== 'undefined') {
+      return bucket[key];
     }
     return undefined;
   }
