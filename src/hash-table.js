@@ -23,6 +23,8 @@ class HashTable {
       this.storage.set(index, bucket);
       count++;
     }
+    // part of extra credit attempt
+    // count items that get inserted and when the count is 75% of limit call resize
     if ((count / this.limit) >= this.limit * 0.75) {
       this.storage.resize(this.limit * 2);
       count = 0;
