@@ -121,6 +121,20 @@ retrievw(key){
   }
 }
 
+With Reduce:
+
+retrieve(key) {
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    let retrieved;
+    if (bucket) {
+      retrieved = bucket.reduce((value, pair) => {
+        return pair[0] === key ? pair[1] : value;
+      }, undefined);
+    }
+
+    return retrieved;
+  }
 
 */
 
