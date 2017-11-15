@@ -31,6 +31,11 @@ class LinkedList {
     this.head = this.head.next;
     this.size--;
     return removedHead;
+  /* if (!this.head) return null;
+    if (!this.head.next) this.tail = null;
+    const headValue = this.head.value;
+   this.head = this.head.next;
+    return headValue; */
   }
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
@@ -48,7 +53,23 @@ class LinkedList {
     } return found;
   }
 }
-/* contains(value) {
+/* if (!this.head) return null;
+let currentNode = this.head;
+
+while(currentNode.value !== value) {
+  if (!currentNode.next) return false;
+  currentNode = currentNode.next;
+} return true;
+}
+}
+const checkNode = (node, criterion) => {
+  if (node.next === null) return false;  // don't find something 
+  if (node.value === criterion) return true; //find something
+  return checkNode(node.next, criterion); //end
+}; return checkNode(this.head, value); // this is a recursion function
+}
+}
+contains(value) {
     //Set variable that references current node, starting with the head
     // Loop through list until either I find the value or the current node's next is null
     // Within loop, use current node's next property to update current node variable for next loop operation

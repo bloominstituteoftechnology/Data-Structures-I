@@ -26,6 +26,25 @@ class HashTable {
        this.checkLimit(index);
        this.storage[index] = value;
       */
+      /* Solution from instructor :
+      const index = getIndexBelowMax(key.toString(), this.limit);
+      const bucket = this.storage.get(index) || [];
+      bucket = bucket.filter(pair => pair[0] !== key);
+       }
+
+       // filter out the key value pair that has the same key as provided in the function call
+      /* can change last line to:
+      let foundPair = false;
+      for (let i = 0; i< bucket.length; i++) {
+        if(bucket[i][0] === key) {
+           bucket[i][1] = value;
+        foundPair = true;
+      }
+    }
+      if(!foundPair) bucket.push([key, value]);
+      this.storage.set(index, bucket);
+    }
+      */
     } else {
       const bucket = this.storage[index];
       let exists = false;  // checking if key is present
@@ -60,6 +79,19 @@ class HashTable {
       }
     }
   }
+  /* instructor solution
+ remove(key) {
+   const index = getIndexBelowMax(key.toString(), this.limit);
+   let bucket = this.storage.get(index);
+
+   if (bucket) {
+     bucket = bucket.filter(pair => pair[0] !== key);
+     this.storage.set(index, bucket);
+    }
+ }
+
+
+  */
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
@@ -76,5 +108,20 @@ class HashTable {
     }
   }
 }
+/* Instructor answer:
+retrievw(key){
+  const index = getIndexBelowMax(key.toSting(), this.limit);
+  const bucket = this.storage.get(index);
+
+  let retrieved;
+  if (bucket){
+    retrieved = bucket.filter(item => item[0] === key)[0];
+  }
+  return retrieved ? retrieved[1] : undefined;
+  }
+}
+
+
+*/
 
 module.exports = HashTable;
