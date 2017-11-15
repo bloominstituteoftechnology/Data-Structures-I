@@ -7,21 +7,18 @@
 class Queue {
   constructor() {
     this.storage = [];
-    this.size = 0;
+    this.counter = 0;
   }
-
+  enqueue(value) {
+    this.counter++;
+    this.storage.push(value);
+  }
+  dequeue() {
+    this.counter--;
+    return this.storage.shift();
+  }
   get size() {
     return this.storage.length;
   }
-
-  enqueue(val) {
-    this.storage.push();
-  }
-
-  dequeue() {
-    this.storage--;
-    return this.storage.shift();
-  }
 }
-
 module.exports = Queue;
