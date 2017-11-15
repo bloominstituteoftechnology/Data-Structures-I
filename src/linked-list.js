@@ -63,7 +63,7 @@ while(currentNode.value !== value) {
 }
 }
 const checkNode = (node, criterion) => {
-  if (node.next === null) return false;  // don't find something 
+  if (node.next === null) return false;  // don't find something
   if (node.value === criterion) return true; //find something
   return checkNode(node.next, criterion); //end
 }; return checkNode(this.head, value); // this is a recursion function

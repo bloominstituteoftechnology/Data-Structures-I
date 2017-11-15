@@ -15,7 +15,26 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
+  resize() {
+    this.limit *= 2; // this.limit = this.limit *=2
+    const oldStorage = this.storage;
+    this.storage = new LimitedArray(this.limit);
+    oldStorage.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((pair) => {
+        this.insert(pair[0], pair[1]);
+      });
+    });
+  }
+  capacityIsFull() {
+    let fullCells = 0;
+    this.storage.each((bucket) => {
+      if (bucket !== undefined) fullCells++;
+    });
+    return fullCells / this.limit >= 0.75;
+  }
   insert(key, value) {
+    if (this.capacityIsFull()) this.resize(); // line for the extra credit
     const index = getIndexBelowMax(key, this.limit); // could cause problem if not a string/Expecting to be key
     // not using get function , or set function from helpers. but it works
     if (this.storage[index] === undefined) {
