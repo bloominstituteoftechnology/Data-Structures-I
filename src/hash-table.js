@@ -36,11 +36,9 @@ class HashTable {
     const bucket = this.storage.get(index);
     let retrieved;
     if (bucket) {
-      retrieved = bucket.reduce((value, pair) => {
-        return pair[0] === key ? pair[1] : value;
-      }, undefined);
-      // return retrieved ? retrieved[1] : undefined;
+      retrieved = bucket.filter(pair => pair[0] === key)[0];
     }
+    return retrieved ? retrieved[1] : undefined;
   }
 }
 module.exports = HashTable;
