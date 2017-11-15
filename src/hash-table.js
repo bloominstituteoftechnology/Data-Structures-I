@@ -8,7 +8,6 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
   insert(key, value) {
-    let count = 0;
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index) || [];
     let foundPair = false;
@@ -21,24 +20,32 @@ class HashTable {
     if (!foundPair) {
       bucket.push([key, value]);
       this.storage.set(index, bucket);
-      count++;
     }
-    if (count >= this.limit * 0.75) {
+    if ((this.storage.length / this.limit) >= this.limit * 0.75) {
       this.storage.resize(this.limit * 2);
-      count = 0;
     }
   }
-  resize(newStorage) {
-    let oldStorage = this.storage;
-    this.limit = newStorage;
+  resize(newLimit) {
+    const oldStorage = this.storage;
+    this.limit = newLimit;
     this.storage = [];
-    oldStorage = oldStorage.each((bucket) => {
-     // if (!bucket) return;
-      for (let i = 0; i < bucket.length; i++) {
-        const tuple = bucket[i];
-        this.storage.insert(tuple[0], tuple[1]);
+    // oldStorage = oldStorage.each((bucket) => {
+    for (let i = 0; i < oldStorage.length; i++) {
+      const bucket = oldStorage[i];
+      if (bucket) {
+        for (let j = 0; j < bucket.length; j++) {
+          const index = getIndexBelowMax(bucket[j][0], this.limit);
+          let newBucket = this.storage[index];
+          if (newBucket) {
+            newBucket.push([bucket[j][0], bucket[j][1]]);
+          } else {
+            newBucket = [];
+            newBucket.push([bucket[j][0], bucket[j][1]]);
+          }
+        }
       }
-    });
+    }
+    // });
   }
 
   remove(key) {
