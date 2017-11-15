@@ -57,15 +57,15 @@ describe('HashTable', () => {
 
   /* Extra Credit */
 
-  // it('should resize the hash table when >= 75% full', () => {
-  //   hashTable.insert('a', true);
-  //   hashTable.insert('b', true);
-  //   hashTable.insert('c', true);
-  //   hashTable.insert('d', true);
-  //   hashTable.insert('e', true);
-  //   hashTable.insert('f', true);
-  //   hashTable.insert('g', true);
-  //   expect(hashTable.limit).toBe(16);
-  //   expect(hashTable.storage.length).toBe(8);
-  // });
+  it('should resize the hash table when >= 75% full', () => {
+    hashTable.insert('a', true);
+    hashTable.insert('b', true);
+    hashTable.insert('c', true);
+    hashTable.insert('d', true);
+    hashTable.insert('e', true);
+    hashTable.insert('f', true);
+    hashTable.insert('g', true);
+    expect(hashTable.limit).toBe(16);
+    expect(hashTable.storage.length).toBe(8);
+  });
 });
