@@ -14,11 +14,10 @@ class LinkedList {
       this.tail = newNode;
     } else {
       this.tail.next = newNode;
-      this.tail = newNode;
+      this.tail = newNode;     // = this.tail.next;
     }
   }
   removeHead(node) {
-    this.length--;
     if (!this.head) return null;
     if (!this.head.next) this.tail = null;
     const returnValue = this.head.value;

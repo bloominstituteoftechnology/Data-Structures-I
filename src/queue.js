@@ -5,7 +5,7 @@ class Queue {
     this.length = 0;
   }
   enqueue(value) {
-    this.length++;
+    this.length++;       // this.storage.push(value);
     const newNode = {
       value,
       next: null
@@ -18,7 +18,7 @@ class Queue {
       this.tail = newNode;
     }
   }
-  dequeue() {
+  dequeue() {    // this.storage.shift();
     this.length--;
     if (!this.head) return null;
     if (!this.head.next) this.tail = null;
