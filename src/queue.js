@@ -12,7 +12,7 @@ class Queue {
   enqueue(item) {
     this.storage.push(item);
     this.size++;
-    return this.storage[0];
+    // return this.storage[0];
   }
   dequeue(item) {
     if (this.storage.length === 0) return 'empty';
