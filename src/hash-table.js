@@ -32,7 +32,7 @@ class HashTable {
     }
   }
   retrieve(key) {
-    const index = getIndexBelowMax(key.toString(), this.max);
+    const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
     let retrieved;
     if (bucket) {
