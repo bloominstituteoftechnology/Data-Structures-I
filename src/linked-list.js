@@ -17,29 +17,45 @@ class LinkedList {
       this.head = newNode;
       this.tail = newNode;
     } else {
-      this.tail.next = newNode;
       this.tail = newNode;
+      this.tail.next = null;
     }
   }
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
+ /* removeHead() {
+    if (this.head) {
+      const removedNode = this.head.value;
+      this.head = this.head.next;
+      return removedNode;
+    }
+   } */
   removeHead() {
-    const removedNode = this.head.value;
+    if (this.head === null) return null;
+    if (this.head.next === null) this.tail = null;
+    const nodeValue = this.head.value;
     this.head = this.head.next;
-    return removedNode;
+    return nodeValue;
   }
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
     let current = this.head;
     while (current !== null) {
-      if (value === current.value) {
+      if (current.value === value) return true;
+      current = current.next;
+    } return false;
+  }
+/*  contains(value) {
+    let current = this.head;
+    while (current) {
+      if (current.value === value) {
         return true;
       }
-      current = this.head.next;
+      current = current.next;
     }
     return false;
-  }
+  } */
 }
 
 module.exports = LinkedList;
