@@ -30,10 +30,10 @@ const test = new Queue();
 // console.log(Object.getPrototypeOf(test).hasOwnProperty('dequeue'));
 // console.log(Object.getPrototypeOf(test).hasOwnProperty('size'));
 
-test.enqueue(true);
-test.enqueue('hi');
-test.enqueue(null);
-test.enqueue(77);
-console.log(test.dequeue());
+// test.enqueue(true);
+// test.enqueue('hi');
+// test.enqueue(null);
+// test.enqueue(77);
+// console.log(test.dequeue());
 
 module.exports = Queue;
