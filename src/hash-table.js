@@ -11,24 +11,37 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
-  // Adds the given key, value pair to the hash table
-  // Fetch the bucket associated with the given key using the getIndexBelowMax function
-  // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
-  // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-
+    if (!isNaN(key) && key < this.limit) {
+      this.storage.set(key, value);
+    } else if (this.storage.get(getIndexBelowMax(key)) !== undefined || null) {
+      const current = this.storage.get(getIndexBelowMax(key));
+      const newArray = [[0, current], [key, value]];
+      this.storage.set(getIndexBelowMax(key), newArray);
+    } else {
+      this.storage.set(getIndexBelowMax(key), value);
+    }
   }
-  // Removes the key, value pair from the hash table
-  // Fetch the bucket associated with the given key using the getIndexBelowMax function
-  // Remove the key, value pair from the bucket
   remove(key) {
-
+    this.storage.set(getIndexBelowMax(key), undefined);
   }
-  // Fetches the value associated with the given key from the hash table
-  // Fetch the bucket associated with the given key using the getIndexBelowMax function
-  // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-
+    if (!isNaN(key)) {
+      return this.storage.get(key);
+    } else if (Array.isArray(this.storage.get(getIndexBelowMax(key)))) {
+      let marker;
+      if (this.storage.get(getIndexBelowMax(key))[0][0] === key) {
+        marker = this.storage.get(getIndexBelowMax(key))[0][1];
+      } else if (this.storage.get(getIndexBelowMax(key))[1][0] === key) {
+        marker = this.storage.get(getIndexBelowMax(key))[1][1];
+      } else if (marker === undefined && this.storage.get(getIndexBelowMax(key))[0][0] === 0) {
+        marker = this.storage.get(getIndexBelowMax(key))[0][1];
+      } else if (marker === undefined && this.storage.get(getIndexBelowMax(key))[1][0] === 0) {
+        marker = this.storage.get(getIndexBelowMax(key))[1][1];
+      }
+      return marker;
+    }
+    return this.storage.get(getIndexBelowMax(key));
   }
 }
 
