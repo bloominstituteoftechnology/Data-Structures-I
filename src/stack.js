@@ -2,22 +2,31 @@
 
 const LinkedList = require('./linked-list');
 
+// // Array implementation
+// class Stack {
+//   constructor() {
+//     this.stack = [];
+//   }
+//   get size() {
+//     return this.stack.length;
+//   }
+
+//   push(item) {
+//     this.stack[this.size] = item;
+//   }
+
+//   pop() {
+//     const popItem = this.stack[this.size - 1];
+//     this.stack = this.stack.splice(0, this.size - 1);
+//     return popItem;
+//   }
+// }
+
+// doubly linked list implementation
 class Stack {
   constructor() {
-    // Array implementation
-    // this.stack = [];
-
-    // LinkedList implementation
     this.stack = new LinkedList();
   }
-  // // Array implementation
-  // get size() {
-  //   return this.stack.length;
-  // }
-
-  // LinkedList implementation
-  // using doubly linked list and
-  // counting from head <-- tail
   get size() {
     let count = 0;
     let node = this.stack.tail;
@@ -34,24 +43,10 @@ class Stack {
     return ++count;
   }
 
-  // // Array implementation
-  // push(item) {
-  //   this.stack[this.size] = item;
-  // }
-
-  // LinkedList implementation
   push(item) {
     this.stack.addToTail(item);
   }
 
-  // // Array implementation
-  // pop() {
-  //   const popItem = this.stack[this.size - 1];
-  //   this.stack = this.stack.splice(0, this.size - 1);
-  //   return popItem;
-  // }
-
-  //  LinkedList implementation
   pop() {
     // no nodes
     if (this.stack.tail === null) return;
