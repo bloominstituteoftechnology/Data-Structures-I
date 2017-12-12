@@ -2,25 +2,27 @@
 
 const LinkedList = require('./linked-list');
 
-// // Array implementation
-// class Stack {
-//   constructor() {
-//     this.stack = [];
-//   }
-//   get size() {
-//     return this.stack.length;
-//   }
+// Array implementation
+/*
+class Stack {
+  constructor() {
+    this.stack = [];
+  }
+  get size() {
+    return this.stack.length;
+  }
 
-//   push(item) {
-//     this.stack[this.size] = item;
-//   }
+  push(item) {
+    this.stack[this.size] = item;
+  }
 
-//   pop() {
-//     const popItem = this.stack[this.size - 1];
-//     this.stack = this.stack.splice(0, this.size - 1);
-//     return popItem;
-//   }
-// }
+  pop() {
+    const popItem = this.stack[this.size - 1];
+    this.stack = this.stack.splice(0, this.size - 1);
+    return popItem;
+  }
+}
+*/
 
 // doubly linked list implementation
 class Stack {
