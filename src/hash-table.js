@@ -47,6 +47,7 @@ class HashTable {
   insert(key, value) {
     if ((this.storage.length + 1) / this.limit > 0.75) {
       this.storage.limit *= 2;
+      this.limit *= 2;
     }
     const index = getIndexBelowMax(key, this.limit);
     // this.storage.get(index) is the bucket in hash table
