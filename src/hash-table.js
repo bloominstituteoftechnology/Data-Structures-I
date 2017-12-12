@@ -14,21 +14,22 @@ class HashTable {
       this.storage.limit *= 2;
       this.limit *= 2;
     }
-    const bucket = getIndexBelowMax(key, this.limit);
-    if (this.storage.get(bucket) === undefined) this.storage.set(bucket, {});
-    this.storage.get(bucket)[key] = value;
+    const index = getIndexBelowMax(key, this.limit);
+    // this.storage.get(index) is the bucket in hash table
+    if (this.storage.get(index) === undefined) this.storage.set(index, {});
+    this.storage.get(index)[key] = value;
   }
 
   remove(key) {
-    const bucket = getIndexBelowMax(key, this.limit);
+    const index = getIndexBelowMax(key, this.limit);
     if (this.retrieve(key) === undefined) return undefined;
-    delete this.storage.get(bucket)[key];
+    delete this.storage.get(index)[key];
   }
 
   retrieve(key) {
-    const bucket = getIndexBelowMax(key, this.limit);
-    if (this.storage.get(bucket) === undefined) return undefined;
-    return this.storage.get(bucket)[key];
+    const index = getIndexBelowMax(key, this.limit);
+    if (this.storage.get(index) === undefined) return undefined;
+    return this.storage.get(index)[key];
   }
 }
 
