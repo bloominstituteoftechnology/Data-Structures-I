@@ -10,6 +10,10 @@ class HashTable {
   }
 
   insert(key, value) {
+    if ((this.storage.length + 1) / this.limit > 0.75) {
+      this.storage.limit *= 2;
+      this.limit *= 2;
+    }
     const bucket = getIndexBelowMax(key, this.limit);
     if (this.storage.get(bucket) === undefined) this.storage.set(bucket, {});
     this.storage.get(bucket)[key] = value;
