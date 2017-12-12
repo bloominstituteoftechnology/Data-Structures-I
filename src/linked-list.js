@@ -62,16 +62,6 @@ class LinkedList {
     // call our recursive function on our first node
     return searchLinkList(this.head);
   }
-  // Non recursive answer
-  // contains (value) {
-  //   if (this.head === null) return false;
-  //   const currentNode = this.head;
-  //   while (currentNode) {
-  //     if (currentNode.value === value) return true;
-  //     currentNode = currentNode.next;
-  //   }
-  //   return false;
-  // }
 }
 
 module.exports = LinkedList;
