@@ -5,7 +5,43 @@
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
 class Queue {
+  constructor() {
+    this.length = 0;
 
+    this.head = null;
+    this.tail = null;
+  }
+  enqueue(value) {
+    this.length++;
+    const newItem = {
+      value,
+      next: null,
+    };
+
+    if (!this.head) {
+      this.head = newItem;
+      this.tail = newItem;
+    } else {
+      this.tail.next = newItem;
+      this.tail = newItem;
+    }
+  }
+  dequeue() {
+    if (this.length === 0) return 0;
+
+    this.length--;
+
+    if (!this.head) return null;
+    if (!this.head.next) this.tail = null;
+
+    const returnVal = this.head.value;
+    this.head = this.head.next;
+    return returnVal;
+  }
+  get size() {
+    return this.length;
+  }
 }
+
 
 module.exports = Queue;
