@@ -18,18 +18,19 @@ class HashTable {
   insert(key, value) {
     if (!isNaN(key) && key < this.limit) {
       this.storage.set(key, value);
+      this.storage.incrementLength();
     } else if (this.storage.get(getIndexBelowMax(key)) !== undefined || null) {
       const current = this.storage.get(getIndexBelowMax(key));
-      // console.log(current);
       const newArray = [[0, current], [key, value]];
       this.storage.set(getIndexBelowMax(key), newArray);
-      // console.log(newArray[0][0]);
-      // console.log(this.storage.get(getIndexBelowMax(key)));
-      // console.log(Array.isArray(this.storage.get(getIndexBelowMax(key))));
+      this.storage.incrementLength();
     } else {
       this.storage.set(getIndexBelowMax(key), value);
+      this.storage.incrementLength();
     }
-    // this.storage.set(getIndexBelowMax(key), value);
+    if (this.storage.length >= (0.75 * this.limit)) {
+      this.limit *= 2;
+    }
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
@@ -66,6 +67,10 @@ class HashTable {
     // console.log(this.storage.get(getIndexBelowMax(key)));
     // return this.storage.get(getIndexBelowMax(key));
   }
+  // uncomment the final test in hash-table.test.js and make the hash-table rebalance
+  // if you used arrays as your underlying data structure for implementing stacks, queues and hash table buckets, convert these to use linked lists instead
+  // in order to do this, you'll need to export your linked list implementation by wrapping it inside a module.exports
+  // just comment out your initial implementation; don't delete perfectly good code
 }
 
 const test = new HashTable();
@@ -99,5 +104,25 @@ const test = new HashTable();
 // console.log(test.storage);
 // console.log(test.retrieve('B'));
 // console.log(test.retrieve('HI!'));
+
+test.insert('a', true);
+test.insert('b', true);
+test.insert('c', true);
+test.insert('d', true);
+test.insert('e', true);
+test.insert('f', true);
+test.insert('g', true);
+console.log(test.limit);
+console.log(test.storage.length);
+test.insert('h', true);
+test.insert('i', true);
+test.insert('j', true);
+test.insert('k', true);
+test.insert('l', true);
+test.insert('m', true);
+test.insert('n', true);
+test.insert('o', true);
+console.log(test.limit);
+console.log(test.storage.length);
 
 module.exports = HashTable;

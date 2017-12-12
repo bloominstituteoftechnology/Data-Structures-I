@@ -28,6 +28,10 @@ class LimitedArray {
   get length() {
     return this.storage.length;
   }
+
+  incrementLength() {
+    this.storage.length++;
+  }
   // Use this setter function to add elements to this class
   set(index, value) {
     this.checkLimit(index);
