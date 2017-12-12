@@ -5,7 +5,7 @@ class Queue {
   }
 
   size() {
-    return this.size.length;
+    return this.storage.length;
   }
 
   enqueue(item) {
