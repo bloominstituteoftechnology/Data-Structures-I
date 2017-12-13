@@ -46,10 +46,6 @@ class HashTable {
   }
 
   insert(key, value) {
-    // if ((this.storage.length + 1) / this.limit > 0.75) {
-    //   this.storage.limit *= 2;
-    //   this.limit *= 2;
-    // }
     if (this.exceedsCapacityPercent()) {
       this.resize();
     }
@@ -73,7 +69,9 @@ class HashTable {
 }
 */
 
+
 // doubly linked list implementation
+// /*
 class HashTable {
   constructor(limit = 8) {
     this.limit = limit;
@@ -100,13 +98,18 @@ class HashTable {
       // if the bucket is empty, don't fill it
       if (!bucket) return;
       // else create [ [key1, value1], [key2, value2] ... ]
-      const bucketKeys = Object.keys(bucket);
-      const bucketVals = Object.values(bucket);
       const bucketKeysVals = [];
-      for (let i = 0; i < bucketKeys.length; i++) {
-        bucketKeysVals.push([bucketKeys[i], bucketVals[i]]);
+      // start at the head
+      let node = bucket.head;
+      // while the node is not null
+      // to ensure the tail key-value pair are added
+      while (node !== null) {
+        // add the node (key) and the next node (value)
+        // to the Array as an Array
+        bucketKeysVals.push([node.value, node.next.value]);
+        // advance to the next node that has a key
+        node = node.next.next;
       }
-      // for each key-value pair
       bucketKeysVals.forEach((pair) => {
         // insert into new larger capacity storage
         this.insert(pair[0], pair[1]);
@@ -115,9 +118,8 @@ class HashTable {
   }
 
   insert(key, value) {
-    if ((this.storage.length + 1) / this.limit > 0.75) {
-      this.storage.limit *= 2;
-      this.limit *= 2;
+    if (this.exceedsCapacityPercent()) {
+      this.resize();
     }
     const index = getIndexBelowMax(key, this.limit);
     // this.storage.get(index) is the bucket in hash table
@@ -175,6 +177,7 @@ class HashTable {
     return searchForKeyNode(this.storage.get(index).tail);
   }
 }
+// */
 
 
 module.exports = HashTable;
