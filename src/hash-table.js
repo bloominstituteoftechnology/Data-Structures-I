@@ -12,10 +12,46 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
 
+  exceedsCapacityPercent() {
+    let filledHashes = 0;
+    this.storage.each((bucket) => {
+      if (bucket !== undefined) filledHashes++;
+    });
+    return (filledHashes + 1) / this.limit > 0.75;
+  }
+
+  resize() {
+    this.limit *= 2;
+    // keep old storage for buckets
+    const oldStorage = this.storage;
+    // make new storage with larger capacity
+    this.storage = new LimitedArray(this.limit);
+    // for each bucket in old storage
+    oldStorage.each((bucket) => {
+      // if the bucket is empty, don't fill it
+      if (!bucket) return;
+      // else create [ [key1, value1], [key2, value2] ... ]
+      const bucketKeys = Object.keys(bucket);
+      const bucketVals = Object.values(bucket);
+      const bucketKeysVals = [];
+      for (let i = 0; i < bucketKeys.length; i++) {
+        bucketKeysVals.push([bucketKeys[i], bucketVals[i]]);
+      }
+      // for each key-value pair
+      bucketKeysVals.forEach((pair) => {
+        // insert into new larger capacity storage
+        this.insert(pair[0], pair[1]);
+      });
+    });
+  }
+
   insert(key, value) {
-    if ((this.storage.length + 1) / this.limit > 0.75) {
-      this.storage.limit *= 2;
-      this.limit *= 2;
+    // if ((this.storage.length + 1) / this.limit > 0.75) {
+    //   this.storage.limit *= 2;
+    //   this.limit *= 2;
+    // }
+    if (this.exceedsCapacityPercent()) {
+      this.resize();
     }
     const index = getIndexBelowMax(key, this.limit);
     // this.storage.get(index) is the bucket in hash table
@@ -43,6 +79,39 @@ class HashTable {
     this.limit = limit;
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
+  }
+
+  exceedsCapacityPercent() {
+    let filledHashes = 0;
+    this.storage.each((bucket) => {
+      if (bucket !== undefined) filledHashes++;
+    });
+    return (filledHashes + 1) / this.limit > 0.75;
+  }
+
+  resize() {
+    this.limit *= 2;
+    // keep old storage for buckets
+    const oldStorage = this.storage;
+    // make new storage with larger capacity
+    this.storage = new LimitedArray(this.limit);
+    // for each bucket in old storage
+    oldStorage.each((bucket) => {
+      // if the bucket is empty, don't fill it
+      if (!bucket) return;
+      // else create [ [key1, value1], [key2, value2] ... ]
+      const bucketKeys = Object.keys(bucket);
+      const bucketVals = Object.values(bucket);
+      const bucketKeysVals = [];
+      for (let i = 0; i < bucketKeys.length; i++) {
+        bucketKeysVals.push([bucketKeys[i], bucketVals[i]]);
+      }
+      // for each key-value pair
+      bucketKeysVals.forEach((pair) => {
+        // insert into new larger capacity storage
+        this.insert(pair[0], pair[1]);
+      });
+    });
   }
 
   insert(key, value) {
@@ -106,5 +175,6 @@ class HashTable {
     return searchForKeyNode(this.storage.get(index).tail);
   }
 }
+
 
 module.exports = HashTable;
