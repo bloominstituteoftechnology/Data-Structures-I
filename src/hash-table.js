@@ -12,9 +12,9 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
   checkCapacity() {
-    // istantiate a variable to keep track of the number of ull slots in our listed array
+    // istantiate a variable to keep track of the number of all slots in our listed array
     // increment our variable for every full slot
-    // if the number of buckets we have is >= 0.75 of total limit, return true
+    // if the number of buckets is >= 0.75 of total limit, return true
     let fullSlots = 0;
     this.storage.each((bucket) => {
       if (bucket !== undefined) ++fullSlots;
@@ -99,15 +99,6 @@ class HashTable {
       }
     }
   }
- /*  resize() {
-    const oldLimit = this.limit;
-    if (this.limit > this.limit * 0.75) {
-      const newLimit = oldLimit * 2;
-      HashTable.this.limit = newLimit;
-      HashTable.this.storage = new LimitedArray(newLimit);
-      return;
-    }
-  } */
 }
 
 module.exports = HashTable;
