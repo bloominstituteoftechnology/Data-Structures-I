@@ -11,11 +11,40 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
+  checkCapacity() {
+    // istantiate a variable to keep track of the number of ull slots in our listed array
+    // increment our variable for every full slot
+    // if the number of buckets we have is >= 0.75 of total limit, return true
+    let fullSlots = 0;
+    this.storage.each((bucket) => {
+      if (bucket !== undefined) ++fullSlots;
+    });
+    return (fullSlots / this.limit) >= 0.75;
+  }
+
+  resize() {
+    // increase the limit of our limited array by a factor of 2
+    this.limit *= 2;
+    // keep a reference to the old limited array
+    const oldStorage = this.storage;
+    // create a new limited array with double the original capacity
+    this.storage = new LimitedArray(this.limit);
+    // put all of the buckets from our limited array into our new expanded limited array
+    oldStorage.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((pair) => {
+        this.insert(pair[0], pair[1]);
+      });
+    });
+  }
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    // call resize before every insertion
+    if (this.checkCapacity()) this.resize();
+    // if (this.limit > this.limit * 0.75) this.resize();
     // has our key and get an index into our limited array
     const index = getIndexBelowMax(key.toString(), this.limit);
     // use the index to fetch whatever is at the slot in our limited array
@@ -70,6 +99,15 @@ class HashTable {
       }
     }
   }
+ /*  resize() {
+    const oldLimit = this.limit;
+    if (this.limit > this.limit * 0.75) {
+      const newLimit = oldLimit * 2;
+      HashTable.this.limit = newLimit;
+      HashTable.this.storage = new LimitedArray(newLimit);
+      return;
+    }
+  } */
 }
 
 module.exports = HashTable;
