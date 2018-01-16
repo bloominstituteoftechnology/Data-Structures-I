@@ -1,25 +1,97 @@
-/* eslint-disable class-methods-use-this */
+class Node {
+  constructor(data) {
+    this.value = data;
+    this.next = null;
+  }
+}
+
 class LinkedList {
   constructor() {
     this.head = null;
+    this.length = 0;
     this.tail = null;
-    // Do not modify anything inside of the constructor
   }
-  // Wraps the given value in a node object and adds the node to the tail of the list
-  // If the list is empty, the new element is considered the tail as well as the head
-  // If there is one element in the list before the new element is added, the new element becomes the tail of the list
-  addToTail(value) {
 
+  addToTail(data) {
+    const newNode = new Node(data);
+
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = this.head;
+      this.length++;
+
+      return newNode;
+    }
+
+    let current = this.head;
+
+    while (current.next !== null) {
+      current = current.next;
+    }
+
+    current.next = newNode;
+    this.tail = current.next;
+    this.length++;
+    return newNode;
   }
-  // Removes the current head node from the list, replacing it with the next element in the list
-  // Returns the value of the removed node
+
+  get(input) {
+    let current = this.head;
+    while (current !== null) {
+      if (current.value === input) {
+        return current;
+      }
+      current = current.next;
+    }
+    return current;
+  }
+
+  contains(input) {
+    if (this.get(input) === null) {
+      return false;
+    }
+    return true;
+  }
+
+  removeNodeByPosition(position) {
+    let currentNode = this.head;
+    const length = this.length;
+    let count = 0;
+    const message = { failure: 'Non-Existent Node' };
+    let beforeNodeToDelete = null;
+    let nodeToDelete = null;
+    let deletedNode = null;
+
+
+    if (position < 0 || position > length) {
+      throw new Error(message.failure);
+    }
+
+    if (position === 1) {
+      this.head = currentNode.next;
+      deletedNode = currentNode;
+      currentNode = null;
+      this.length--;
+
+      return deletedNode;
+    }
+
+    while (count < position) {
+      beforeNodeToDelete = currentNode;
+      nodeToDelete = currentNode.next;
+      count++;
+    }
+
+    beforeNodeToDelete.next = nodeToDelete.next;
+    deletedNode = nodeToDelete;
+    nodeToDelete = null;
+    this.length = this.length - 1;
+
+    return deletedNode;
+  }
+
   removeHead() {
-
-  }
-  // Checks the linked list for the given value
-  // Returns true if the the value is found in the list, false otherwise
-  contains(value) {
-
+    return this.removeNodeByPosition(1).value;
   }
 }
 
