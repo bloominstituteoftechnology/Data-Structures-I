@@ -18,7 +18,9 @@ class Queue {
   }
 
   dequeue(value) {
+    const first = this.items[0];
     this.items = this.items.slice(1);
+    return first;
   }
 }
 
