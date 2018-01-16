@@ -11,7 +11,7 @@ class Stack {
   }
   // size getter that returns number of items
   size() {
-    return this.array.length();
+    return this.array.length;
   }
   // push method
   push(n) {
@@ -20,8 +20,7 @@ class Stack {
   }
   // pop method
   pop() {
-    this.array.pop();
-    return this.array;
+    return this.array.pop();
   }
 }
 
