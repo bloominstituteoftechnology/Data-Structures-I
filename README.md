@@ -23,7 +23,7 @@ Topics:
 
  * Should have the methods: `enqueue`, `dequeue`, and a getter for the property `size`
  * `enqueue` should add an item to the back of the queue.
- * `dequeue` should remove an item from the front of the queue.
+ * `dequeue` should remove and return an item from the front of the queue.
  * `size` should return the number of items in the queue.
  
 ![Image of Queue](https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Data_Queue.svg/600px-Data_Queue.svg.png)
