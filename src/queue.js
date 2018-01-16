@@ -9,10 +9,10 @@ class Queue {
     this.storage = [];
   }
   enqueue(x) {
-    return this.storage.enqueue(x);
+    return this.storage.push(x);
   }
   dequeue() {
-    return this.storage.dequeue;
+    return this.storage.shift();
   }
   get size() {
     return this.storage.length;
