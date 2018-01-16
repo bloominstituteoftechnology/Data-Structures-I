@@ -6,26 +6,26 @@
 */
 class Queue {
   constructor() {
-    this.size = 0;
-    this.lowestSize = 0;
+    this.count = 0;
+    this.lowestCount = 0;
     this.storage = {};
   }
 
-  size() {
-    return this.size - this.lowestSize;
+  get size() {
+    return this.count - this.lowestCount;
   }
 
   enqueue(value) {
-    this.storage[this.size] = value;
-    ++this.size;
+    this.storage[this.count] = value;
+    ++this.count;
   }
 
   dequeue() {
-    if (this.size - this.lowestSize === 0) return undefined;
+    if (this.count - this.lowestCount === 0) return undefined;
 
-    const result = this.storage[this.lowestSize];
-    delete this.storage[this.lowestSize];
-    ++this.lowestSize;
+    const result = this.storage[this.lowestCount];
+    delete this.storage[this.lowestCount];
+    ++this.lowestCount;
     return result;
   }
 }
