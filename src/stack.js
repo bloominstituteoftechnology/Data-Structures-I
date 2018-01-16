@@ -6,11 +6,11 @@
 */
 class Stack {
   // build a constructor here
-  constructor(options) {
+  constructor() {
     this.array = [];
   }
   // size getter that returns number of items
-  size() {
+  get size() {
     return this.array.length;
   }
   // push method
