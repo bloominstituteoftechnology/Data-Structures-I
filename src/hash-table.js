@@ -15,31 +15,28 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-    const idx = getIndexBelowMax(key.toString(), this.limit);
+    const idx = getIndexBelowMax(key, this.limit);
     const bucket = this.storage.get(idx);
 
     if (bucket === undefined) {
       this.storage.set(idx, [[key, value]]);
       return;
-    }
+    }// else that means theres something else in the bucket already
     for (let i = 0; i < bucket.length; i++) {
       const bucketKey = bucket[i][0];
-      // let bucketVal = bucket[i][1]; // Ask TA ---I Can't use this to set the value in the following if statement?
-      if (bucketKey === key) { // if the key the bucket exist it will change value accordingly
+      if (bucketKey === key) { // itere through loop to see if the key in  the bucket exist, overwrite older value associated with key
         bucket[i][1] = value;
-        this.storage.set(idx, bucket);
         return;
       }
     }
-    bucket.push([key, value]);
-    this.storage.set(idx, bucket);
+    bucket.push([key, value]);// this is handling collision. If
     //  were we store all of the entires of the bucket
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
-    const idx = getIndexBelowMax(key.toString(), this.limit);
+    const idx = getIndexBelowMax(key, this.limit);
     const bucket = this.storage.get(idx);
 
     if (bucket === undefined) return undefined;// error handling for the test. "should not throw error for existing key "
@@ -53,7 +50,7 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-    const idx = getIndexBelowMax(key.toString(), this.limit);
+    const idx = getIndexBelowMax(key, this.limit);
     const bucket = this.storage.get(idx);
     // if key is not in bucket do nothing else return that key pair
     if (bucket === undefined) return;// Error handling
