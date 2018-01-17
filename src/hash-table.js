@@ -46,7 +46,19 @@ class HashTable {
   remove(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
-    this.storage.set(index, undefined);
+    if (!bucket) return;
+
+    if (bucket.length === 1) {
+      this.storage.set(index, undefined);
+      return;
+    }
+
+    bucket.forEach((pair, i) => {
+      if (pair[0] === key) {
+        bucket.splice(i, 1);
+        this.storage.set(index, bucket);
+      }
+    });
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
