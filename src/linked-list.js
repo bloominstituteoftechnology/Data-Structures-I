@@ -44,10 +44,10 @@ class LinkedList {
 
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
-  contains(value) {
+  contains(input) {
     if (this.head === null) return false;
     const search = (node) => {
-      if (node.value === value) return true;
+      if (node.value === input) return true;
       if (node.next === null) return false;
       return search(node.next);
     };
