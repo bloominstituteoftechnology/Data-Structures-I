@@ -6,6 +6,22 @@
 */
 class Queue {
 
+  constructor() {
+    this.storage = [];
+  }
+
+  enqueue(input) {
+    return this.storage.unshift(input);
+  }
+
+  dequeue() {
+    return this.storage.pop();
+  }
+
+  get size() {
+    return this.storage.length;
+  }
+
 }
 
 module.exports = Queue;

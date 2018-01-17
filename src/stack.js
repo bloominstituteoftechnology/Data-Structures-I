@@ -6,6 +6,43 @@
 */
 class Stack {
 
+  constructor() {
+    this.storage = [];
+  }
+
+  push(input) {
+    return this.storage.push(input);
+  }
+
+  pop() {
+    return this.storage.pop();
+  }
+
+  get size() {
+    return this.storage.length;
+  }
+
 }
+
+// class Stack {
+
+//   constructor() {
+//     this.storage = [];
+//   }
+
+//   push(input) {
+//     return this.storage[this.storage.length] = input;
+//   }
+
+//   pop() {
+//     if (this.storage.length > 0) {
+//     }
+//   }
+
+//   get size() {
+//     return this.storage.length;
+//   }
+
+// }
 
 module.exports = Stack;
