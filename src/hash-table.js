@@ -23,8 +23,8 @@ class HashTable {
     const bucket = this.storage.get(index);
 
     if (this.storage.length > (this.limit * 0.75)) {
-      this.limit = this.limit * 2;
       this.storage.limit = this.limit * 2;
+      this.limit = this.limit * 2;
     }
 
     if (bucket === undefined) {
