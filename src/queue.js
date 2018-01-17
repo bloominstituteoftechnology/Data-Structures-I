@@ -10,17 +10,18 @@ class Queue {
     this.size = 0;
   }
   size() {
-    return this.storage.length;
+    // return this.storage.length;
+    return this.size;
   }
   enqueue(item) {
-    // this.storage.unshift(item);
-    // return this.size;
     this.size++;
     this.storage.push(item);
   }
   dequeue() {
     // The shift() method removes the first element from an array and
     // returns that removed element. This method changes the length of the array.
+    if (this.size === 0) return null;
+    this.size--;
     return this.storage.shift();
   }
 }
