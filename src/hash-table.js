@@ -41,6 +41,7 @@ class HashTable {
     }
     // the key we're trying to insert is unique;
     bucket.push([key, value]);
+    this.storage.set(index, bucket);
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
@@ -51,7 +52,7 @@ class HashTable {
     // checks to see if there is really a bucket to be removed
     // at that index
     if (bucket === undefined) {
-      return null;
+      return;
     }
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === key) {
@@ -60,12 +61,23 @@ class HashTable {
       }
     }
     bucket.pop(key);
+    this.storage.set(index, null);
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    if (bucket === undefined) {
+      return;
+    }
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        return bucket[i][1];
+      }
+    }
+    return;
   }
 }
 
