@@ -10,7 +10,7 @@ class Stack {
     this.size = this.storage.length;
   }
   size() {
-    return this.size;
+    return this.storage.length;
   }
   pop() {
     if (this.size === 0) return;
