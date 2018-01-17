@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
+
 const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 
 // LimitedArray, and getIndexBelowMax are two tools provided for you in the helper file.
@@ -16,19 +17,43 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-
+    this.storage[key] = value;
+    if (this.storage.length + 1 > this.storage.limit * 0.75) {
+      this.limit *= 2;
+      this.storage.limit *= 2;
+    }
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    if (bucket === undefined) {
+      this.storage.set(index, [key, value]);
+      return;
+    }
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        bucket[i][1] = value;
+        this.storage.set(index, bucket);
+        return;
+      }
+    }
+    bucket.push([key, value]);
+    this.storage.set(index, bucket);
+    return;
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
-  remove(key) {
+  // if there is nothing in the slot, insert our key value pair inside a newly-instantiated bucket
+  // otherwise, we'll need to add our new key -value pair to the bucket
+  // make sure to main tain the uniqueness of kets property
 
+  remove(key) {
+    return delete this.storage[key];
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-
+    return this.storage[key];
   }
 }
 
