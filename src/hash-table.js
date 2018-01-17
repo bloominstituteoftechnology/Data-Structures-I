@@ -1,5 +1,3 @@
-// Master
-
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
@@ -52,8 +50,9 @@ class HashTable {
 
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === key) {
-        delete bucket[i][0]; // And why not `delete bucket[i]` to delete the key value pair?
-      }                      // Also, is bucket.this.storage.length the same as bucket.length here?
+        bucket.splice(i, 1);
+        this.storage.set(index, bucket);
+      }
     }
   }
 
