@@ -4,22 +4,8 @@
   3. Add an `enqueue` method that accepts an item as input and adds it to the storage structure
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
-
 class Queue {
-  constructor() { // No parameters necessary.
-    this.storage = [];
-  } // This Class Declaration Satisfies #1
 
-// Methods added #'s 2-4
-  enqueue(item) {
-    this.storage.push(item);
-  }
-  dequeue() {
-    return this.storage.shift();
-  }
-  get size() {
-    return this.storage.length;
-  }
 }
 
 module.exports = Queue;
