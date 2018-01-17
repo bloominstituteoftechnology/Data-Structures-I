@@ -40,6 +40,7 @@ class LimitedArray {
 // on the given `str` arg (the key) modded by the limit of the limited array
 // This simply ensures that the hash function always returns an index that is within the boundaries of the limited array
 const getIndexBelowMax = (str, max) => {
+  str = str.toString();
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = (hash << 5) + hash + str.charCodeAt(i);
