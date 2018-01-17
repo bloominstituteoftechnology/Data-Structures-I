@@ -23,14 +23,13 @@ class DoubleLinkedList {
   }
 
   removeHead() {
-
     if (this.head === null) return;
 
     if (this.head.next === null) {
       const val = this.head.value;
       this.head = null;
       this.tail = null;
-      return value;
+      return val;
     }
 
     const value = this.head.value;

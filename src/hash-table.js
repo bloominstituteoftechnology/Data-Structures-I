@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
+
 const { LimitedArray, getIndexBelowMax } = require('./hash-table-helpers');
 
 // LimitedArray, and getIndexBelowMax are two tools provided for you in the helper file.
@@ -19,6 +21,11 @@ class HashTable {
     // grab the index associated with this key via the hash function
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
+
+    if (this.storage.length > (this.limit * 0.75)) {
+      this.limit = this.limit * 2;
+      this.storage.limit = this.limit * 2;
+    }
 
     if (bucket === undefined) {
       // if bucket is undefined, we add a bucket and populate it
