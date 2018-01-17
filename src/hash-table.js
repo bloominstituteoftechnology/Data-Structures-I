@@ -16,19 +16,51 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-
+    const bucket = getIndexBelowMax(key.toString(), this.limit);
+    // if no values in that bucket index, then set key/value pair within that bucket
+    const withinBucket = this.storage.get(bucket);
+    if (withinBucket === undefined) {
+      this.storage.set(bucket, [[key, value]]);
+      return;
+    }
+    for (let i = 0; i < withinBucket.length; i++) {
+      if (key === withinBucket[i][0]) {
+        withinBucket[i][1] = value;
+        // this.storage.set(bucket, withinBucket);
+        return;
+      }
+    }
+    withinBucket.push([key, value]);
+    // this.storage.set(bucket, withinBucket);
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
-
+    const bucket = getIndexBelowMax(key.toString(), this.limit);
+    const withinBucket = this.storage.get(bucket);
+    if (withinBucket === undefined) return undefined;
+    for (let i = 0; i < withinBucket.length; i++) {
+      if (key === withinBucket[i][0]) {
+        withinBucket.splice(i, 1);
+        // this.storage.set(bucket, withinBucket);
+      }
+    }
+    return 'no key to be found';
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-
+    const bucket = getIndexBelowMax(key.toString(), this.limit);
+    if (this.storage.get(bucket) === undefined) return undefined;
+    const withinBucket = this.storage.get(bucket);
+    for (let i = 0; i < withinBucket.length; i++) {
+      if (key === withinBucket[i][0]) {
+        return withinBucket[i][1];
+      }
+    }
+    return undefined;
   }
 }
 
