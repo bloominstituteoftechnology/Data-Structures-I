@@ -19,7 +19,7 @@ class Queue {
     this.lastIn++;
   }
   dequeue() {
-    if ((this.lastIn - this.firstIn) === 0) return;
+    if ((this.size) === 0) return;
     const removed = this.storage[this.firstIn];
     delete this.storage[this.firstIn];
     this.firstIn++;
