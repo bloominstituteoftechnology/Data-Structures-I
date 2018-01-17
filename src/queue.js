@@ -13,6 +13,8 @@ class Queue {
     return this.storage.length;
   }
   enqueue(item) {
+    // this.storage.unshift(item);
+    // return this.size;
     this.size++;
     this.storage.push(item);
   }
