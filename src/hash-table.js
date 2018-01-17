@@ -18,18 +18,54 @@ class HashTable {
   insert(key, value) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
+    if (bucket === undefined) {
+      this.storage.set(index, [[key, value]]);
+      return;
+    }
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        bucket[i][1] = value;
+        this.storage.set(index, bucket);
+        return;
+      }
+    }
+    bucket.push([key, value]);
+    this.storage.set(index, bucket);
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
-
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    if (bucket === undefined) {
+      return undefined;
+    }
+    if (bucket.length === 1 && bucket[0][0] === key) {
+      bucket.pop(index);
+      return;
+    }
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        bucket.pop(index);
+        return;
+      }
+    }
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
-
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
+    if (bucket === undefined) {
+      return undefined;
+    }
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i][0] === key) {
+        return bucket[i][1];
+      }
+    }
   }
 }
 
