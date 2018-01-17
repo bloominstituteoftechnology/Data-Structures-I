@@ -51,9 +51,19 @@ class HashTable {
     const bucket = this.storage.get(index);
     // checks to see if there is really a bucket to be removed
     // at that index
-    if (bucket === undefined) {
+    if (!bucket) return;
+    // if the bucket only contains the key value pair we're looking for, remove it as well
+    if (bucket.length === 1) {
+      this.storage.set(index, undefined);
       return;
     }
+    bucket.forEach((pair, i) => {
+      if (pair[0] === key) {
+        bucket.splice(i, 1);
+        this.storage.set(index, bucket);
+      }
+    });
+    /*
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === key) {
         bucket.splice(i, 1);
@@ -62,22 +72,35 @@ class HashTable {
     }
     bucket.pop(key);
     this.storage.set(index, null);
+    */
   }
+  // the above works, but I also wanted to practice forEach
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
+  //
+  // retrieve(key) {
+  //   const index = getIndexBelowMax(key.toString(), this.limit);
+  //   const bucket = this.storage.get(index);
+  //   if (bucket === undefined) {
+  //     return;
+  //   }
+  //   for (let i = 0; i < bucket.length; i++) {
+  //     if (bucket[i][0] === key) {
+  //       return bucket[i][1];
+  //     }
+  //   }
+  //   return;
+  // }
+
   retrieve(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
-    if (bucket === undefined) {
-      return;
-    }
-    for (let i = 0; i < bucket.length; i++) {
-      if (bucket[i][0] === key) {
-        return bucket[i][1];
-      }
-    }
-    return;
+    if (!bucket) return;
+    const found = bucket.find((pair) => {
+      return pair[0] === key;
+    });
+    return found[1];
   }
 }
 
