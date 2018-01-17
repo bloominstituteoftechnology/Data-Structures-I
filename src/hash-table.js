@@ -19,25 +19,26 @@ class HashTable {
     // grab the index associated with this key via the hash function
     const index = getIndexBelowMax(key.toString(), this.limit);
     // fetch whatever is stored at this index
-    const bucket = this.storage.get(index);
+    const tempBucket = this.storage.get(index);
 
-    if (bucket === undefined) {
+    if (tempBucket === undefined) {
       // if bucket is undefined, creat new bucket (and insert the key/value pair)
       this.storage.set(index, [[key, value]]);
       return;
     }
+
     // we have a collision or we have an empty bucket
-    for (let i = 0; i < bucket.length; i++) {
+    for (let i = 0; i < tempBucket.length; i++) {
       // check to see if any  keys in the bucket match the key we want to insert
-      if (bucket[i][0] === key) {
+      if (tempBucket[i][0] === key) {
         // this means we have a duplicate key we're trying to insert
-        bucket[i][1] = value;
-        this.storage.set(index, bucket);
+        tempBucket[i][1] = value;
+        this.storage.set(index, tempBucket);
         return;
       }
     }
-    bucket.push([key, value]);
-    this.storage.set();
+    tempBucket.push([key, value]);
+    this.storage.set(index, tempBucket);
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
