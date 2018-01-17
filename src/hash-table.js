@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
-const { LimitedArray, getIndexBelowMax, set } = require('./hash-table-helpers');
+const { LimitedArray, getIndexBelowMax, set, get, checkLimit } = require('./hash-table-helpers');
 
 // LimitedArray, and getIndexBelowMax are two tools provided for you in the helper file.
 // There are other methods on the LimitedArray class in the './hash-table-helpers' file that you can use for your implementation.
@@ -16,14 +16,35 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
-    const hashedKey = getIndexBelowMax(key, this.limit);
-    set(hashedKey, value);
+    // grab the index associated with this key via the hash function
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    // fetch whatever is stored at this index
+    const bucket = this.storage.get(index);
+
+    if (bucket === undefined) {
+      // if bucket is undefined, creat new bucket (and insert the key/value pair)
+      this.storage.set(index, [[key, value]]);
+      return;
+    }
+    // we have a collision or we have an empty bucket
+    for (let i = 0; i < bucket.length; i++) {
+      // check to see if any  keys in the bucket match the key we want to insert
+      if (bucket[i][0] === key) {
+        // this means we have a duplicate key we're trying to insert
+        bucket[i][1] = value;
+        this.storage.set(index, bucket);
+        return;
+      }
+    }
+    bucket.push([key, value]);
+    this.storage.set();
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
   remove(key) {
-
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
   }
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
