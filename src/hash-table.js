@@ -19,6 +19,11 @@ class HashTable {
     const index = getIndexBelowMax(key.toString(), this.limit); // grab index associated with key via hash function
     const bucket = this.storage.get(index); // fetch whatever is stored at this index
 
+    if (this.storage.length >= this.limit * 0.75) {
+      this.limit *= 2;
+      this.storage.limit *= 2;
+    }
+
     if (bucket === undefined) {
       // if bucket is undefined, we need to create the bucket at that index
       this.storage.set(index, [[key, value]]);
