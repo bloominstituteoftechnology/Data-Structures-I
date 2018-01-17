@@ -18,3 +18,5 @@ class Stack {
     return this.storage.pop();
   }
 }
+
+module.exports = Stack;

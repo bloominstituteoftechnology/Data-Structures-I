@@ -11,7 +11,7 @@ class LinkedList {
   addToTail(value) {
     const newNode = {
       next: null,
-      value: value,
+      value,
     };
 
     if (this.head === null) {
@@ -29,7 +29,7 @@ class LinkedList {
     // need to check if there is a head node
     if (this.head === null) return;
 
-    //check if head has a next (or is it a single element)
+    // check if head has a next (or is it a single element)
     if (this.head.next === null) {
       const value = this.head.value;
       this.head = null;
@@ -51,15 +51,15 @@ class LinkedList {
   //   }
   //   return false;
 
-  //check if the linked list is empty
-  if (this.head === null) return false;
+  // check if the linked list is empty
+    if (this.head === null) return false;
   // otherwise, define our recursive function
     const searchLinkedList = (node) => {
-      //check if the current node's value matches what we're looking for
+      // check if the current node's value matches what we're looking for
       if (node.value === value) return true;
-      //check if we've reached the end of the linked list
+      // check if we've reached the end of the linked list
       if (node.next === null) return false;
-      //make our recursive call
+      // make our recursive call
       return searchLinkedList(node.next);
     };
     return searchLinkedList(this.head);
