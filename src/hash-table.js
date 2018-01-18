@@ -18,6 +18,8 @@ class HashTable {
   insert(key, value) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const tempStore = this.storage.get(index);
+    if (this.storage.length / this.limit >= 0.75) this.limit *= 2;
+    this.storage.limit = this.limit;
 
     if (tempStore === undefined) {
       this.storage.set(index, [[key, value]]);
