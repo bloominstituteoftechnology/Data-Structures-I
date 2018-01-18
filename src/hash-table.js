@@ -57,7 +57,7 @@ class HashTable {
     oldHashTable.each((bucket) => {
       if (!bucket) return;
       bucket.forEach((pair) => {
-        this.insert(pair[0], pair[1])
+        this.insert(pair[0], pair[1]);
       });
     });
   }
@@ -119,7 +119,14 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
+    const index = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(index);
 
+    if (!bucket) return;
+    const found = bucket.find((pair) => {
+      return pair[0] === key;
+    });
+    return found[1];
   }
 }
 
