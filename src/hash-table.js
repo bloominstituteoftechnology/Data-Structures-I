@@ -42,7 +42,29 @@ class HashTable {
   //   this.storage.set(index, bucket);
   // }
 
+  checkCapacity() {
+    let fullSlots = 0;
+    this.storage.each((bucket) => {
+      if (bucket) fullSlots++;
+    });
+    return (fullSlots / this.limit) >= 0.75;
+  }
+
+  resize() {
+    this.limit *= 2;
+    const oldHashTable = this.storage;
+    this.storage = new LimitedArray(this.limit);
+    oldHashTable.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((pair) => {
+        this.insert(pair[0], pair[1])
+      });
+    });
+  }
+
   insert(key, value) {
+    // check to see if we'be reached the capacity for resizing
+    if (this.checkCapacity()) this.resize();
     // grab the index associated with this key via the hash function
     const index = getIndexBelowMax(key.toString(), this.limit);
     // fetch whatever is stored at this index
