@@ -16,6 +16,10 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    if (this.storage.length / 0.75 === this.limit) {
+      this.limit = this.limit * 2;
+      this.storage.limit = this.limit;
+    }
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
 
