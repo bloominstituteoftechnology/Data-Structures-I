@@ -71,4 +71,15 @@ class LinkedList {
 	//	return searchLinkedList(this.head);
 //	}
 //}
+
+//doubly linkedlist code
+//insertBeginning(List list, Node, newNode)
+//	if list.firstNode == null
+	//    list.firstNode := newNode
+		//	list.last Node := newNode
+	//		newNode.prev := null
+	//		newNode.next := null
+//	else 
+//	 insertBefore(list, list.firstNode, newNode) 
+
 module.exports = LinkedList;

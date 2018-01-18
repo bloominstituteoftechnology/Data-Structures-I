@@ -15,9 +15,9 @@ class Queue {
 		this.storage = new LinkedList();
 	}	
 
-	  get size () {
-     return this.queuesize;
-		}
+//	  get size () {
+ //    return this.queuesize;
+//		}
 		
 		get size() {
 			let node = this.storage.head;
