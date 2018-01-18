@@ -4,8 +4,21 @@
   3. Add an `enqueue` method that accepts an item as input and adds it to the storage structure
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
+/* esLint-disable */
 class Queue {
-
+  constructor() {
+    this.storage = [];
+  }
+  get size() {
+    return this.storage.length;
+  }
+  enqueue(input) {
+    this.storage.push(input);
+  }
+  dequeue(input) {
+    this.storage.shift(input);
+    return this.storage.length;
+  }
 }
 
 module.exports = Queue;
