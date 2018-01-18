@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 /*
   1. Add a constructor with a storage structure; there are multiple options you could use for this
   2. Add a size getter that returns the number of items the queue is storing
@@ -18,19 +18,10 @@ class Queue {
   }
   enqeue(items) {
     this.length++;
-    const newNode = {
-      value,
-      next: null,
-    };
-
-    if (!this.head) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
-    }
+    return this.storage.push(items);
   }
+
+
   dequeue() {
     return this.storage.shift();
   }
