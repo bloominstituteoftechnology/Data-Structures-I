@@ -48,6 +48,10 @@ class HashTable {
 
     if (bucket === undefined) return undefined; // Error handling
 
+    if (bucket.length === 1) {
+      this.storage.set(index, undefined);
+    }
+
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i][0] === key) {
         bucket.splice(i, 1);
