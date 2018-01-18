@@ -13,11 +13,33 @@ class HashTable {
     // Do not modify anything inside of the constructor
   }
 
+  checkCapacity() {
+    let slotCounter = 0;
+    this.storage.each((bucket) => {
+      if (bucket) slotCounter++;
+    });
+    return (slotCounter / this.limit) >= 0.75;
+  }
+
+  resize() {
+    this.limit *= 2;
+    const oldTable = this.storage;
+    this.storage = new LimitedArray(this.limit);
+    oldTable.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((pair) => {
+        this.insert(pair[0], pair[1]);
+      });
+    });
+  }
+
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    if (this.checkCapacity()) this.resize();
+
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
 
@@ -45,11 +67,19 @@ class HashTable {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
 
-    if (bucket === undefined) return undefined;
+    if (!bucket) return;
+
+    if (bucket.length === 1) {
+      this.storage.set(index, undefined);
+      this.sizeCounter--;
+      return;
+    }
 
     for (let i = 0; i < bucket.length; i++) {
-      if (bucket[i] === key);
-      bucket[i].splice(bucket[i], 1);
+      if (bucket[i][0] === key) {
+        bucket.splice(i, 1);
+        this.storage.set(index, bucket);
+      }
     }
   }
 
@@ -58,11 +88,18 @@ class HashTable {
   // Find the key, value pair inside the bucket and return the value
   retrieve(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
-    const result = this.storage.get(index);
+    const bucket = this.storage.get(index);
 
-    if (result === undefined) return undefined;
-
-    return result[0][1];
+    if (!bucket) return;
+    // for (let i = 0; i < bucket.length; i++) {
+    //   if (bucket[i][0] === key) {
+    //     return bucket[i][1];
+    //   }
+    // }
+    const found = bucket.find((pair) => {
+      return pair[0] === key;
+    });
+    return found[1];
   }
 }
 
