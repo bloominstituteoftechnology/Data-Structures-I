@@ -15,13 +15,15 @@ class Queue {
     return this.storage.push(input);
   }
   dequeue() {
-    if (this.storage.length === null) return null;
+    if (this.storage.length === 0) return null;
+    const elem = this.storage[0];
+    this.storage = this.storage.slice(1);
+    return elem;
     // const l = this.size - this.size;
     // const popped = this.storage[l];
     // this.storage[this.size] = this.storage[this.size.next];
     // this.storage[l] = null;
     // return popped;
-    return this.storage.shift();
   }
 }
 
