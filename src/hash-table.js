@@ -11,11 +11,34 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
+
+  checkCapacity() {
+    let fullSlots = 0;
+    this.storage.each((bucket) => {
+      if (bucket !== undefined) fullSlots++;
+    });
+    return (fullSlots / this.limit) >= 0.75;
+  }
+
+  resize() {
+    this.limit *= 2;
+    const oldHashTable = this.storage;
+    this.storage = new LimitedArray(this.limit);
+    oldHashTable.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((pair) => {
+        this.insert(pair[0], pair[1]);
+      });
+    });
+  }
+
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    // check to see if we've reache the capacity for resizing
+    if (this.checkCapacity()) this.resize();
     // grab the index associated with this key via the hash function
     const index = getIndexBelowMax(key.toString(), this.limit);
     // fetch whatever is stored at this index
