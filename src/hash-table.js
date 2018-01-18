@@ -120,18 +120,6 @@ class HashTable {
     });
     return found;
   }
-
-  //  retrieve(key) {
-  //   const index = getIndexBelowMax(key.toString(), this.limit);
-  //   const bucket = this.storage.get(index);
-
-  //   if (!bucket) return;
-
-  //   const found = bucket.find((pair) => {
-  //     return pair[0] === key;
-  //   });
-  //   return found[1];
-  // }
 }
 
 module.exports = HashTable;
