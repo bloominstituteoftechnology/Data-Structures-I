@@ -6,6 +6,34 @@
 */
 class Stack {
 
+  constructor() {
+    this.storage = [];
+  }
+
+  push(item) {
+    let itemT = [];
+    itemT = this.storage.push(item);
+    return itemT;
+  }
+
+  pop() {
+    const topItem = this.storage.pop();
+    return topItem;
+  }
+
+  get size() {
+    return this.storage.length;
+  }
+
 }
+
+// let stackObj = new Stack();
+
+// stackObj.push('german');
+// stackObj.push('carlos');
+// stackObj.push('pedro');
+// stackObj.pop();
+
+// console.log(stackObj);
 
 module.exports = Stack;
