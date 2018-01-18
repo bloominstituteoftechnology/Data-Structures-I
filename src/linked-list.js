@@ -37,6 +37,14 @@ class LinkedList {
     this.head = newNode;
   }
 
+  getHead() {
+    return this.head.value;
+  }
+
+  getTail() {
+    return this.tail.value;
+  }
+
   // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
@@ -54,6 +62,12 @@ class LinkedList {
     return value;
   }
 
+  removeNode(node) {
+    const previous = this.find(testNode => testNode.next === node);
+    previous.next = node.next;
+    node = null;
+  }
+
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
@@ -63,6 +77,15 @@ class LinkedList {
       node = node.next;
     } 
     return false;
+  }
+
+  find(cb) {
+    let node = this.head;
+    while (node !== null) {
+      if (cb(node)) return node;
+      node = node.next;
+    } 
+    return null;
   }
 }
 

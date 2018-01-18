@@ -5,7 +5,7 @@
   4. Add a `pop` method that removes the most recently-added item to the stack
 */
 
-const LinkedList = require('./linked-list.js');
+const LinkedList = require('./linked-list');
 
 class Stack {
   // constructor() {

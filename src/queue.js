@@ -5,7 +5,7 @@
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
 
-const LinkedList = require('./linked-list.js');
+const LinkedList = require('./linked-list');
 
 class Queue {
   // constructor() {
