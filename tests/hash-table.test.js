@@ -24,6 +24,7 @@ describe('HashTable', () => {
 
   it('should properly remove items', () => {
     hashTable.insert('Ben', 'Nelson');
+    hashTable.insert('Sean', 'Chen');
     expect(hashTable.retrieve('Ben')).toBe('Nelson');
     hashTable.remove('Ben');
     expect(hashTable.retrieve('Ben')).toBe(undefined);
