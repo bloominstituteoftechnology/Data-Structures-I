@@ -15,7 +15,28 @@ class HashTable {
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
+  checkCapacity() {
+    let fullSlots = 0;
+    this.storage.each((bucket) => {
+      if (bucket !== undefined) fullSlots++;
+    });
+    return (fullSlots / this.limit) >= 0.75;
+  }
+
+  resize() {
+    this.limit *= 2;
+    const oldHashTable = this.storage;
+    this.storage = new LimitedArray(this.limit);
+    oldHashTable.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((pair) => {
+        this.insert(pair[0], pair[1]);
+      });
+    });
+  }
+
   insert(key, value) {
+    if (this.checkCapacity()) this.resize();
     const bucket = getIndexBelowMax(key.toString(), this.limit);
     // if no values in that bucket index, then set key/value pair within that bucket
     const withinBucket = this.storage.get(bucket);
@@ -30,6 +51,21 @@ class HashTable {
         return;
       }
     }
+    // let bucketsFilled = 0;
+    // for (let j = 0; j < this.storage.length; j++) {
+    //   if (this.storage[j] !== 'object') bucketsFilled++;
+    // }
+    // if (bucketsFilled / this.limit >= 0.75) {
+    //   this.limit *= 2;
+    //   const oldHashTable = this.storage;
+    //   this.storage = new LimitedArray(this.limit);
+    //   oldHashTable.each((n) => {
+    //     if (!n) return;
+    //     n.forEach((pair) => {
+    //       this.insert(pair[0], pair[1]);
+    //     });
+    //   });
+    // }
     withinBucket.push([key, value]);
     // this.storage.set(bucket, withinBucket);
   }
@@ -40,6 +76,11 @@ class HashTable {
     const bucket = getIndexBelowMax(key.toString(), this.limit);
     const withinBucket = this.storage.get(bucket);
     if (withinBucket === undefined) return undefined;
+    // if (!bucket) return;
+    if (withinBucket.length === 1) {
+      this.storage.set(bucket, undefined);
+      return;
+    }
     for (let i = 0; i < withinBucket.length; i++) {
       if (key === withinBucket[i][0]) {
         withinBucket.splice(i, 1);
