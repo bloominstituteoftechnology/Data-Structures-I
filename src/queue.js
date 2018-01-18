@@ -20,7 +20,7 @@ class Queue {
   dequeue() {
     if (this.size === 0) return null;
     const dequeued = this.storage[0];
-    this.storage.shif();
+    this.storage.shift();
     this.count--;
     return dequeued;
   }
