@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-/* eslint-disable */
+
 class LinkedList {
   constructor() {
     this.head = null;
@@ -28,10 +28,10 @@ class LinkedList {
     if (this.head === null) {
       return;
     }
-    //check if head has a next
+    // check if head has a next
     if (this.head.next === null) {
-      const value = this.head.value
-      this.head == null;
+      const value = this.head.value;
+      this.head = null;
       this.tail = null;
       return value;
     }
@@ -44,8 +44,9 @@ class LinkedList {
   contains(value) {
     let node = this.head;
     while (node !== null) {
-      if (node.value === value)
+      if (node.value === value) {
         return true;
+      }
     }
     node = node.next;
 
