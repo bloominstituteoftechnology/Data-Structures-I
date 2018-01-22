@@ -1,4 +1,5 @@
 /* eslint-disable no-undef, no-prototype-builtins */
+
 const LinkedList = require('../src/linked-list');
 
 let list;
