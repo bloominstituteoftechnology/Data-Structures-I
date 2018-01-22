@@ -25,6 +25,7 @@ class LimitedArray {
   }
   // Use this getter function to fetch elements from this class INCORRECT!
   // This is not a getter!  This is just a method on the LimitedArray class called "get"
+  // Use this method to fetch elements from this class
   get(index) {
     this.checkLimit(index);
     return this.storage[index];
