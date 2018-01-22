@@ -24,6 +24,7 @@ describe('HashTable', () => {
 
   it('should properly remove items', () => {
     hashTable.insert('Ben', 'Nelson');
+    hashTable.insert('Sean', 'Chen');
     expect(hashTable.retrieve('Ben')).toBe('Nelson');
     hashTable.remove('Ben');
     expect(hashTable.retrieve('Ben')).toBe(undefined);
@@ -59,25 +60,25 @@ describe('HashTable', () => {
 
 /* Extra Credit */
   
-  // it('should resize the hash table when > 75% full', () => {
-  //   hashTable.insert('a', true);
-  //   hashTable.insert('b', true);
-  //   hashTable.insert('c', true);
-  //   hashTable.insert('d', true);
-  //   hashTable.insert('e', true);
-  //   hashTable.insert('f', true);
-  //   hashTable.insert('g', true);
-  //   expect(hashTable.limit).toBe(16);
-  //   expect(hashTable.storage.length).toBe(8);
-  //   hashTable.insert('h', true);
-  //   hashTable.insert('i', true);
-  //   hashTable.insert('j', true);
-  //   hashTable.insert('k', true);
-  //   hashTable.insert('l', true);
-  //   hashTable.insert('m', true);
-  //   hashTable.insert('n', true);
-  //   hashTable.insert('o', true);
-  //   expect(hashTable.limit).toBe(32);
-  //   expect(hashTable.storage.length).toBe(16);
-  // });
+  it('should resize the hash table when >= 75% full', () => {
+    hashTable.insert('a', true);
+    hashTable.insert('b', true);
+    hashTable.insert('c', true);
+    hashTable.insert('d', true);
+    hashTable.insert('e', true);
+    hashTable.insert('f', true);
+    hashTable.insert('g', true);
+    expect(hashTable.limit).toBe(16);
+    expect(hashTable.storage.length).toBe(8);
+    hashTable.insert('h', true);
+    hashTable.insert('i', true);
+    hashTable.insert('j', true);
+    hashTable.insert('k', true);
+    hashTable.insert('l', true);
+    hashTable.insert('m', true);
+    hashTable.insert('n', true);
+    hashTable.insert('o', true);
+    expect(hashTable.limit).toBe(32);
+    expect(hashTable.storage.length).toBe(16);
+  });
 });

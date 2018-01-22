@@ -12,84 +12,84 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     // Do not modify anything inside of the constructor
   }
+
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
+
   insert(key, value) {
+    const occupiedBuckets = this.bucketsFilled();
+    if (occupiedBuckets >= this.limit * 0.75) this.resize();
     const bucketIndex = getIndexBelowMax(key.toString(), this.limit);
-    if (this.storage.get(bucketIndex) === undefined) {
+    let bucket = this.storage.get(bucketIndex);
+    if (bucket === undefined) {
       // Check if bucket has not yet been instantiated
-      this.storage.set(bucketIndex, [[key, value]]);
+      bucket = new LinkedList();
+      bucket.addToHead(new LinkedList());
+      bucket.getHead().addToHead(key);
+      bucket.getHead().addToHead(value);
+      this.storage.set(bucketIndex, bucket);
     } else {
-      const bucket = this.storage.get(bucketIndex);
-      const keyIndex = bucket.findIndex(el => el[0] === key);
-      if (keyIndex !== -1) {
-        bucket[keyIndex][1] = value;
+      let keyNode = bucket.find(node => node.value.getTail() === key);
+      if (keyNode !== null) {
+        keyNode = keyNode.value;
+        keyNode.removeHead();
+        keyNode.addToHead(value);
       } else {
-        bucket.push([key, value]);
-        this.storage.set(bucketIndex, bucket);
+        bucket.addToHead(new LinkedList());
+        bucket.getHead().addToHead(key);
+        bucket.getHead().addToHead(value);
       }
     }
   }
-  // insert(key, value) {
-  //   const bucketIndex = getIndexBelowMax(key.toString(), this.limit);
-  //   let bucket = this.storage.get(bucketIndex);
-  //   if (bucket === undefined) {
-  //     // Check if bucket has not yet been instantiated
-  //     bucket = new LinkedList();
-  //     bucket.addToHead(new LinkedList());
-  //     bucket.getHead().addToHead(key);
-  //     bucket.getHead().addToHead(value);
-  //     this.storage.set(bucketIndex, bucket);
-  //   } else {
-  //     const keyNode = bucket.find(node => node.getTail() === key);
-  //     if (keyNode !== null) {
-  //       keyNode.removeHead();
-  //       keyNode.addToHead(value);
-  //     } else {
-  //       bucket.addToHead(new LinkedList());
-  //       bucket.getHead().addToHead(key);
-  //       bucket.getHead().addToHead(value);
-  //     }
-  //   }
-  // }
+
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Remove the key, value pair from the bucket
+
   remove(key) {
-    const bucket = this.storage.get(getIndexBelowMax(key.toString(), this.limit));
-    if (bucket) {
-      const keyIndex = bucket.findIndex(el => el[0] === key);
-      if (keyIndex !== -1) bucket.splice(keyIndex, 1);
+    const bucketIndex = getIndexBelowMax(key.toString(), this.limit);
+    const bucket = this.storage.get(bucketIndex);
+    if (bucket !== undefined && bucket.getHead() !== null) {
+      const newBucket = new LinkedList();
+      while (bucket.getHead() !== null) {
+        const node = bucket.removeHead();
+        if (node.getTail() !== key) newBucket.addToHead(node);
+      }
+      this.storage.set(bucketIndex, newBucket);
     }
   }
-  // remove(key) {
-  //   const bucket = this.storage.get(getIndexBelowMax(key.toString(), this.limit));
-  //   if (bucket) {
-  //     const keyNode = bucket.find(node => node.getTail() === key);
-  //     if (keyNode !== null) bucket.remove(keyNode);
-  //   }
-  // }
+
   // Fetches the value associated with the given key from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // Find the key, value pair inside the bucket and return the value
+
   retrieve(key) {
     const bucket = this.storage.get(getIndexBelowMax(key.toString(), this.limit));
-    if (bucket) {
-      const keyIndex = bucket.findIndex(el => el[0] === key);
-      if (keyIndex !== -1) return bucket[keyIndex][1];
+    if (bucket !== undefined && bucket.getHead() !== null) {
+      const keyNode = bucket.find(node => node.value.getTail() === key);
+      if (keyNode !== null) return keyNode.value.getHead();
     }
   }
-  // retrieve(key) {
-  //   const bucket = this.storage.get(getIndexBelowMax(key.toString(), this.limit));
-  //   if (bucket) {
-  //     const keyNode = bucket.find(node => node.getTail() === key);
-  //     if (keyNode !== null) {
-  //       return keyNode.getHead();
-  //     }
-  //   }
-  // }
-}
 
+  resize() {
+    this.limit *= 2;
+    const oldStorage = this.storage;
+    this.storage = new LimitedArray(this.limit);
+    const transfer = node => this.insert(node.value.getTail(), node.value.getHead());
+    for (let i = 0; i < this.limit / 2; i++) {
+      const bucket = oldStorage.get(i);
+      if (bucket !== undefined) bucket.each(transfer);
+    }
+  }
+
+  bucketsFilled() {
+    let count = 0;
+    for (let i = 0; i < this.limit; i++) {
+      if (this.storage.get(i)) count++;
+    }
+    return count;
+  }
+}
 module.exports = HashTable;

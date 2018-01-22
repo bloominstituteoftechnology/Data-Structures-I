@@ -1,19 +1,16 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-trailing-spaces */
-class LinkedList {
+class DoublyLinkedList {
   constructor() {
     this.head = null;
-    this.tail = null;
-    // Do not modify anything inside of the constructor
+    this.tail = null;     
   }
 
-  // Wraps the given value in a node object and adds the node to the tail of the list
-  // If the list is empty, the new element is considered the tail as well as the head
-  // If there is one element in the list before the new element is added, the new element becomes the tail of the list
   addToTail(value) {
     const newNode = {
       next: null,
-      value, 
+      previous: this.tail,
+      value,
     };
 
     if (this.head === null) {
@@ -23,16 +20,23 @@ class LinkedList {
     } 
 
     this.tail.next = newNode;
-    this.tail = newNode; 
+    this.tail = newNode;
   }
 
   addToHead(value) {
     const newNode = {
       next: this.head,
+      previous: null,
       value,
     };
 
-    if (this.head === null) this.tail = newNode;
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+      return;
+    }
+
+    this.head.previous = newNode;
     this.head = newNode;
   }
 
@@ -44,8 +48,20 @@ class LinkedList {
     return this.tail ? this.tail.value : null;
   }
 
-  // Removes the current head node from the list, replacing it with the next element in the list
-  // Returns the value of the removed node
+  removeTail() {
+    if (this.tail === null) return;
+    if (this.tail.previous === null) {
+      const value = this.tail.value;
+      this.head = null;
+      this.tail = null;
+      return value;
+    }
+    const value = this.tail.value;
+    this.tail = this.tail.previous;
+    this.tail.next = null;
+    return value;
+  }
+
   removeHead() {
     // need to check if there is a head node
     if (this.head === null) return;
@@ -58,12 +74,11 @@ class LinkedList {
     }
     const value = this.head.value;
     this.head = this.head.next;
+    this.head.previous = null;
     return value;
   }
 
-  // Checks the linked list for the given value
-  // Returns true if the the value is found in the list, false otherwise
-  contains(value) {
+  containsFromHead(value) {
     let node = this.head;
     while (node !== null) {
       if (node.value === value) return true;
@@ -72,7 +87,16 @@ class LinkedList {
     return false;
   }
 
-  each(cb) {
+  containsFromTail(value) {
+    let node = this.tail;
+    while (node !== null) {
+      if (node.value === value) return true;
+      node = node.previous;
+    } 
+    return false;
+  }
+
+  eachFromHead(cb) {
     let node = this.head;
     while (node !== null) {
       cb(node);
@@ -80,7 +104,15 @@ class LinkedList {
     } 
   }
 
-  find(cb) {
+  eachFromTail(cb) {
+    let node = this.tail;
+    while (node !== null) {
+      cb(node);
+      node = node.previous;
+    } 
+  }
+
+  findFromHead(cb) {
     let node = this.head;
     while (node !== null) {
       if (cb(node)) return node;
@@ -88,6 +120,14 @@ class LinkedList {
     } 
     return null;
   }
-}
 
-module.exports = LinkedList;
+  findFromTail(cb) {
+    let node = this.tail;
+    while (node !== null) {
+      if (cb(node)) return node;
+      node = node.previous;
+    } 
+    return null;
+  }
+}
+module.exports = DoublyLinkedList;
