@@ -30,7 +30,16 @@ class LinkedList {
  if (this.head === null) this.tail = newNode;
  this.head = newNode;
  }
-	// Removes the current head node from the list, replacing it with the next element in the list
+	 
+  getHead() {
+		return this.head ? this.head.value : null;
+	}
+   
+  getTail() {
+		return this.tail ? this.tail.value : null;
+  }
+
+  // Removes the current head node from the list, replacing it with the next element in the list
   // Returns the value of the removed node
   removeHead() {
    if (this.head === null) // need to check if there is a head node  
@@ -45,6 +54,14 @@ class LinkedList {
 	 this.head = this.head.next;
 	 return value;
 	}
+   
+/*    removeNode(node) {
+		 const previous = this.find(testNode => testNode.next === node);
+		 if (previous) previous.next = node.next;
+		   if (this.head === node) this.head = node.next;
+			 if (this.tail === node) this.tail = previous;
+			    node = null;
+		} */
 
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
@@ -57,7 +74,25 @@ class LinkedList {
  		}
 		 return false;
 	 }
+  each(cb) {
+		let node = this.head;
+		while (node !== null) {
+			cb(node);
+			node = node.next;
+		}
+	}
+   
+  find(cb) {
+		 let node = this.head;
+		  while (node !== null) {
+				if (cb(node)) 
+					return node;
+				  node = node.next;
+		 }
+			 return null;
+		}
 }
+
 //   contains(value) {
 	//	 if (this.head === null)
 		//	 return false;
@@ -70,16 +105,7 @@ class LinkedList {
 //		};
 	//	return searchLinkedList(this.head);
 //	}
-//}
-
-//doubly linkedlist code
-//insertBeginning(List list, Node, newNode)
-//	if list.firstNode == null
-	//    list.firstNode := newNode
-		//	list.last Node := newNode
-	//		newNode.prev := null
-	//		newNode.next := null
-//	else 
-//	 insertBefore(list, list.firstNode, newNode) 
+//} 
 
 module.exports = LinkedList;
+

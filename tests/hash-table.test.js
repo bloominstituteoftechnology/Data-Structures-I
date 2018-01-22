@@ -81,5 +81,5 @@ describe('HashTable', () => {
      hashTable.insert('o', true);
      expect(hashTable.limit).toBe(32);
      expect(hashTable.storage.length).toBe(16);
-   });
+   }); 
 });
