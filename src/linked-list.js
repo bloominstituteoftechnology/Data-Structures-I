@@ -14,12 +14,12 @@ class LinkedList {
       value,
       next: null
     };
-    if (this.head === null) {
+    if (!this.head) {
       this.head = node;
+      this.tail = node;
+      return;
     }
-    else {
-      this.tail.next = node;
-    }
+    this.tail.next = node;
     this.tail = node;
   }
 
@@ -34,12 +34,12 @@ class LinkedList {
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
-    let testNode = this.head;
-    while (testNode.next) {
-      if (testNode.value === value) {
+    let node = this.head;
+    while (node) {
+      if (node.value === value) {
 	return true;
       }
-      testNode = testNode.next;
+      node = node.next;
     }
     return false;
   }
