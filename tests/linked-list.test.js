@@ -75,7 +75,7 @@ describe('LinkedList', () => {
 
 //   it('should have the methods "addToHead", "addToTail", "removeFromHead", "removeFromTail", "delete", "moveToFront", and "moveToBack"', () => {
 //     const hasAddToTail = Object.getPrototypeOf(list).hasOwnProperty('addToTail');
-//     const hasAddToHead = Object.getPrototypeOf(list).hasOwnProperty('addToHead'); 
+//     const hasAddToHead = Object.getPrototypeOf(list).hasOwnProperty('addToHead');
 //     const hasRemoveFromHead = Object.getPrototypeOf(list).hasOwnProperty('removeFromHead');
 //     const hasRemoveFromTail = Object.getPrototypeOf(list).hasOwnProperty('removeFromTail');
 //     const hasMoveToFront = Object.getPrototypeOf(list).hasOwnProperty('moveToFront');
@@ -118,7 +118,7 @@ describe('LinkedList', () => {
 //     expect(list.removeFromHead()).toBeNull();
 //     list.addToTail(18);
 //     expect(list.removeFromHead().value).toEqual(18);
-//     expect(list.removeFromHead()).toBeNull(); 
+//     expect(list.removeFromHead()).toBeNull();
 //   });
 
 //   it('should be able to remove the tail node of the list', () => {
