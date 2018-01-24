@@ -22,16 +22,16 @@ class HashTable {
     let matchIndex;
     bucket.forEach((item, index) => {
       if (item[0] === key) {
-	match = item;
-	matchIndex = index;
+        match = item;
+        matchIndex = index;
       }
     });
     return {
       match,
       bucket,
       matchIndex,
-      hash
-    }
+      hash,
+    };
   }
 
   // Adds the given key, value pair to the hash table
@@ -54,7 +54,7 @@ class HashTable {
   retrieve(key) {
     try {
       return this.find(key).match[1];
-    } catch(e) {
+    } catch (e) {
       return undefined;
     }
   }

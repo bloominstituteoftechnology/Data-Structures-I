@@ -12,7 +12,7 @@ class LinkedList {
   addToTail(value) {
     const node = {
       value,
-      next: null
+      next: null,
     };
     if (!this.head) {
       this.head = node;
@@ -37,7 +37,7 @@ class LinkedList {
     let node = this.head;
     while (node) {
       if (node.value === value) {
-	return true;
+        return true;
       }
       node = node.next;
     }
