@@ -11,6 +11,27 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
   }
 
+  // Fetches the value associated with the given key from the hash table
+  // Fetch the bucket associated with the given key using the getIndexBelowMax function
+  // Find the key, value pair inside the bucket and return the value
+  retrieve(key) {
+    const hash = getIndexBelowMax(key, this.limit); // => address
+    const bucket = this.storage.get(hash);
+    let match;
+
+    try {
+      bucket.forEach((tuple) => {
+        if (tuple[0] === key) {
+          match = tuple[1];
+        }
+      });
+    } catch (e) {
+      return undefined;
+    }
+
+    return match;
+  }
+
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
@@ -26,28 +47,13 @@ class HashTable {
       }
     });
 
+    if (this.storage.length > this.limit * 0.75) {
+      this.resize(2 * this.limit);
+    }
+
     this.storage.set(hash, bucket);
   }
 
-  // Fetches the value associated with the given key from the hash table
-  // Fetch the bucket associated with the given key using the getIndexBelowMax function
-  // Find the key, value pair inside the bucket and return the value
-  retrieve(key) {
-    const hash = getIndexBelowMax(key, this.limit);
-    const bucket = this.storage.get(hash);
-    let match;
-
-    try {
-      bucket.forEach((tuple) => {
-        if (tuple[0] === key) {
-          match = tuple[1];
-        }
-      });
-    } catch (e) {
-      return undefined;
-    }
-    return match;
-  }
 
   // REMOVES the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
@@ -70,9 +76,20 @@ class HashTable {
   }
 
   resize(newSize) {
+    const oldStore = this.storage;
+    this.limit = newSize;
+    this.storage = new LimitedArray(newSize);
 
+    oldStore.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((tuple) => {
+        const [key, value] = tuple;
+        const hash = getIndexBelowMax(key);
+
+        this.insert(key, value);
+      });
+    });
   }
-
 }
 
 module.exports = HashTable;
