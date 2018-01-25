@@ -1,3 +1,4 @@
+const DoublyLinkedList = require('./doubly-linked-list');
 /*
   1. Add a constructor with a storage structure; there are multiple options you could use for this
   2. Add a size getter that returns the number of items the stack is storing
@@ -6,14 +7,16 @@
 */
 class Stack {
   constructor() {
-    this.items = [];
+    // this.items = [];
+    this.items = new DoublyLinkedList();
     this.size = 0;
   }
   size() {
     return this.size;
   }
   push(item) {
-    this.items.push(item);
+    // this.items.push(item);
+    this.items.addToTail(item);
     ++this.size;
   }
   pop() {
@@ -21,7 +24,8 @@ class Stack {
       return this.size;
     }
     this.size--;
-    return this.items.pop();
+    // return this.items.pop();
+    return this.items.removeFromTail().value;
   }
 }
 module.exports = Stack;
