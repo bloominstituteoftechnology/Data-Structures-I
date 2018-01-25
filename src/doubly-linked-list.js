@@ -37,18 +37,39 @@ class DoublyLinkedList {
   }
 
   removeFromHead() {
+    if (this.head === this.tail) {
+      const removed = this.head;
+      this.head = null;
+      this.tail = null;
+      return removed;
+    }
     const removed = this.head;
-    return removed.value;
+    this.head = this.head.next;
+    this.head.prev = null;
+    removed.next = null
+    return removed;
   }
 
   removeFromTail() {
+    if (this.tail === this.head) {
+      const removed = this.tail;
+      this.tail = null;
+      this.head = null;
+      return removed;
+    }
     const removed = this.tail;
     this.tail = this.tail.prev;
-    return removed.value;
+    this.tail.next = null;
+    removed.prev = null;
+    return removed;
   }
 
-  delete(value) {
-    this;
+  delete(node) {
+    let head = this.head;
+    while (head.value !== node.value) {
+      head = this.head.next;
+    }
+    [head.next.prev, head.prev.next] = [head.prev, head.next];
   }
 
   moveToFront(value) {
@@ -63,3 +84,4 @@ class DoublyLinkedList {
 
 
 module.exports = DoublyLinkedList;
+
