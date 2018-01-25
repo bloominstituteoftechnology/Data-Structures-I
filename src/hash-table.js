@@ -11,45 +11,20 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
   }
 
-  //find(key) {
-  //  const hash = getIndexBelowMax(key, this.limit);
-
-  //  // 1! //
-  //  const bucket = this.storage.get(hash) || [];
-  //  //const bucket = this.storage[hash] || [];
-
-  //  let match;
-  //  let matchIndex;
-  //  bucket.forEach((item, index) => {
-  //    if (item[0] === key) {
-  //      match = item;
-  //      matchIndex = index;
-  //    }
-  //  });
-  //  return {
-  //    match,
-  //    bucket,
-  //    matchIndex,
-  //    hash,
-  //  };
-  //}
-
   // Adds the given key, value pair to the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
-
   insert(key, value) {
     const hash = getIndexBelowMax(key, this.limit);
     const bucket = this.storage.get(hash) || [];
 
-    bucket.push([key, value])
-
+    bucket.push([key, value]);
     bucket.forEach((tuple, i) => {
       if (tuple[0] === key) {
-	bucket.splice(i, 1, tuple)
+        bucket.splice(i, 1, tuple);
       }
-    })
+    });
 
     this.storage.set(hash, bucket);
   }
@@ -63,11 +38,11 @@ class HashTable {
     let match;
 
     try {
-      bucket.forEach(tuple => {
-	if (tuple[0] === key) {
-	  match = tuple[1];
-	}
-      })
+      bucket.forEach((tuple) => {
+        if (tuple[0] === key) {
+          match = tuple[1];
+        }
+      });
     } catch (e) {
       return undefined;
     }
@@ -83,35 +58,19 @@ class HashTable {
 
     try {
       bucket.forEach((tuple, i) => {
-	if (tuple[0] === key) {
-	  //console.log('bucket:', bucket)
-	  //console.log('tuple:', tuple)
-	  //console.log('i:', i)
-	  bucket.splice(i, 1);
-	}
-      })
+        if (tuple[0] === key) {
+          bucket.splice(i, 1);
+        }
+      });
     } catch (e) {
       return undefined;
     }
-    //console.log(bucket)
 
     this.storage.set(hash, bucket);
   }
 
-
-
-
-
-
-  
   resize(newSize) {
-    //console.log(this.storage)
 
-
-    //const oldStorage = this.storage;
-    //this.size = newSize;
-    //this.count = 0;
-    //this.storage = [];
   }
 
 }
