@@ -4,23 +4,29 @@
   3. Add a `push` method that accepts an item as input and adds it to the storage structure
   4. Add a `pop` method that removes the most recently-added item to the stack
 */
+
+const DLL = require('./doubly-linked-list');
+
 class Stack {
   constructor() {
-    this.storage = [];
+    this.storage = new DLL();
+    this.count = 0;
   }
 
   push(value) {
-    this.storage.push(value);
-    return this.size;
+    this.storage.addToTail(value);
+    return ++this.count;
   }
 
   pop() {
-    const value = this.storage.pop();
+    if (this.count === 0) return;
+    const { value } = this.storage.removeFromTail();
+    --this.count;
     return value;
   }
 
   get size() {
-    return this.storage.length;
+    return this.count;
   }
 }
 

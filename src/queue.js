@@ -4,22 +4,29 @@
   3. Add an `enqueue` method that accepts an item as input and adds it to the storage structure
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
+
+const DLL = require('./doubly-linked-list');
+
 class Queue {
   constructor() {
-    this.storage = [];
+    this.storage = new DLL();
+    this.count = 0;
   }
 
   enqueue(value) {
-    this.storage.push(value);
+    this.storage.addToTail(value);
+    return ++this.count;
   }
 
   dequeue() {
-    const dequeued = this.storage.shift();
-    return dequeued;
+    if (this.count === 0) return;
+    const { value } = this.storage.removeFromHead();
+    this.count--;
+    return value;
   }
 
   get size() {
-    return this.storage.length;
+    return this.count;
   }
 }
 
