@@ -5,7 +5,20 @@
   4. Add a `pop` method that removes the most recently-added item to the stack
 */
 class Stack {
-
+  constructor() {
+    this.storage = [];
+    this.count = 0;
+  }
+  get size() {
+    return this.storage.length;
+  }
+  push(item) {
+    this.storage.push(item);
+    this.count++;
+  }
+  pop(item) {
+    return this.storage.pop(item);
+  }
 }
 
 module.exports = Stack;
