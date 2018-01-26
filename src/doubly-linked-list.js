@@ -44,7 +44,7 @@ class DoublyLinkedList {
     const removed = this.head;
     this.head = this.head.next;
     this.head.prev = null;
-    removed.next = null
+    removed.next = null;
     return removed;
   }
 
@@ -85,11 +85,9 @@ class DoublyLinkedList {
 
     current.prev.next = current.next;
     current.next.prev = current.prev;
-    // we don't need to reassign this.head or this.tail
 
     current.next = null;
     current.prev = null;
-
   }
 
   moveToFront(node) {
