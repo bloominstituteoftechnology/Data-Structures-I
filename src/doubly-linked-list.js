@@ -63,50 +63,45 @@ class DoublyLinkedList {
   }
 
   delete(node) {
-    if (this.head === this.tail) {
-      this.head = null;
-      this.tail = null;
-      return;
+    const value = node.value;
+    let current = this.head;
+    while (current.value !== value) {
+      current = current.next;
     }
-    // if node is head, remove head
-    if (node.prev === null) {
-      this.head = this.head.next;
-      this.head.prev = null;
-      return;
-    }
-    // if node is tail, remove tail
-    if (node.next === null) {
-      this.tail = this.tail.prev;
-      this.tail.next = null;
+
+    if (current.prev === null) {
+      current.next.prev = null;
+      this.head = current.next;
+      current.next = null;
       return;
     }
 
-    let head = this.head;
-    while (head.value !== node.value) {
-      head = this.head.next;
+    if (current.next === null) {
+      current.prev.next = null;
+      this.tail = current.prev;
+      current.prev = null;
+      return;
     }
 
-    head.next.prev = head.prev;
-    head.prev.next = head.next;
+    current.prev.next = current.next;
+    current.next.prev = current.prev;
+    // we don't need to reassign this.head or this.tail
+
+    current.next = null;
+    current.prev = null;
+
   }
 
   moveToFront(node) {
     this.delete(node);
-
-    node.next = this.head;
-    node.prev = null;
-    this.head.prev = node;
-    // this line is creating an infinite loop?
-    //this.head = node;
-
+    this.addToHead(node.value);
   }
 
   moveToBack(node) {
-
+    this.delete(node);
+    this.addToTail(node.value);
   }
-
 }
 
 
 module.exports = DoublyLinkedList;
-
