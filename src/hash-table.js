@@ -29,6 +29,10 @@ class HashTable {
     }
     bucket.push([key, value]);
     this.storage.set(index, bucket);
+    
+    if (this.storage.length > this.limit * 0.75) {
+      this.resize(this.limit * 2);
+    }
   }
   // Removes the key, value pair from the hash table
   // Fetch the bucket associated with the given key using the getIndexBelowMax function
@@ -47,6 +51,10 @@ class HashTable {
     }
     bucket = [];
     this.storage.set(index, bucket);
+
+    if (this.storage.length < this.limit * 0.25) {
+      this.resize(this.limit / 2);
+    }
   }
   
   // Fetches the value associated with the given key from the hash table
@@ -64,6 +72,20 @@ class HashTable {
       let tuple = bucket[i];
       if (tuple[0] === key) return tuple[1];
     }
+  }
+  resize(newLimit) {
+    const oldStorage = this.storage;
+    this.limit = newLimit;
+    this.storage = new LimitedArray(newLimit);
+
+    oldStorage.each((bucket) => {
+      if (!bucket) return;
+      bucket.forEach((tuple) => {
+        const [key, value] = tuple;
+        const index = getIndexBelowMax(key);
+        this.insert(key, value);
+      });
+    });
   }
 }
 
