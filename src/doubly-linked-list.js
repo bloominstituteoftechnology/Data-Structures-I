@@ -1,5 +1,3 @@
-// import LinkedList from './linked-list';
-
 class DoublyLinkedList {
   constructor() {
     this.head = null;
@@ -65,19 +63,46 @@ class DoublyLinkedList {
   }
 
   delete(node) {
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+      return;
+    }
+    // if node is head, remove head
+    if (node.prev === null) {
+      this.head = this.head.next;
+      this.head.prev = null;
+      return;
+    }
+    // if node is tail, remove tail
+    if (node.next === null) {
+      this.tail = this.tail.prev;
+      this.tail.next = null;
+      return;
+    }
+
     let head = this.head;
     while (head.value !== node.value) {
       head = this.head.next;
     }
-    [head.next.prev, head.prev.next] = [head.prev, head.next];
+
+    head.next.prev = head.prev;
+    head.prev.next = head.next;
   }
 
-  moveToFront(value) {
-    this;
+  moveToFront(node) {
+    this.delete(node);
+
+    node.next = this.head;
+    node.prev = null;
+    this.head.prev = node;
+    // this line is creating an infinite loop?
+    //this.head = node;
+
   }
 
-  moveToBack(value) {
-    this;
+  moveToBack(node) {
+
   }
 
 }
