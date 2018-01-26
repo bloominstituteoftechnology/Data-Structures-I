@@ -5,7 +5,7 @@
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
 class Queue {
-  constuctor() {
+  constructor() {
     this.items = [];
     this.size = 0;
   }
