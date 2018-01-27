@@ -19,6 +19,7 @@ class LinkedList {
       this.tail = node;
       return;
     }
+
     this.tail.next = node;
     this.tail = node;
   }
@@ -28,18 +29,19 @@ class LinkedList {
   removeHead() {
     const removed = this.head;
     this.head = this.head.next;
+    removed.next = null;
     return removed.value;
   }
 
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
-    let node = this.head;
-    while (node) {
-      if (node.value === value) {
+    let current = this.head;
+    while (current) {
+      if (current.value === value) {
         return true;
       }
-      node = node.next;
+      current = current.next;
     }
     return false;
   }
