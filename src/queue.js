@@ -6,18 +6,26 @@
 */
 class Queue {
   constructor() {
-    this.queue = [];
+    this.storage = [];
+    this.storageLength = 0;
   }
   get size() {
-    return this.queue.length;
+    return this.storageLength;
   }
   enqueue(value) {
-    this.queue.push(value);
-    return this.queue.length;
+    this.storage[this.storageLength] = value;
+    this.storageLength++;
   }
   dequeue() {
-    if (this.queue.length > 0) {
-      return this.queue.shift();
+    if (this.storageLength > 0) {
+      const updatedQueue = [];
+      const firstInFirstOut = this.storage[0];
+      for (let i = 1; i < this.storageLength; i++) {
+        updatedQueue[i - 1] = this.storage[i];
+      }
+      this.storage = updatedQueue;
+      this.storageLength--;
+      return firstInFirstOut;
     }
   }
 }

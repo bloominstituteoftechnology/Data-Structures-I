@@ -6,18 +6,24 @@
 */
 class Stack {
   constructor() {
-    this.stack = [];
+    this.storage = [];
+    this.storageLength = 0;
   }
   get size() {
-    return this.stack.length;
+    return this.storageLength;
   }
-  push(value) {
-    this.stack.push(value);
-    return this.stack.length;
+  push(item) {
+    this.storage[this.storageLength] = item;
+    this.storageLength++;
+    return this.storageLength;
   }
   pop() {
-    return this.stack.pop();
+    if (this.storageLength === 0) return null;
+    const lastInFirstOut = this.storage[this.storageLength - 1];
+    this.storage[this.storageLength - 1] = null;
+    this.storageLength--;
+    return lastInFirstOut;
   }
-}
+ }
 
 module.exports = Stack;
