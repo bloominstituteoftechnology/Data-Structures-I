@@ -14,9 +14,11 @@ class Queue {
   }
   enqueue(item) {
     this.storage.push(item);
-    return this.size;
+    this.count++;
   }
   dequeue(item) {
+    if (this.count === 0) return null;
+    this.count--;
     return this.storage.shift(item);
   }
 }
