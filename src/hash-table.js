@@ -14,6 +14,7 @@ class HashTable {
   // If no bucket has been created for that index, instantiate a new bucket and add the key, value pair to that new bucket
   // If the key already exists in the bucket, the newer value should overwrite the older value associated with that key
   insert(key, value) {
+    this.resize();
     const index = getIndexBelowMax(key.toString(), this.limit);
     let bucket = this.storage.get(index) || [];
     bucket = bucket.filter(item => item[0] !== key);
@@ -40,9 +41,23 @@ class HashTable {
     const bucket = this.storage.get(index);
     let retrieved;
     if (bucket) {
-      retrieved = bucket.filter(item => item[0] ===key)[0];
+      retrieved = bucket.filter(item => item[0] === key)[0];
     }
     return retrieved ? retrieved[1] : undefined;
+  }
+
+  resize() {
+    if (this.storage.length < (.75 * this.limit)) return;
+    let oldHT = this.storage;
+    this.limit *= 2;
+    this.storage = new LimitedArray(this.limit);
+    oldHT.each((bucket, index) => {
+      if (Array.isArray(bucket)) {
+        for (let i = 0; i < bucket.length; i++) {
+          this.insert(...bucket[i]);
+        }
+      }
+    })
   }
 }
 
