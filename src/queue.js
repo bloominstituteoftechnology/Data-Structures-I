@@ -5,7 +5,22 @@
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
 class Queue {
-
+  constructor() {
+    this.storage = [];
+    this.count = 0;
+  }
+  get size() {
+    return this.storage.length;
+  }
+  enqueue(item) {
+    this.storage.push(item);
+    this.count++;
+  }
+  dequeue(item) {
+    if (this.count === 0) return null;
+    this.count--;
+    return this.storage.shift(item);
+  }
 }
 
 module.exports = Queue;
