@@ -1,15 +1,21 @@
+class Node {
+  constructor({ value, next, prev }) {
+    Object.assign(this, { value, next, prev });
+  }
+}
+
 class DoublyLinkedList {
   constructor() {
-    this.head = null;
-    this.tail = null;
+    Object.assign(this, { head: null, tail: null });
   }
 
   addToHead(value) {
-    const node = {
+    const node = new Node({
       value,
       next: this.head,
       prev: null,
-    };
+    });
+
     if (!this.head) {
       this.head = node;
       this.tail = node;
@@ -20,11 +26,12 @@ class DoublyLinkedList {
   }
 
   addToTail(value) {
-    const node = {
+    const node = new Node({
       value,
       next: null,
       prev: this.tail,
-    };
+    });
+
     if (!this.head) {
       this.head = node;
       this.tail = node;
