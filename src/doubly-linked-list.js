@@ -2,6 +2,9 @@ class Node {
   constructor({ value, next, prev }) {
     Object.assign(this, { value, next, prev });
   }
+  //equals() {
+
+  //}
 }
 
 class DoublyLinkedList {
@@ -70,8 +73,11 @@ class DoublyLinkedList {
   }
 
   delete(node) {
+    if (!this.head) return undefined;
+
     const value = node.value;
     let current = this.head;
+
     while (current.value !== value) {
       current = current.next;
     }
@@ -80,14 +86,14 @@ class DoublyLinkedList {
       current.next.prev = null;
       this.head = current.next;
       current.next = null;
-      return;
+      return node;
     }
 
     if (current.next === null) {
       current.prev.next = null;
       this.tail = current.prev;
       current.prev = null;
-      return;
+      return node;
     }
 
     current.prev.next = current.next;
@@ -95,6 +101,8 @@ class DoublyLinkedList {
 
     current.next = null;
     current.prev = null;
+
+    return node;
   }
 
   moveToFront(node) {
@@ -107,5 +115,15 @@ class DoublyLinkedList {
     this.addToTail(node.value);
   }
 }
+
+const DLL = new DoublyLinkedList();
+DLL.addToHead(103);
+DLL.addToHead(102);
+DLL.addToHead(101);
+DLL.delete({ value: 101 });
+DLL.delete({ value: 102 });
+//DLL.delete({ value: 103 });
+console.log(DLL);
+//DLL.delete({ value: 104 });
 
 module.exports = DoublyLinkedList;
