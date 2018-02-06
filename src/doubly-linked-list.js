@@ -2,9 +2,9 @@ class Node {
   constructor({ value, next, prev }) {
     Object.assign(this, { value, next, prev });
   }
-  //equals() {
-
-  //}
+  equals(node) {
+    return node.value === this.value;
+  }
 }
 
 class DoublyLinkedList {
@@ -73,36 +73,25 @@ class DoublyLinkedList {
   }
 
   delete(node) {
-    if (!this.head) return undefined;
+    const recurse = n => {
+      if (!n) return undefined;
+      if (n.equals(node)) {
+        if (!n.prev) {
+          this.removeFromHead();
+        } else if (!n.next) {
+          this.removeFromTail();
+        } else {
+          n.next.prev = n.prev;
+          n.prev.next = n.next;
+          n = null;
+        }
+        return n;
+      }
 
-    const value = node.value;
-    let current = this.head;
+      return recurse(n.next);
+    };
 
-    while (current.value !== value) {
-      current = current.next;
-    }
-
-    if (current.prev === null) {
-      current.next.prev = null;
-      this.head = current.next;
-      current.next = null;
-      return node;
-    }
-
-    if (current.next === null) {
-      current.prev.next = null;
-      this.tail = current.prev;
-      current.prev = null;
-      return node;
-    }
-
-    current.prev.next = current.next;
-    current.next.prev = current.prev;
-
-    current.next = null;
-    current.prev = null;
-
-    return node;
+    return recurse(this.head);
   }
 
   moveToFront(node) {
@@ -115,15 +104,5 @@ class DoublyLinkedList {
     this.addToTail(node.value);
   }
 }
-
-const DLL = new DoublyLinkedList();
-DLL.addToHead(103);
-DLL.addToHead(102);
-DLL.addToHead(101);
-DLL.delete({ value: 101 });
-DLL.delete({ value: 102 });
-//DLL.delete({ value: 103 });
-console.log(DLL);
-//DLL.delete({ value: 104 });
 
 module.exports = DoublyLinkedList;

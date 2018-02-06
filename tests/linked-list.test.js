@@ -190,11 +190,11 @@ describe("DoublyLinkedList", () => {
 
   it("should not throw an errow with empty list when deleting", () => {
     expect(list.delete({ value: 100 })).toBeUndefined();
-    list.addToHead(99);
-    list.delete({ value: 1 });
-    //list.addToHead(50);
-    //list.delete(list.head);
-    //list.delete(list.head);
-    //expect(list.delete({ value: 100 })).toBeUndefined();
+    list.addToHead(99); // [99]
+    expect(list.delete({ value: 99 }).value).toEqual(99);
+    list.addToHead(50); // [50]
+    expect(list.delete(list.head).value).toEqual(50);
+    expect(list.delete(list.head)).toBeUndefined();
+    expect(list.delete({ value: 100 })).toBeUndefined();
   });
 });
