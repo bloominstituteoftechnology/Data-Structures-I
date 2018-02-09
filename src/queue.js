@@ -12,21 +12,19 @@ class Queue {
   get size() {
     return this.storageLength;
   }
-  enqueue(value) {
-    this.storage[this.storageLength] = value;
+  enqueue(item) {
+    this.storage[this.storageLength] = item;
     this.storageLength++;
   }
   dequeue() {
-    if (this.storageLength > 0) {
-      const updatedQueue = [];
-      const firstInFirstOut = this.storage[0];
-      for (let i = 1; i < this.storageLength; i++) {
-        updatedQueue[i - 1] = this.storage[i];
-      }
-      this.storage = updatedQueue;
-      this.storageLength--;
-      return firstInFirstOut;
+    if (this.storageLength === 0) return;
+    const firstItem = this.storage[0];
+    for (let i = 0; i < this.storage.length; i++) {
+      this.storage[i] = this.storage[i + 1];
     }
+    this.storage[this.storageLength] === null;
+    this.storageLength--;
+    return firstItem;
   }
 }
 
