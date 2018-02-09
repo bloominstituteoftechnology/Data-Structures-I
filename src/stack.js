@@ -1,4 +1,3 @@
-/* eslint-disable*/
 /*
   1. Add a constructor with a storage structure; there are multiple options you could use for this
   2. Add a size getter that returns the number of items the stack is storing
@@ -19,8 +18,8 @@ class Stack {
     return this.storageLength;
   }
   pop() {
-    if (this.storageLength === 0) return null; 
-    let popped = this.storage[this.storageLength - 1];
+    if (this.storageLength === 0) return null;
+    const popped = this.storage[this.storageLength - 1];
     this.storage[this.storageLength - 1] = null;
     this.storageLength--;
     return popped;
