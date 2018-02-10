@@ -22,7 +22,7 @@ class Queue {
     for (let i = 0; i < this.storage.length; i++) {
       this.storage[i] = this.storage[i + 1];
     }
-    this.storage[this.storageLength] === null;
+    this.storage[this.storageLength] = null;
     this.storageLength--;
     return firstItem;
   }
