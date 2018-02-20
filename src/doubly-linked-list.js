@@ -22,18 +22,7 @@ class DoublyLinkedList {
   }
 
   addToTail(value) {
-    const node = {
-      value,
-      next: null,
-      prev: this.tail,
-    }
-    if (!this.head) {
-      this.head = node;
-      return;
-    }
-    let oldTail = this.tail;
-    this.tail = node;
-    this.oldTail.next = node;
+    
   }
 
   removeFromHead() {
