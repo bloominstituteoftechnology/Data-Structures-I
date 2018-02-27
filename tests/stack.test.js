@@ -1,5 +1,6 @@
 /* eslint-disable no-undef, no-prototype-builtins */
 const Stack = require('../src/stack');
+const Stack2 = require('../src/stack-2');
 
 let stack;
 
@@ -69,4 +70,16 @@ describe('Stack', () => {
     expect(stack.pop()).toBe('hi');
     expect(stack.pop()).toBe(true);
   });
+});
+
+
+describe('Stack 2', () => {
+  beforeEach(() => {
+    stack = new Stack2();
+  });
+
+  it('write me!', () => {
+
+  });
+
 });
