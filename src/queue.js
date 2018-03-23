@@ -4,8 +4,20 @@
   3. Add an `enqueue` method that accepts an item as input and adds it to the storage structure
   4. Add a `dequeue` method that removes the item in the queue that was added earliest
 */
+// Queues are First in, First out FIFO
 class Queue {
-
+  constructor() {
+    this.storage = [];
+  }
+  get size() {
+    return this.storage.length;
+  }
+  enqueue(value) {
+    this.storage.push(value);
+  }
+  dequeue(value) {
+    return this.storage.shift();
+  }
 }
 
 module.exports = Queue;
