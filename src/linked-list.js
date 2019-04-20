@@ -33,17 +33,17 @@ class LinkedList {
   // Checks the linked list for the given value
   // Returns true if the the value is found in the list, false otherwise
   contains(value) {
-    let item = this.head.value;
-    while (item.value != null) {
-      if (item == value) {
+    let item = this.head;
+
+    while (item) {
+      if (item.value == value) {
         return true;
       }
       else {
-        item = item.next.value;
+        item = item.next;
       }
     }
     return false;  
   }
 }
-
 module.exports = LinkedList;
