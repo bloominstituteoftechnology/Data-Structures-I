@@ -7,38 +7,52 @@ class DoublyLinkedList {
   }
   // should have the methods "addToHead", "addToTail", "removeFromHead", "removeFromTail", "delete", "moveToFront", and "moveToBack"'
   addToHead(value) {
-    const node = {
+    let node = {
       value,
-      next : this.head,
-      prev: null,
-    }
-    if (!this.tail) {
-      this.tail = node;
+      next: null
+    };
+    if (this.head == null) {
       this.head = node;
-      return;
+      this.tail = node;
+    } else {
+      let oldHead = this.head;
+      this.head = node;
+      this.head.next = oldHead;
     }
-    this.head.prev = node;
-    this.head = node;
   }
-
   addToTail(value) {
-    
+    let node = {
+      value,
+      next: null,
+      previous: this.tail
+    };
+    if (this.head == null) {
+      this.head = node;
+      this.tail = node;
+    } 
+    else {
+      let oldTail = this.tail;
+      console.log('oldTail', oldTail)
+      oldTail.next = node;
+      this.tail = node;
+      // this.tail.previous = oldTail;
+    }
   }
-
   removeFromHead() {
-
+    let newHead = this.head.next;
+    this.head = newHead;
   }
   removeFromTail() {
-
+    return;
   }
   delete() {
-
+    return;
   }
   moveToFront() {
-
+    return;
   }
   moveToBack() {
-
+    return;
   }
 }
 
